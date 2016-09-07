@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Bootstrap CSS framework
+gem 'bootstrap-sass'
+
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', platform: :mri, group: [:development, :test]
 
