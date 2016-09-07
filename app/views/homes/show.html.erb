@@ -27,6 +27,8 @@
   <%= number_to_currency @home.price, precision: 0 %>
 </p>
 
+<%= render 'layouts/copy_to_clipboard', copytext: home_url(@home) %>
+
 <table class="table">
   <thead>
     <tr>

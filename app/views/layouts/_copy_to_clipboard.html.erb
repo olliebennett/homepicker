@@ -1,0 +1,35 @@
+<%# Note: Requires 'copytext' variable. 'copyid' is optional %>
+<%# eg: render 'layout/copy_to_clipboard', :copytext => "Click to copy this to clipboard", :copyid => "unique_id_here" %>
+<% copyid ||= SecureRandom.hex %>
+<div class="form-group" id="copy_<%= copyid %>_withflash">
+  <div class="input-group">
+    <input type="text" readonly="readonly" class="form-control copy-to-clipboard-input" id="copy_<%= copyid %>_val" value="<%= copytext %>" />
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" data-clipboard-target="copy_<%= copyid %>_val" title="Click here to copy to clipboard." id="copy_<%= copyid %>_btn">Copy</button>
+    </span>
+  </div>
+</div>
+<%# Alternative for when flash is not available %>
+<div class="form-group" id="copy_<%= copyid %>_noflash">
+  <input type="text" class="form-control" value="<%= copytext %>" />
+</div>
+<script>
+  $(document).ready(function() {
+    // Detect status of Adobe Flash / SWF support
+    var flashState = ZeroClipboard.state().flash;
+    if (flashState.deactivated || flashState.disabled || flashState.outdated) {
+      $('#copy_<%= copyid %>_withflash').hide();
+    } else {
+      $('#copy_<%= copyid %>_noflash').hide();
+      var clip = new ZeroClipboard($("#copy_<%= copyid %>_btn"));
+      clip.on( "ready", function() {
+        clip.on( "aftercopy", function( afterCopyEvent) {
+          $(afterCopyEvent.target).text("Copied!");
+          window.setTimeout(function() {
+            $(afterCopyEvent.target).text("Copy").blur();
+          }, 1000);
+        });
+      });
+    }
+  });
+</script>

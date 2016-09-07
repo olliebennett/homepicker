@@ -42,3 +42,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 gem 'web-console', group: :development
+
+# Copy-to-clipboard support
+gem 'zeroclipboard-rails'
