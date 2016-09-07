@@ -1,0 +1,22 @@
+<%= form_for(comment, html: { class: 'form-inline' }) do |f| %>
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :text, class: 'sr-only' %>
+    <%= f.text_field :text, class: 'form-control' %>
+  </div>
+
+  <%= f.hidden_field :home_id, value: comment.home_id %>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

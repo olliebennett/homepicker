@@ -24,5 +24,22 @@
   <%= number_to_currency @home.price, precision: 0 %>
 </p>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @home.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.text %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render 'comments/form', comment: @home.comments.new %>
+
 <%= link_to 'Edit', edit_home_path(@home) %> |
 <%= link_to 'Back', homes_path %>
