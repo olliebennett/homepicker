@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Homes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <th><%= image_tag 'agent-icons/zoopla.png', size: 50 %></th>
+      <th><%= image_tag 'agent-icons/rightmove.png', size: 50 %></th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @homes.each do |home| %>
+      <tr>
+        <td><%= home.agent_url %></td>
+        <td>
+          <% if home.zoopla_url.present? %>
+            <%= link_to home.zoopla_url do %>
+              <%= image_tag 'agent-icons/zoopla.png', size: 50 %>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if home.rightmove_url.present? %>
+            <%= link_to home.rightmove_url do %>
+              <%= image_tag 'agent-icons/rightmove.png', size: 50 %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= number_to_currency home.price, precision: 0 %></td>
+        <td><%= link_to 'Show', home %></td>
+        <td><%= link_to 'Edit', edit_home_path(home) %></td>
+        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Home', new_home_path %>

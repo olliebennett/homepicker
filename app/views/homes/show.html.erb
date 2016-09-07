@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<% if @home.agent_url.present? %>
+  <p>
+    <strong>Agent URL:</strong>
+    <%= @home.agent_url %>
+  </p>
+<% end %>
+
+<% if @home.zoopla_url.present? %>
+  <%= link_to @home.zoopla_url do %>
+    <%= image_tag 'agent-icons/zoopla.png', size: 50 %>
+  <% end %>
+<% end %>
+
+<% if @home.rightmove_url.present? %>
+  <%= link_to @home.rightmove_url do %>
+    <%= image_tag 'agent-icons/rightmove.png', size: 50 %>
+  <% end %>
+<% end %>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency @home.price, precision: 0 %>
+</p>
+
+<%= link_to 'Edit', edit_home_path(@home) %> |
+<%= link_to 'Back', homes_path %>
