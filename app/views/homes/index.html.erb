@@ -5,6 +5,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Title</th>
       <th>Agent</th>
       <th><%= image_tag 'agent-icons/zoopla.png', size: 50 %></th>
       <th><%= image_tag 'agent-icons/rightmove.png', size: 50 %></th>
@@ -16,6 +17,10 @@
   <tbody>
     <% @homes.each do |home| %>
       <tr>
+        <td>
+          <p class="lead"><%= home.title %></p>
+          <p><%= home.address %></p>
+        </td>
         <td><%= home.agent_url %></td>
         <td>
           <% if home.zoopla_url.present? %>

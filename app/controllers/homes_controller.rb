@@ -69,6 +69,13 @@ class HomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
-      params.require(:home).permit(:agent_url, :zoopla_url, :rightmove_url, :price)
+      params.require(:home).permit(
+        :title,
+        :address,
+        :agent_url,
+        :zoopla_url,
+        :rightmove_url,
+        :price
+      )
     end
 end
