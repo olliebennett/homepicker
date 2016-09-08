@@ -1,0 +1,19 @@
+<% flash.each do |key, value| 
+  
+  # Convert devise keys into bootstrap-compatible styles 
+  alertClass = case key.to_s
+  when "notice"
+    "success"
+  when "alert"
+    "warning"
+  when "error"
+    "danger"
+  else
+    key.to_s
+  end
+  %>
+  <div class="alert alert-<%= alertClass %> alert-dismissible top-buffer" role="alert">
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <%= value %>
+  </div>
+<% end %>
