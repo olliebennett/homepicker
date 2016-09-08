@@ -1,0 +1,12 @@
+<div style="margin-top: 20%; width: 100%; text-align: center;">
+  <h1>Home Picker</h1>
+  <% if user_signed_in? %>
+    <p><a href="/homes">View Homes</a></p>
+  <% else %>
+    <p>
+      <%= link_to 'Register', new_user_registration_path %>
+      or
+      <%= link_to 'Sign In', new_user_session_path %>
+    </p>
+  <% end %>
+</div>
