@@ -26,6 +26,12 @@
   <%= number_to_currency @home.price, precision: 0 %>
 </p>
 
+<% if @home.latitude.present? && @home.longitude.present? %>
+  <%= link_to "https://www.google.co.uk/maps/place/#{@home.latitude},#{@home.longitude}" do %>
+    <%= image_tag "https://maps.google.com/maps/api/staticmap?center=#{@home.latitude},#{@home.longitude}&zoom=15&size=300x300&maptype=roadmap&markers=color:ORANGE|label:X|#{@home.latitude},#{@home.longitude}", { alt: "Map of #{ @home.address }", size: 300, class: "img-rounded"} %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-4">
     <%= image_tag @home.images.first.url, class: 'img-responsive' %>
