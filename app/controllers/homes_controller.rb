@@ -38,6 +38,9 @@ class HomesController < ApplicationController
 
     respond_to do |format|
       if @home.save
+        (retrieved_data[:images] || []).each do |img|
+          Image.create(url: img, home: @home)
+        end
         format.html { redirect_to @home, notice: 'Home was successfully created.' }
         format.json { render :show, status: :created, location: @home }
       else
