@@ -11,6 +11,14 @@
     </div>
   <% end %>
 
+
+  <div class="form-group">
+    <label for="url">Retrieve Data via URL</label>
+    <%= text_field_tag :url, '', class: 'form-control' %>
+  </div>
+
+  OR
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control' %>

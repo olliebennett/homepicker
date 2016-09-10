@@ -26,6 +26,16 @@ class HomesController < ApplicationController
   def create
     @home = Home.new(home_params)
 
+    # TODO: Move to background job
+    if params[:url].present?
+      retrieved_data = LinkRetrieverService.retrieve(params[:url])
+      @home.price = retrieved_data[:price] if @home.price.blank?
+      @home.title = retrieved_data[:description] if @home.title.blank?
+      @home.address = "#{retrieved_data[:address]}, #{retrieved_data[:postcode]}" if @home.address.blank?
+
+      @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla')
+    end
+
     respond_to do |format|
       if @home.save
         format.html { redirect_to @home, notice: 'Home was successfully created.' }

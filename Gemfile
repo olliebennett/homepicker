@@ -18,6 +18,9 @@ gem 'jbuilder', '~> 2.5'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# HTML Parsing (for crawler)
+gem 'nokogiri', require: false
+
 # PostgreSQL Database
 gem 'pg'
 
