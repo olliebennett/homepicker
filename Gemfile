@@ -9,6 +9,9 @@ gem 'byebug', platform: :mri, group: [:development, :test]
 # Authentication
 gem 'devise'
 
+# Use factories for creating test objects
+gem 'factory_girl_rails', group: [:development, :test]
+
 # Watch for file changes
 gem 'listen', '~> 3.0.5', group: :development
 
