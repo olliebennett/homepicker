@@ -1,5 +1,6 @@
 <h2><%= @home.address %></h2>
 <p><%= @home.title %></p>
+<p>Location: <%= @home.latitude %>, <%= @home.longitude %></p>
 
 <% if @home.agent_url.present? %>
   <p>

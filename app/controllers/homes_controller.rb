@@ -85,6 +85,9 @@ class HomesController < ApplicationController
       params.require(:home).permit(
         :title,
         :address,
+        :postcode,
+        :latitude,
+        :longitude,
         :agent_url,
         :zoopla_url,
         :rightmove_url,
