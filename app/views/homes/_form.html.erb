@@ -1,4 +1,4 @@
-<%= form_for(home, html: { class: 'form-horizontal' }) do |f| %>
+<%= form_for(home) do |f| %>
   <% if home.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(home.errors.count, "error") %> prohibited this home from being saved:</h2>
@@ -11,17 +11,54 @@
     </div>
   <% end %>
 
+  <% if home.new_record? %>
+    <div class="form-group">
+      <label for="url">Retrieve Data via URL</label>
+      <%= text_field_tag :url, '', class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <label for="url">Retrieve Data via URL</label>
-    <%= text_field_tag :url, '', class: 'form-control' %>
+    OR
+  <% end %>
+
+  <div class="form-row">
+    <div class="form-group col-md-8">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :price %>
+      <%= f.number_field :price, class: 'form-control' %>
+    </div>
   </div>
 
-  OR
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :address_street %>
+      <%= f.text_field :address_street, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-3">
+      <%= f.label :latitude %>
+      <%= f.number_field :latitude, class: 'form-control', step: 0.000001 %>
+    </div>
+    <div class="form-group col-md-3">
+      <%= f.label :longitude %>
+      <%= f.number_field :longitude, class: 'form-control', step: 0.000001 %>
+    </div>
+  </div>
 
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control' %>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= f.label :address_locality %>
+      <%= f.text_field :address_locality, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :address_region %>
+      <%= f.text_field :address_region, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :postcode %>
+      <%= f.text_field :postcode, class: 'form-control' %>
+    </div>
   </div>
 
   <div class="form-group">
@@ -29,54 +66,20 @@
     <%= f.text_area :description, class: 'form-control', rows: 10 %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :address_street %>
-    <%= f.text_field :address_street, class: 'form-control' %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :address_locality %>
-    <%= f.text_field :address_locality, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :address_region %>
-    <%= f.text_field :address_region, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :latitude %>
-    <%= f.number_field :latitude, class: 'form-control', step: 0.000001 %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :longitude %>
-    <%= f.number_field :longitude, class: 'form-control', step: 0.000001 %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :postcode %>
-    <%= f.text_field :postcode, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :agent_url %>
-    <%= f.text_field :agent_url, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :zoopla_url %>
-    <%= f.text_field :zoopla_url, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :rightmove_url %>
-    <%= f.text_field :rightmove_url, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :price %>
-    <%= f.number_field :price, class: 'form-control' %>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= f.label :agent_url %>
+      <%= f.text_field :agent_url, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :zoopla_url %>
+      <%= f.text_field :zoopla_url, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-4">
+      <%= f.label :rightmove_url %>
+      <%= f.text_field :rightmove_url, class: 'form-control' %>
+    </div>
   </div>
 
   <%= f.submit class: 'btn btn-primary' %>

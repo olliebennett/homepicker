@@ -20,4 +20,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      home:
+        address_street: 'Street Address'
+        address_locality: 'Locality'
+        address_region: 'Region'
+        agent_url: 'Agent URL'
+        zoopla_url: 'Zoopla URL'
+        rightmove_url: 'Rightmove URL'
