@@ -1,24 +1,28 @@
-# README
+# HomePicker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Build a list of interesting homes and automtically pull in (and backup) data from Zoopla.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+- Setup Ruby and PostgreSQL
 
-* System dependencies
+- Install dependencies
 
-* Configuration
+  ```
+  gem install bundler
+  bundle install
+  ```
 
-* Database creation
+- Setup database;
 
-* Database initialization
+  ```
+  createdb homepicker_development
+  createdb homepicker_test
+  bundle exec rails db:schema:load
+  ```
 
-* How to run the test suite
+## Developing
 
-* Services (job queues, cache servers, search engines, etc.)
+- Test with `bundle exec rspec`.
 
-* Deployment instructions
-
-* ...
+- Start local server with `bundle exec rails s`
