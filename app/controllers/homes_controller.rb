@@ -30,8 +30,14 @@ class HomesController < ApplicationController
     if params[:url].present?
       retrieved_data = LinkRetrieverService.retrieve(params[:url])
       @home.price = retrieved_data[:price] if @home.price.blank?
-      @home.title = retrieved_data[:description] if @home.title.blank?
-      @home.address = "#{retrieved_data[:address]}, #{retrieved_data[:postcode]}" if @home.address.blank?
+      @home.title = retrieved_data[:title] if @home.title.blank?
+      @home.description = retrieved_data[:description] if @home.description.blank?
+      @home.latitude = retrieved_data[:latitude] if @home.latitude.blank?
+      @home.longitude = retrieved_data[:longitude] if @home.longitude.blank?
+      @home.postcode = retrieved_data[:postcode] if @home.postcode.blank?
+      @home.address_street = retrieved_data[:address_street] if @home.address_street.blank?
+      @home.address_locality = retrieved_data[:address_locality] if @home.address_locality.blank?
+      @home.address_region = retrieved_data[:address_region] if @home.address_region.blank?
 
       @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla')
     end
@@ -84,7 +90,10 @@ class HomesController < ApplicationController
     def home_params
       params.require(:home).permit(
         :title,
-        :address,
+        :description,
+        :address_street,
+        :address_locality,
+        :address_region,
         :postcode,
         :latitude,
         :longitude,

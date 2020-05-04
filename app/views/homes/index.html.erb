@@ -20,7 +20,7 @@
           <% end %>
         </td>
         <td>
-          <p class="lead"><%= link_to home.address, home %></p>
+          <p class="lead"><%= link_to home.address_street, home %></p>
           <p><%= home.title %></p>
         </td>
         <td>
@@ -28,26 +28,14 @@
             <%= link_to home.agent_url 'Agent' %>
           <% end %>
           <% if home.zoopla_url.present? %>
-            <%= link_to home.zoopla_url do %>
-              <%= image_tag 'agent-icons/zoopla.png', size: 25 %>
-              Zoopla
-            <% end %>
+            <%= link_to 'Zoopla', home.zoopla_url %>
           <% end %>
           <% if home.rightmove_url.present? %>
-            <%= link_to home.rightmove_url do %>
-              <%= image_tag 'agent-icons/rightmove.png', size: 25 %>
-              Rightmove
-            <% end %>
+            <%= link_to 'Rightmove', home.rightmove_url %>
           <% end %>
         </td>
-        <td><%= number_to_currency home.price, precision: 0 %></td>
-        <td><%= link_to 'Edit', edit_home_path(home) %></td>
-        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>£<%= home.price / 1000 %>k</td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Home', new_home_path %>
