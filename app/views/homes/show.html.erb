@@ -1,44 +1,46 @@
-<h2><%= @home.address %></h2>
-<p><%= @home.title %></p>
-<p>Location: <%= @home.latitude %>, <%= @home.longitude %></p>
-
-<% if @home.agent_url.present? %>
-  <p>
-    <strong>Agent URL:</strong>
-    <%= @home.agent_url %>
-  </p>
-<% end %>
-
-<% if @home.zoopla_url.present? %>
-  <%= link_to @home.zoopla_url do %>
-    <%= image_tag 'agent-icons/zoopla.png', size: 50 %>
-  <% end %>
-<% end %>
-
-<% if @home.rightmove_url.present? %>
-  <%= link_to @home.rightmove_url do %>
-    <%= image_tag 'agent-icons/rightmove.png', size: 50 %>
-  <% end %>
-<% end %>
-
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency @home.price, precision: 0 %>
-</p>
-
-<% if @home.latitude.present? && @home.longitude.present? %>
-  <%= link_to "https://www.google.co.uk/maps/place/#{@home.latitude},#{@home.longitude}" do %>
-    <%= image_tag "https://maps.google.com/maps/api/staticmap?center=#{@home.latitude},#{@home.longitude}&zoom=15&size=300x300&maptype=roadmap&markers=color:ORANGE|label:X|#{@home.latitude},#{@home.longitude}", { alt: "Map of #{ @home.address }", size: 300, class: "img-rounded"} %>
-  <% end %>
-<% end %>
+<h2>
+  <%= @home.address_street || '[unnamed property]' %><%= ", #{@home.postcode}" if @home.postcode %>
+</h2>
 
 <div class="row">
-  <div class="col-lg-4">
-    <%= image_tag @home.images.first.url, class: 'img-responsive' %>
+  <div class="col-sm-8">
+    <h3><%= @home.title %></h3>
+    <p>
+      <strong>Location:</strong>
+      <% if @home.address_locality.present? %>
+        <%= @home.address_locality %>,
+      <% end %>
+      <% if @home.address_region.present? %>
+        <%= @home.address_region %>
+      <% end %>
+      <% if @home.latitude.present? && @home.longitude.present? %>
+        (<%= @home.latitude %>, <%= @home.longitude %>)
+      <% end %>
+    </p>
   </div>
+  <div class="col-sm-4 text-right">
+    <h3>£<%= @home.price / 1000 %>k</h3>
+    <p>
+      |
+      <% if @home.latitude.present? && @home.longitude.present? %>
+        <%= link_to 'Google Maps',
+                    "https://www.google.co.uk/maps/place/#{@home.latitude},#{@home.longitude}" %> |
+      <% end %>
+
+      <% if @home.zoopla_url.present? %>
+        <%= link_to 'Zoopla', @home.zoopla_url %> |
+      <% end %>
+
+      <% if @home.rightmove_url.present? %>
+        <%= link_to 'Rightmove', @home.rightmove_url %> |
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<div class="row row-cols-4">
   <% @home.images.each_with_index do |img, idx| %>
-    <% next if idx.zero? %>
-    <div class="col-md-3 col-lg-2">
+    <div class="col" style="padding-top: 20px">
       <%= link_to img.url do %>
         <%= image_tag img.url, class: 'img-thumbnail' %>
       <% end %>
@@ -46,24 +48,33 @@
   <% end %>
 </div>
 
-<%= render 'layouts/copy_to_clipboard', copytext: home_url(@home) %>
+<div class="row" style="padding-top: 20px">
+  <div class="col-sm-8">
+    <%= render_markdown_paragraphs(@home.description) %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to 'Edit Home', edit_home_path(@home), class: 'btn btn-warning' %>
+    <%= link_to 'Delete Home',
+                @home,
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: 'btn btn-danger' %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @home.comments.each do |comment| %>
-      <tr>
-        <td><%= comment.text %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <h3>Comments:</h3>
+    <table class="table">
+      <tbody>
+        <% if @home.comments.each do |comment| %>
+          <tr>
+            <td><%= comment.text %></td>
+          </tr>
+        <% end.empty? %>
+          <tr>
+            <td>None</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<%= render 'comments/form', comment: @home.comments.new %>
-
-<%= link_to 'Edit', edit_home_path(@home) %> |
-<%= link_to 'Back', homes_path %>
+    <%= render 'comments/form', comment: @home.comments.new %>
+  </div>
+</div>
