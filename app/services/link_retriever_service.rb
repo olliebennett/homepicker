@@ -39,7 +39,17 @@ class LinkRetrieverService
     # data[:longitude] = latlong[:long]
     # data[:latitude] = latlong[:lat]
 
-    data[:description] = page.css('.dp-description__text')[0].text.squish
+    data[:description] = ''
+    page.css('.dp-description__text')[0].children.each do |child_node| # text.squish
+      case child_node.name
+      when 'text', 'strong'
+        data[:description] += child_node.text.squish
+      when 'br'
+        data[:description] += "\n"
+      else
+        raise "Unexpected child_node name; #{child_node.name}"
+      end
+    end
 
     data[:canonical_url] = page.xpath("//link[@rel='canonical']/@href")&.to_s
 
