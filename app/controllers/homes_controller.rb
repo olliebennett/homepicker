@@ -15,10 +15,12 @@ class HomesController < ApplicationController
   # GET /homes/new
   def new
     @home = Home.new
+    4.times { @home.images.build }
   end
 
   # GET /homes/1/edit
   def edit
+    4.times { @home.images.build }
   end
 
   # POST /homes
@@ -100,7 +102,8 @@ class HomesController < ApplicationController
         :agent_url,
         :zoopla_url,
         :rightmove_url,
-        :price
+        :price,
+        images_attributes: %i[id url _destroy]
       )
     end
 end
