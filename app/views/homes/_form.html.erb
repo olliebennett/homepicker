@@ -83,4 +83,8 @@
   </div>
 
   <%= f.submit class: 'btn btn-primary' %>
+
+  <% if home.persisted? %>
+    <%= link_to 'Cancel', home_path(@home), class: 'btn btn-light' %>
+  <% end %>
 <% end %>

@@ -1,9 +1,8 @@
-<h2>
-  <%= @home.address_street || '[unnamed property]' %><%= ", #{@home.postcode}" if @home.postcode %>
-</h2>
-
 <div class="row">
   <div class="col-sm-8">
+    <h1>
+      <%= @home.address_street || '[unnamed property]' %><%= ", #{@home.postcode}" if @home.postcode %>
+    </h1>
     <h3><%= @home.title %></h3>
     <p>
       <strong>Location:</strong>
@@ -19,6 +18,13 @@
     </p>
   </div>
   <div class="col-sm-4 text-right">
+    <%= link_to 'Edit', edit_home_path(@home), class: 'btn btn-warning' %>
+    <%= link_to 'Delete',
+                @home,
+                method: :delete,
+                data: { confirm: 'Are you sure?' },
+                class: 'btn btn-danger' %>
+
     <h3>£<%= @home.price / 1000 %>k</h3>
     <p>
       |
@@ -53,13 +59,6 @@
     <%= render_markdown_paragraphs(@home.description) %>
   </div>
   <div class="col-sm-4">
-    <%= link_to 'Edit Home', edit_home_path(@home), class: 'btn btn-warning' %>
-    <%= link_to 'Delete Home',
-                @home,
-                method: :delete,
-                data: { confirm: 'Are you sure?' },
-                class: 'btn btn-danger' %>
-
     <h3>Comments:</h3>
     <table class="table">
       <tbody>
