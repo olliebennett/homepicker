@@ -66,7 +66,6 @@
     <%= f.text_area :description, class: 'form-control', rows: 10 %>
   </div>
 
-
   <div class="form-row">
     <div class="form-group col-md-4">
       <%= f.label :agent_url %>
@@ -84,7 +83,7 @@
 
   <%= f.submit class: 'btn btn-primary' %>
 
-  <% if home.persisted? %>
-    <%= link_to 'Cancel', home_path(@home), class: 'btn btn-light' %>
-  <% end %>
+  <%= link_to 'Cancel',
+              (home.new_record? ? homes_path : home_path(@home)),
+              class: 'btn btn-light' %>
 <% end %>
