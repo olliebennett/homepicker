@@ -1,30 +1,22 @@
 class HomesController < ApplicationController
-  before_action :set_home, only: [:show, :edit, :update, :destroy]
+  before_action :set_home, only: %i[show edit update destroy]
 
-  # GET /homes
-  # GET /homes.json
   def index
     @homes = Home.order(id: :desc)
   end
 
-  # GET /homes/1
-  # GET /homes/1.json
   def show
   end
 
-  # GET /homes/new
   def new
     @home = Home.new
-    4.times { @home.images.build }
+    build_images
   end
 
-  # GET /homes/1/edit
   def edit
-    4.times { @home.images.build }
+    build_images
   end
 
-  # POST /homes
-  # POST /homes.json
   def create
     @home = Home.new(home_params)
 
@@ -58,8 +50,6 @@ class HomesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /homes/1
-  # PATCH/PUT /homes/1.json
   def update
     respond_to do |format|
       if @home.update(home_params)
@@ -72,8 +62,6 @@ class HomesController < ApplicationController
     end
   end
 
-  # DELETE /homes/1
-  # DELETE /homes/1.json
   def destroy
     @home.destroy
     respond_to do |format|
@@ -83,7 +71,11 @@ class HomesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def build_images
+      blank_images = (@home.images.size % 4).zero? ? 4 : 4 - (@home.images.size % 4)
+      blank_images.times { @home.images.build }
+    end
+
     def set_home
       @home = Home.find(params[:id])
     end

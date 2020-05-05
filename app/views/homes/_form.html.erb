@@ -83,10 +83,20 @@
 
   <div class="form-row">
     <%= f.fields_for :images do |images_form| %>
-      <div class="form-group col-md-3">
-        <%= images_form.label :url %>
-        <%= images_form.text_field :url, class: 'form-control' %>
-      </div>
+      <% if images_form.object.persisted? %>
+        <div class="form-group col-md-3">
+          <%= images_form.label :_destroy do %>
+            <%= image_tag images_form.object.url, class: 'img-thumbnail' %>
+          <% end %>
+          <%= images_form.check_box :_destroy, class: 'form-check-input' %>
+          <%#= images_form.label :_destroy, class: 'form-check-label' %>
+        </div>
+      <% else %>
+        <div class="form-group col-md-3">
+          <%= images_form.label :url %>
+          <%= images_form.text_field :url, class: 'form-control' %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

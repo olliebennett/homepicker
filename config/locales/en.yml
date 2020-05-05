@@ -30,4 +30,5 @@ en:
         zoopla_url: 'Zoopla URL'
         rightmove_url: 'Rightmove URL'
       image:
-        url: 'URL'
+        url: 'Image URL'
+        _destroy: 'Delete'
