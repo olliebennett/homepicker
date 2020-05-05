@@ -8,6 +8,9 @@ source 'https://rubygems.org'
 
 ruby '2.7.0'
 
+# Debug: Improved error page display
+gem 'better_errors', group: :development
+
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 gem 'byebug', platform: :mri, group: %i[development test]
 
