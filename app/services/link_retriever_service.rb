@@ -29,7 +29,7 @@ class LinkRetrieverService
 
     raise "ZOOPLA: cannot find res_data..." if res_data.blank?
 
-    data[:title] = res_data['name']
+    data[:title] = res_data['name']&.squish
     raise "ZOOPLA: cannot find title..." if data[:title].blank?
 
     data[:latitude] = res_data['geo']['latitude']
@@ -58,15 +58,24 @@ class LinkRetrieverService
 
     data[:address_locality] = res_data['address']['addressLocality']
     raise "ZOOPLA: cannot find address_locality..." if data[:address_locality].blank?
+
     data[:address_region] = res_data['address']['addressRegion']
 
-    # data[:address] = page.xpath("//h2[@itemprop='streetAddress']").try(:text).try(:to_s)
+    # Clean up street address to remove duplication;
+    # Zoopla street addresses often end in "street, Locality OUTCODE", eg '... Bath BA1'
+    if data[:address_street].end_with?(outcode)
+      data[:address_street] = data[:address_street][0...- outcode.length].squish
+      data[:address_street] = data[:address_street][0...-1].squish if data[:address_street].end_with?(',')
+    end
+    if data[:address_street].end_with?(data[:address_locality])
+      data[:address_street] = data[:address_street][0...- data[:address_locality].length].squish
+      data[:address_street] = data[:address_street][0...-1].squish if data[:address_street].end_with?(',')
+    end
 
     raw_price = page.css('.ui-pricing__main-price')[0].text.squish
     data[:price] = raw_price.match(/[\d\,\.]{5,}/)[0].tr(',','').to_i
 
     data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
-    # data[:images] = page.css('.dp-gallery__image').map { |x| x['src'] }
 
     data
   end
