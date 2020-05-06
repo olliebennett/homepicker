@@ -16,7 +16,11 @@
       <tr>
         <td>
           <%= link_to home do %>
-            <%= image_tag home.images.first.url, height: 100 %>
+            <% if home.images.first.present? %>
+              <%= image_tag home.images.first.url, height: 100 %>
+            <% else %>
+              [ no image ]
+            <% end %>
           <% end %>
         </td>
         <td>
