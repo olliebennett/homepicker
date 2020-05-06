@@ -85,3 +85,25 @@
     <%= render 'comments/form', comment: @home.comments.new %>
   </div>
 </div>
+
+<% if @home.latitude.present? && @home.longitude.present? %>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
+
+  <div id="mapbox_map" style="padding-top: 20px; height: 500px"></div>
+
+  <script>
+    mapboxgl.accessToken = '<%= ENV.fetch('MAPBOX_TOKEN', 'no mapbox token') %>';
+
+    var map = new mapboxgl.Map({
+    container: 'mapbox_map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [<%= @home.longitude %>, <%= @home.latitude %>],
+    zoom: 14
+    });
+
+    var marker = new mapboxgl.Marker()
+    .setLngLat([<%= @home.longitude %>, <%= @home.latitude %>])
+    .addTo(map);
+  </script>
+<% end %>
