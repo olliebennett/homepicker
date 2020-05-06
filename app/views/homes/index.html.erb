@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @homes.each do |home| %>
+    <% if @homes.each do |home| %>
       <tr>
         <td>
           <%= link_to home do %>
@@ -39,6 +39,14 @@
           <% end %>
         </td>
         <td>£<%= home.price / 1000 %>k</td>
+      </tr>
+    <% end.empty? %>
+      <tr>
+        <td colspan="4">
+          No homes!
+          Get started by
+          <%= link_to 'adding one', new_home_path %>.
+        </td>
       </tr>
     <% end %>
   </tbody>
