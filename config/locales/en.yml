@@ -29,3 +29,6 @@ en:
         agent_url: 'Agent URL'
         zoopla_url: 'Zoopla URL'
         rightmove_url: 'Rightmove URL'
+      image:
+        url: 'Image URL'
+        _destroy: 'Delete'

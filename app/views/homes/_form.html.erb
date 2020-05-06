@@ -1,4 +1,4 @@
-<%= form_for(home) do |f| %>
+<%= form_with model: home do |f| %>
   <% if home.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(home.errors.count, "error") %> prohibited this home from being saved:</h2>
@@ -79,6 +79,25 @@
       <%= f.label :rightmove_url %>
       <%= f.text_field :rightmove_url, class: 'form-control' %>
     </div>
+  </div>
+
+  <div class="form-row">
+    <%= f.fields_for :images do |images_form| %>
+      <% if images_form.object.persisted? %>
+        <div class="form-group col-md-3">
+          <%= images_form.label :_destroy do %>
+            <%= image_tag images_form.object.url, class: 'img-thumbnail' %>
+          <% end %>
+          <%= images_form.check_box :_destroy, class: 'form-check-input' %>
+          <%#= images_form.label :_destroy, class: 'form-check-label' %>
+        </div>
+      <% else %>
+        <div class="form-group col-md-3">
+          <%= images_form.label :url %>
+          <%= images_form.text_field :url, class: 'form-control' %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 
   <%= f.submit class: 'btn btn-primary' %>
