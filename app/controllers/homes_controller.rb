@@ -20,7 +20,6 @@ class HomesController < ApplicationController
   def create
     @home = Home.new(home_params)
 
-    # TODO: Move to background job
     if params[:url].present?
       retrieved_data = LinkRetrieverService.retrieve(params[:url])
       @home.price = retrieved_data[:price] if @home.price.blank?
@@ -32,8 +31,11 @@ class HomesController < ApplicationController
       @home.address_street = retrieved_data[:address_street] if @home.address_street.blank?
       @home.address_locality = retrieved_data[:address_locality] if @home.address_locality.blank?
       @home.address_region = retrieved_data[:address_region] if @home.address_region.blank?
-
       @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla')
+
+      # Avoid saving a duplicate of existing home
+      existing_home = Home.find_by(zoopla_url: @home.zoopla_url)
+      return redirect_to(existing_home, alert: 'Home already imported from Zoopla; see below.') if existing_home.present?
     end
 
     respond_to do |format|
