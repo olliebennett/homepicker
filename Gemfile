@@ -32,7 +32,7 @@ gem 'nokogiri', require: false
 gem 'pg'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 4.3'
 
 # Ruby on Rails framework
 gem 'rails'
