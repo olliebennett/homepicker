@@ -41,8 +41,7 @@ gem 'rails'
 gem 'rspec-rails', group: %i[development test]
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 gem 'web-console', group: :development
-
