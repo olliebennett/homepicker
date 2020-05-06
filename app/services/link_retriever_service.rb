@@ -42,7 +42,7 @@ class LinkRetrieverService
     data[:description] = ''
     page.css('.dp-description__text')[0].children.each do |child_node| # text.squish
       case child_node.name
-      when 'text', 'strong'
+      when 'text', 'strong', 'em'
         data[:description] += child_node.text.squish
       when 'br'
         data[:description] += "\n"
