@@ -68,19 +68,19 @@
   </div>
   <div class="col-sm-4">
     <h3>Comments:</h3>
-    <table class="table">
-      <tbody>
-        <% if @home.comments.each do |comment| %>
-          <tr>
-            <td><%= comment.text %></td>
-          </tr>
-        <% end.empty? %>
-          <tr>
-            <td>None</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if @home.comments.each do |comment| %>
+      <div class="media mt-2">
+        <%= image_tag comment.user.gravatar_url(70),
+                      class: 'mr-3',
+                      size: 70 %>
+        <div class="media-body">
+          <h5 class="mt-0"><%= comment.user.email.scan(/.+@/).last[0...-1] %></h5>
+          <%= comment.text %>
+        </div>
+      </div>
+    <% end.empty? %>
+      <p>None</p>
+    <% end %>
 
     <%= render 'comments/form', comment: @home.comments.new %>
   </div>
