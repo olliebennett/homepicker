@@ -5,7 +5,13 @@ class LinkRetrieverService
   def self.retrieve(url)
     page_html = URI.open(url) { |f| f.read }
 
-    parse_zoopla(page_html)
+    if url.include?('zoopla.com')
+      parse_zoopla(page_html)
+    elsif url.include?('rightmove.co.uk')
+      parse_rightmove(page_html)
+    else
+      raise "Unhandled URL: #{url}"
+    end
   end
 
   def self.parse_zoopla(page_html)
@@ -39,17 +45,7 @@ class LinkRetrieverService
     # data[:longitude] = latlong[:long]
     # data[:latitude] = latlong[:lat]
 
-    data[:description] = ''
-    page.css('.dp-description__text')[0].children.each do |child_node| # text.squish
-      case child_node.name
-      when 'text', 'strong', 'em'
-        data[:description] += child_node.text.squish
-      when 'br'
-        data[:description] += "\n"
-      else
-        raise "Unexpected child_node name; #{child_node.name}"
-      end
-    end
+    data[:description] = html_to_markdown(page.css('.dp-description__text')[0])
 
     data[:canonical_url] = page.xpath("//link[@rel='canonical']/@href")&.to_s
 
@@ -78,5 +74,57 @@ class LinkRetrieverService
     data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
 
     data
+  end
+
+  def self.parse_rightmove(page_html)
+    page = Nokogiri::HTML(page_html)
+
+    puts "RIGHTMOVE: starting..."
+
+    data = {}
+
+    property_json_string = page_html.match(/'property',{"location":{(.*)}/)
+    property_json = JSON.parse(property_json_string[0][11..-1])
+
+    data[:postcode] = property_json.dig('location', 'postcode')
+    raise "RIGHTMOVE: cannot find postcode..." if data[:postcode].blank?
+    data[:latitude] = property_json.dig('location', 'latitude')
+    data[:longitude] = property_json.dig('location', 'longitude')
+    data[:price] = property_json.dig('propertyInfo', 'price')
+
+    data[:title] = page.xpath("//title")&.text
+    raise "RIGHTMOVE: cannot find title..." if data[:title].blank?
+
+    data[:description] = html_to_markdown(page.xpath("//p[@itemprop='description']")[0])
+
+    data[:canonical_url] = page.xpath("//link[@rel='canonical']/@href")&.to_s
+
+    data[:address_street] = 'blah street' # res_data['address']['streetAddress']
+    raise "RIGHTMOVE: cannot find address_street..." if data[:address_street].blank?
+
+    data[:address_locality] = 'blah locality' # res_data['address']['addressLocality']
+    raise "RIGHTMOVE: cannot find address_locality..." if data[:address_locality].blank?
+
+    data[:address_region] = 'blah region' # res_data['address']['addressRegion']
+
+    data[:images] = page.xpath("//meta[@property='og:image']/@content").map(&:to_s)
+
+    data
+  end
+
+  def self.html_to_markdown(container_node)
+    res = ''
+    container_node.children.each do |child_node|
+      case child_node.name
+      when 'text', 'strong', 'em'
+        res += child_node.text.squish
+      when 'br'
+        res += "\n"
+      else
+        raise "Unexpected child_node name; #{child_node.name}"
+      end
+    end
+
+    res
   end
 end
