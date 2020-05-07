@@ -43,19 +43,13 @@
   </div>
 </div>
 
-<div class="row">
-  <% if @home.images.each_with_index do |img, idx| %>
-    <div class="col-12 col-md-6 col-lg-3" style="padding-top: 20px">
-      <%= link_to img.url do %>
-        <%= image_tag img.url, class: 'img-thumbnail' %>
-      <% end %>
-    </div>
-  <% end.empty? %>
-    <div class="col-12 col-md-6 col-lg-3" style="padding-top: 20px">
-      No images for this home.
-    </div>
-  <% end %>
-</div>
+<% if @home.images.any? %>
+  <%= render 'images_carousel', images: @home.images %>
+<% else %>
+  <div class="alert alert-danger" role="alert">
+    There aren't any images for this home.
+  </div>
+<% end %>
 
 <div class="row" style="padding-top: 20px">
   <div class="col-sm-8">
