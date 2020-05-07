@@ -44,15 +44,15 @@
   </div>
 </div>
 
-<div class="row row-cols-4">
+<div class="row">
   <% if @home.images.each_with_index do |img, idx| %>
-    <div class="col" style="padding-top: 20px">
+    <div class="col-12 col-md-6 col-lg-3" style="padding-top: 20px">
       <%= link_to img.url do %>
         <%= image_tag img.url, class: 'img-thumbnail' %>
       <% end %>
     </div>
   <% end.empty? %>
-    <div class="col" style="padding-top: 20px">
+    <div class="col-12 col-md-6 col-lg-3" style="padding-top: 20px">
       No images for this home.
     </div>
   <% end %>
