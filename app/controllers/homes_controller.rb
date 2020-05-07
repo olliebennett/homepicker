@@ -31,11 +31,17 @@ class HomesController < ApplicationController
       @home.address_street = retrieved_data[:address_street] if @home.address_street.blank?
       @home.address_locality = retrieved_data[:address_locality] if @home.address_locality.blank?
       @home.address_region = retrieved_data[:address_region] if @home.address_region.blank?
-      @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla')
+      @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla.com')
+      @home.rightmove_url = retrieved_data[:canonical_url] if params[:url].include?('rightmove.co.uk')
 
       # Avoid saving a duplicate of existing home
-      existing_home = Home.find_by(zoopla_url: @home.zoopla_url)
-      return redirect_to(existing_home, alert: 'Home already imported from Zoopla; see below.') if existing_home.present?
+      if @home.zoopla_url.present?
+        existing_home = Home.find_by(zoopla_url: @home.zoopla_url)
+        return redirect_to(existing_home, alert: 'Home already imported from Zoopla; see below.') if existing_home.present?
+      elsif @home.rightmove_url.present?
+        existing_home = Home.find_by(rightmove_url: @home.rightmove_url)
+        return redirect_to(existing_home, alert: 'Home already imported from Rightmove; see below.') if existing_home.present?
+      end
     end
 
     respond_to do |format|
