@@ -12,7 +12,7 @@
         <%= @home.address_region %>
       <% end %>
       <% if @home.latitude.present? && @home.longitude.present? %>
-        (<%= @home.latitude %>, <%= @home.longitude %>)
+        (<%= @home.latitude.round(5) %>, <%= @home.longitude.round(5) %>)
       <% end %>
     </p>
   </div>
