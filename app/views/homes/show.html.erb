@@ -1,9 +1,11 @@
 <div class="row mt-2">
   <div class="col-sm-8">
     <h1>
-      <%= @home.address_street || '[unnamed property]' %><%= ", #{@home.postcode}" if @home.postcode %>
+      <%= @home.address_street || '[unnamed property]' %>
     </h1>
-    <h3><%= @home.title %></h3>
+    <h3>
+      <%= @home.title %><%= ", #{@home.postcode}" if @home.postcode %>
+    </h3>
     <p>
       <% if @home.address_locality.present? %>
         <%= @home.address_locality %>,
