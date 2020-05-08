@@ -23,6 +23,9 @@ gem 'factory_bot_rails', group: %i[development test]
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
+# Support dialogues, link HTTP verb changes and form-submit improvements
+gem 'jquery-rails'
+
 gem 'listen'
 
 # HTML Parsing (for crawler)
