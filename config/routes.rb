@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-  resources :images
-  devise_for :users
   root to: 'static_pages#homepage'
+
+  devise_for :users,
+             controllers: {
+               confirmations: 'confirmations',
+               registrations: 'registrations',
+               sessions: 'sessions'
+             }
 
   resources :comments
   resources :homes
+  resources :images
 end

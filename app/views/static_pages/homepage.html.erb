@@ -1,15 +1,13 @@
-<div style="text-align: center;" class="mt-4 pt-4">
-  <%= image_tag 'https://homepicker.s3.eu-west-2.amazonaws.com/homepicker.svg', size: 150 %>
-  <h1>Home Picker</h1>
-  <% if user_signed_in? %>
-    <p>
-      <%= link_to 'View Homes', homes_path, class: 'btn btn-warning' %>
-    </p>
-  <% else %>
-    <p>
-      <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary' %>
-      or
-      <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
-    </p>
-  <% end %>
-</div>
+<h1>Home Picker</h1>
+
+<% if user_signed_in? %>
+  <p>
+    <%= link_to 'View Homes', homes_path, class: 'btn btn-warning' %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary' %>
+    or
+    <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
+  </p>
+<% end %>

@@ -13,14 +13,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav mr-auto">
-      <%= link_to 'Homes', homes_path, class: 'nav-item nav-link' %>
-      <%= link_to 'Add Home', new_home_path, class: 'nav-item nav-link' %>
-    </div>
-    <div class="navbar-nav">
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
+      <div class="navbar-nav mr-auto">
+        <%= link_to 'Homes', homes_path, class: 'nav-item nav-link' %>
+        <%= link_to 'Add Home', new_home_path, class: 'nav-item nav-link' %>
+      </div>
+      <div class="navbar-nav">
         <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </nav>
