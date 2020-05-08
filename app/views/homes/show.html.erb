@@ -54,22 +54,25 @@
 <% end %>
 
 <div class="row" style="padding-top: 20px">
-  <div class="col-sm-8">
+  <div class="col-sm-7">
     <% if @home.description.present? %>
       <%= render_markdown_paragraphs(@home.description) %>
     <% else %>
       NO DETAILS
     <% end %>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-5">
     <h3>Comments:</h3>
     <% if @home.comments.each do |comment| %>
-      <div class="media mt-2">
+      <div class="media mt-2 mb-2">
         <%= image_tag comment.user.gravatar_url(70),
                       class: 'mr-3',
                       size: 70 %>
         <div class="media-body">
-          <h5 class="mt-0"><%= comment.user.email.scan(/.+@/).last[0...-1] %></h5>
+          <h5 class="mt-0">
+            <%= comment.user.display_name %>
+            <small>(<%= comment.created_at.strftime('%e %b @ %H:%M').squish %>)</small>
+          </h5>
           <%= comment.text %>
         </div>
       </div>
