@@ -92,20 +92,20 @@ class LinkRetrieverService
     data[:longitude] = property_json.dig('location', 'longitude')
     data[:price] = property_json.dig('propertyInfo', 'price')
 
-    data[:title] = page.xpath("//title")&.text
+    data[:title] = page.css('div.property-header-bedroom-and-price/div/h1')[0].text
     raise "RIGHTMOVE: cannot find title..." if data[:title].blank?
 
     data[:description] = html_to_markdown(page.xpath("//p[@itemprop='description']")[0])
 
     data[:canonical_url] = page.xpath("//link[@rel='canonical']/@href")&.to_s
 
-    data[:address_street] = 'blah street' # res_data['address']['streetAddress']
-    raise "RIGHTMOVE: cannot find address_street..." if data[:address_street].blank?
+    address = page.css("div.property-header-bedroom-and-price/div/address/meta[@itemprop='streetAddress']/@content")[0].text
+    raise "RIGHTMOVE: cannot find address..." if address.blank?
 
-    data[:address_locality] = 'blah locality' # res_data['address']['addressLocality']
+    data[:address_street], data[:address_locality] = address.split(',', 2)
     raise "RIGHTMOVE: cannot find address_locality..." if data[:address_locality].blank?
 
-    data[:address_region] = 'blah region' # res_data['address']['addressRegion']
+    data[:address_region] = 'UNKNOWN'
 
     data[:images] = page.xpath("//meta[@property='og:image']/@content").map(&:to_s)
 
