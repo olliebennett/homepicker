@@ -7,9 +7,9 @@
     </p>
   <% else %>
     <p>
-      <%= link_to 'Register', new_user_registration_path %>
+      <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary' %>
       or
-      <%= link_to 'Sign In', new_user_session_path %>
+      <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
     </p>
   <% end %>
 </div>
