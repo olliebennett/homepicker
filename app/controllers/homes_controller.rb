@@ -2,7 +2,8 @@ class HomesController < ApplicationController
   before_action :set_home, only: %i[show edit update destroy restore]
 
   def index
-    @homes = Home.where(disabled: false)
+    filter_disabled = params[:disabled] == 'true'
+    @homes = Home.where(disabled: filter_disabled)
   end
 
   def show
