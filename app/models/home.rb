@@ -5,6 +5,8 @@ class Home < ApplicationRecord
   validates :title, presence: true
   validates :address_street, presence: true
 
+  default_scope { order(:id) }
+
   accepts_nested_attributes_for :images, reject_if: :mark_empty_images_for_destruction, allow_destroy: true
 
   def default_image
