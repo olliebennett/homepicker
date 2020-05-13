@@ -2,8 +2,8 @@
 
 <% if @homes.each do |home| %>
   <div class="media">
-    <%= link_to home do %>
-      <%= image_tag home.default_image, height: 100, class: 'align-self-center mr-3', alt: home.address_street %>
+    <%= link_to home, class: 'align-self-center' do %>
+      <%= image_tag home.default_image, height: 100, class: 'mr-3', alt: home.address_street %>
     <% end %>
     <div class="media-body">
       <h5 class="mt-0">
