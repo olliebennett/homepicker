@@ -1,17 +1,35 @@
-<div id="imageCarousel" class="carousel slide" data-ride="carousel">
+<%# Based on https://stackoverflow.com/questions/41548027 %>
+
+<div id="homeImagesCarousel" class="carousel carousel-fade shadow">
+  <%# Carousel full-size images %>
   <div class="carousel-inner">
     <% images.each_with_index do |image, idx| %>
-      <div class="carousel-item<%= ' active' if idx.zero? %>">
+      <div class="<%= 'active' if idx.zero? %> carousel-item" data-slide-number="<%= idx %>">
         <%= image_tag image.url, class: 'd-block w-100', alt: "Image #{idx + 1} of #{images.size}" %>
       </div>
     <% end %>
+
+    <a class="carousel-control-prev" href="#homeImagesCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#homeImagesCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
-  <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+
+  <%# Carousel thumbnails %>
+  <ul class="carousel-indicators list-inline mx-auto px-2 mb-0">
+    <% images.each_with_index do |image, idx| %>
+      <li class="list-inline-item <%= 'active' if idx.zero? %>">
+        <%= link_to nil,
+                    id: "carousel-selector-#{idx}",
+                    class: idx.zero? ? 'selected' : '',
+                    data: { 'slide-to': idx, target: '#homeImagesCarousel' } do %>
+          <%= image_tag image.url, class: 'img-fluid', style: 'max-height: 100px;', alt: "Image #{idx + 1} of #{images.size}" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 </div>
