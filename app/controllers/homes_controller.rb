@@ -31,7 +31,7 @@ class HomesController < ApplicationController
       @home.address_street = retrieved_data[:address_street] if @home.address_street.blank?
       @home.address_locality = retrieved_data[:address_locality] if @home.address_locality.blank?
       @home.address_region = retrieved_data[:address_region] if @home.address_region.blank?
-      @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla.com')
+      @home.zoopla_url = retrieved_data[:canonical_url] if params[:url].include?('zoopla.co')
       @home.rightmove_url = retrieved_data[:canonical_url] if params[:url].include?('rightmove.co.uk')
 
       # Avoid saving a duplicate of existing home
