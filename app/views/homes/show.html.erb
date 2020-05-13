@@ -1,5 +1,12 @@
+<% if @home.disabled? %>
+  <div class="mt-4 alert alert-danger" role="alert">
+    This home has been archived.
+  </div>
+<% end %>
+
 <div class="row mt-2">
   <div class="col-sm-8">
+
     <h1>
       <%= @home.address_street || '[unnamed property]' %>
     </h1>
@@ -20,11 +27,17 @@
   </div>
   <div class="col-sm-4 text-right">
     <%= link_to 'Edit', edit_home_path(@home), class: 'btn btn-warning' %>
-    <%= link_to 'Delete',
-                @home,
-                method: :delete,
-                data: { confirm: 'Are you sure?' },
-                class: 'btn btn-danger' %>
+    <% if @home.disabled? %>
+      <%= link_to 'Restore',
+                  restore_home_path(@home),
+                  method: :patch,
+                  class: 'btn btn-info' %>
+    <% else %>
+      <%= link_to 'Archive',
+                  @home,
+                  method: :delete,
+                  class: 'btn btn-danger' %>
+    <% end %>
 
     <h3>£<%= @home.price / 1000 %>k</h3>
     <p>

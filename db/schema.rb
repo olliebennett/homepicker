@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_213934) do
+ActiveRecord::Schema.define(version: 2020_05_13_200740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_05_06_213934) do
     t.string "address_locality"
     t.string "address_region"
     t.text "description"
+    t.boolean "disabled", default: false
   end
 
   create_table "images", id: :serial, force: :cascade do |t|

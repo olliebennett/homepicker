@@ -9,6 +9,8 @@ Rails.application.routes.draw do
              }
 
   resources :comments
-  resources :homes
+  resources :homes do
+    patch :restore, on: :member
+  end
   resources :images
 end

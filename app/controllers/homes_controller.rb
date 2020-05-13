@@ -1,8 +1,8 @@
 class HomesController < ApplicationController
-  before_action :set_home, only: %i[show edit update destroy]
+  before_action :set_home, only: %i[show edit update destroy restore]
 
   def index
-    @homes = Home.order(id: :desc)
+    @homes = Home.where(disabled: false)
   end
 
   def show
@@ -44,38 +44,32 @@ class HomesController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      if @home.save
-        (retrieved_data[:images] || []).each do |img|
-          Image.create(url: img, home: @home)
-        end
-        format.html { redirect_to @home, notice: 'Home was successfully created.' }
-        format.json { render :show, status: :created, location: @home }
-      else
-        format.html { render :new }
-        format.json { render json: @home.errors, status: :unprocessable_entity }
+    if @home.save
+      (retrieved_data[:images] || []).each do |img|
+        @home.images.create(url: img)
       end
+      redirect_to @home, notice: 'Home was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @home.update(home_params)
-        format.html { redirect_to @home, notice: 'Home was successfully updated.' }
-        format.json { render :show, status: :ok, location: @home }
-      else
-        format.html { render :edit }
-        format.json { render json: @home.errors, status: :unprocessable_entity }
-      end
+    if @home.update(home_params)
+      redirect_to @home, notice: 'Home was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
-    @home.destroy
-    respond_to do |format|
-      format.html { redirect_to homes_url, notice: 'Home was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @home.update!(disabled: true)
+    redirect_to homes_path, notice: 'Home archived!'
+  end
+
+  def restore
+    @home.update!(disabled: false)
+    redirect_to homes_path, notice: 'Home restored!'
   end
 
   private
@@ -88,7 +82,6 @@ class HomesController < ApplicationController
       @home = Home.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
       params.require(:home).permit(
         :title,
