@@ -1,8 +1,8 @@
 <%# Based on https://stackoverflow.com/questions/41548027 %>
 
-<div id="homeImagesCarousel" class="carousel carousel-fade shadow">
+<div id="homeImagesCarousel" class="carousel carousel-fade">
   <%# Carousel full-size images %>
-  <div class="carousel-inner">
+  <div class="carousel-inner shadow">
     <% images.each_with_index do |image, idx| %>
       <div class="<%= 'active' if idx.zero? %> carousel-item" data-slide-number="<%= idx %>">
         <%= image_tag image.url, class: 'd-block w-100', alt: "Image #{idx + 1} of #{images.size}" %>
