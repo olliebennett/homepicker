@@ -35,8 +35,9 @@ class LinkRetrieverService
 
     raise "ZOOPLA: cannot find res_data..." if res_data.blank?
 
-    data[:title] = res_data['name']&.squish
+    data[:title] = res_data['name']
     raise "ZOOPLA: cannot find title..." if data[:title].blank?
+    data[:title] = data[:title].gsub('for sale', '').squish
 
     data[:latitude] = res_data['geo']['latitude']
     data[:longitude] = res_data['geo']['longitude']
@@ -94,6 +95,7 @@ class LinkRetrieverService
 
     data[:title] = page.css('div.property-header-bedroom-and-price/div/h1')[0].text
     raise "RIGHTMOVE: cannot find title..." if data[:title].blank?
+    data[:title] = data[:title].gsub('for sale', '').squish
 
     data[:description] = html_to_markdown(page.xpath("//p[@itemprop='description']")[0])
 
