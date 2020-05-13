@@ -11,7 +11,7 @@
         £<%= home.price / 1000 %>k
         <% if home.comments.size > 0 %><%= fas_icon('comment') %><% end %>
       </h5>
-      <p class="mb-2"><%= home.title %></p>
+      <p class="mb-2"><%= home.title %><%= ", #{home.postcode}" if home.postcode.present? %></p>
       <p>
         <% if home.latitude.present? && home.longitude.present? %>
           <%= link_to image_tag('external-icons/google-maps.svg', size: 30, alt: 'Google Maps'),
