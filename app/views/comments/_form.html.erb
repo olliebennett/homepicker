@@ -11,12 +11,15 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :text, class: 'sr-only' %>
-    <%= f.text_field :text, class: 'form-control' %>
-  </div>
-
   <%= f.hidden_field :home_id, value: comment.home_id %>
 
-  <%= f.submit 'Add Comment', class: 'btn btn-primary' %>
+  <div class="input-group">
+    <%= f.text_field :text,
+                     class: 'form-control',
+                     placeholder: ['I think...', 'Love this!', 'What about ...', 'No. Way.'].sample,
+                     required: true %>
+    <div class="input-group-append">
+      <%= f.submit 'Comment', class: 'btn btn-primary' %>
+    </div>
+  </div>
 <% end %>
