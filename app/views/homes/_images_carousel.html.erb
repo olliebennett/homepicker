@@ -20,7 +20,7 @@
   </div>
 
   <%# Carousel thumbnails %>
-  <ul class="carousel-indicators list-inline mx-auto px-2 mb-0">
+  <ul class="carousel-indicators list-inline mx-auto px-2 mb-0 d-none d-md-flex">
     <% images.each_with_index do |image, idx| %>
       <li class="list-inline-item <%= 'active' if idx.zero? %>">
         <%= link_to nil,
