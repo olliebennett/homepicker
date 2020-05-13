@@ -122,6 +122,10 @@ class LinkRetrieverService
         res += child_node.text.squish
       when 'br'
         res += "\n"
+      when 'ul', 'ol'
+        res += html_to_markdown(child_node)
+      when 'li'
+        res += "\n- #{child_node.text.squish}"
       else
         raise "Unexpected child_node name; #{child_node.name}"
       end
