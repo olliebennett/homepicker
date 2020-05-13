@@ -20,9 +20,6 @@
       <% if @home.address_region.present? %>
         <%= @home.address_region %>
       <% end %>
-      <% if @home.latitude.present? && @home.longitude.present? %>
-        (<%= @home.latitude.round(5) %>, <%= @home.longitude.round(5) %>)
-      <% end %>
     </p>
   </div>
   <div class="col-sm-4 text-right">
