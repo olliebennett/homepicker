@@ -1,56 +1,38 @@
 <h1>Homes</h1>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>&nbsp;</th>
-      <th>Description</th>
-      <th>Links</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @homes.each do |home| %>
-      <tr>
-        <td>
-          <%= link_to home do %>
-            <% if home.images.first.present? %>
-              <%= image_tag home.images.first.url, height: 100 %>
-            <% else %>
-              [ no image ]
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-          <p class="lead"><%= link_to home.address_street, home %></p>
-          <p><%= home.title %></p>
-        </td>
-        <td>
-          <% if home.agent_url.present? %>
-            <%= link_to home.agent_url 'Agent' %>
-          <% end %>
-          <% if home.zoopla_url.present? %>
-            <%= link_to 'Zoopla', home.zoopla_url %>
-          <% end %>
-          <% if home.rightmove_url.present? %>
-            <%= link_to 'Rightmove', home.rightmove_url %>
-          <% end %>
-        </td>
-        <td>£<%= home.price / 1000 %>k</td>
-      </tr>
-    <% end.empty? %>
-      <tr>
-        <td colspan="4">
-          No homes!
-          Get started by
-          <%= link_to 'adding one', new_home_path %>.
-        </td>
-      </tr>
+<% if @homes.each do |home| %>
+  <div class="media">
+    <%= link_to home do %>
+      <%= image_tag home.default_image, height: 100, class: 'align-self-center mr-3', alt: home.address_street %>
     <% end %>
-  </tbody>
-</table>
+    <div class="media-body">
+      <h5 class="mt-0">
+        <%= link_to home.address_street, home %>
+        £<%= home.price / 1000 %>k
+        <% if home.comments.size > 0 %><%= fas_icon('comment') %><% end %>
+      </h5>
+      <p class="mb-2"><%= home.title %></p>
+      <p>
+        <% if home.latitude.present? && home.longitude.present? %>
+          <%= link_to image_tag('external-icons/google-maps.svg', size: 30, alt: 'Google Maps'),
+                      "https://www.google.co.uk/maps/place/#{home.latitude},#{home.longitude}" %>
+        <% end %>
+        <% if home.zoopla_url.present? %>
+          <%= link_to image_tag('external-icons/zoopla.png', size: 30, alt: 'Zoopla'), home.zoopla_url %>
+        <% end %>
+        <% if home.rightmove_url.present? %>
+          <%= link_to image_tag('external-icons/rightmove.png', size: 30, alt: 'Rightmove'), home.rightmove_url %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+<% end.empty? %>
+  <p>
+    No homes!
+    Get started by
+    <%= link_to 'adding one', new_home_path %>.
+  </p>
+<% end %>
 
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css" rel="stylesheet" />
