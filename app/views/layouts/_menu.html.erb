@@ -15,10 +15,13 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <% if user_signed_in? %>
       <div class="navbar-nav mr-auto">
-        <%= link_to 'Homes', homes_path, class: 'nav-item nav-link' %>
-        <%= link_to 'Add Home', new_home_path, class: 'nav-item nav-link' %>
+        <% if @hunt %>
+          <%= link_to 'Homes', hunt_homes_path(@hunt), class: 'nav-item nav-link' %>
+          <%= link_to 'Add Home', new_hunt_home_path(@hunt), class: 'nav-item nav-link' %>
+        <% end %>
       </div>
       <div class="navbar-nav">
+        <%= link_to 'Switch Hunts', hunts_path, class: 'nav-item nav-link' %>
         <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
       </div>
     <% end %>

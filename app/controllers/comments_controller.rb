@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment.home, notice: 'Comment added.' }
+        format.html { redirect_to hunt_home_url(@comment.home.hunt, @comment.home), notice: 'Comment added.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to hunt_home_url(@comment.home.hunt, @comment.home), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

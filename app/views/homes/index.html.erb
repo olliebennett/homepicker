@@ -2,12 +2,12 @@
 
 <% if @homes.each do |home| %>
   <div class="media">
-    <%= link_to home, class: 'align-self-center' do %>
+    <%= link_to hunt_home_path(@hunt, home), class: 'align-self-center' do %>
       <%= image_tag home.default_image, height: 100, class: 'mr-3', alt: home.address_street %>
     <% end %>
     <div class="media-body">
       <h5 class="mt-0">
-        <%= link_to home.address_street, home %>
+        <%= link_to home.address_street, hunt_home_path(@hunt, home) %>
         £<%= home.price / 1000 %>k
         <% if home.comments.size > 0 %><%= fas_icon('comment') %><% end %>
       </h5>

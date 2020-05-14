@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_202925) do
+ActiveRecord::Schema.define(version: 2020_05_14_204407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,11 @@ ActiveRecord::Schema.define(version: 2020_05_14_202925) do
     t.index ["hunt_id"], name: "index_homes_on_hunt_id"
   end
 
-  create_table "hunt_members", force: :cascade do |t|
+  create_table "hunt_memberships", force: :cascade do |t|
     t.bigint "hunt_id", null: false
     t.bigint "user_id", null: false
-    t.index ["hunt_id"], name: "index_hunt_members_on_hunt_id"
-    t.index ["user_id"], name: "index_hunt_members_on_user_id"
+    t.index ["hunt_id"], name: "index_hunt_memberships_on_hunt_id"
+    t.index ["user_id"], name: "index_hunt_memberships_on_user_id"
   end
 
   create_table "hunts", force: :cascade do |t|
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 2020_05_14_202925) do
   end
 
   add_foreign_key "homes", "hunts"
-  add_foreign_key "hunt_members", "hunts"
-  add_foreign_key "hunt_members", "users"
+  add_foreign_key "hunt_memberships", "hunts"
+  add_foreign_key "hunt_memberships", "users"
   add_foreign_key "hunts", "users", column: "creator_user_id"
   add_foreign_key "images", "homes"
 end

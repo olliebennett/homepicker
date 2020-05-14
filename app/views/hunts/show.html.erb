@@ -1,0 +1,19 @@
+<h1>
+  <%= @hunt.title %>
+</h1>
+
+<h2>Members</h2>
+
+<ul>
+  <% @hunt.users.each do |user| %>
+    <li><%= user.display_name %></li>
+  <% end %>
+</ul>
+
+<h2>Homes</h2>
+
+<ul>
+  <% @hunt.homes.each do |home| %>
+    <li><%= link_to home.title, hunt_home_path(@hunt, home) %></li>
+  <% end %>
+</ul>

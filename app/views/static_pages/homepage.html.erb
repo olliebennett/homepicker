@@ -1,8 +1,17 @@
 <h1>Home Picker</h1>
 
 <% if user_signed_in? %>
+  <% if current_user.hunts.any? %>
+    <p>
+      <%= link_to "View '#{current_user.hunts.last.title}' Homes",
+                  hunt_homes_path(current_user.hunts.last),
+                  class: 'btn btn-warning' %>
+    </p>
+  <% end %>
   <p>
-    <%= link_to 'View Homes', homes_path, class: 'btn btn-warning' %>
+    <%= link_to 'Switch to a different home hunt',
+                hunts_path,
+                class: 'btn btn-outline-info' %>
   </p>
 <% else %>
   <p>

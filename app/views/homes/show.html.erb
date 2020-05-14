@@ -23,15 +23,15 @@
     </p>
   </div>
   <div class="col-sm-4 text-right">
-    <%= link_to 'Edit', edit_home_path(@home), class: 'btn btn-warning' %>
+    <%= link_to 'Edit', edit_hunt_home_path(@hunt, @home), class: 'btn btn-warning' %>
     <% if @home.disabled? %>
       <%= link_to 'Restore',
-                  restore_home_path(@home),
+                  restore_hunt_home_path(@hunt, @home),
                   method: :patch,
                   class: 'btn btn-info' %>
     <% else %>
       <%= link_to 'Archive',
-                  @home,
+                  hunt_home_path(@hunt, @home),
                   method: :delete,
                   class: 'btn btn-danger' %>
     <% end %>
@@ -100,3 +100,7 @@
     .addTo(map);
   </script>
 <% end %>
+
+<p>
+  This home is part of the <%= link_to @hunt.title, hunt_path(@hunt) %> hunt!
+</p>

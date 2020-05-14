@@ -1,5 +1,6 @@
 class HomesController < ApplicationController
   before_action :set_home, only: %i[show edit update destroy restore]
+  before_action :set_hunt
 
   def index
     filter_disabled = params[:disabled] == 'true'
@@ -10,7 +11,7 @@ class HomesController < ApplicationController
   end
 
   def new
-    @home = Home.new
+    @home = @hunt.homes.new
     build_images
   end
 
@@ -46,10 +47,10 @@ class HomesController < ApplicationController
     end
 
     if @home.save
-      (retrieved_data[:images] || []).each do |img|
+      (retrieved_data&.dig(:images) || []).each do |img|
         @home.images.create(url: img)
       end
-      redirect_to @home, notice: 'Home was successfully created.'
+      redirect_to hunt_home_path(@hunt, @home), notice: 'Home was successfully created.'
     else
       render :new
     end
@@ -57,7 +58,7 @@ class HomesController < ApplicationController
 
   def update
     if @home.update(home_params)
-      redirect_to @home, notice: 'Home was successfully updated.'
+      redirect_to hunt_home_path(@hunt, @home), notice: 'Home was successfully updated.'
     else
       render :edit
     end
@@ -65,12 +66,12 @@ class HomesController < ApplicationController
 
   def destroy
     @home.update!(disabled: true)
-    redirect_to homes_path, notice: 'Home archived!'
+    redirect_to hunt_homes_path(@hunt), notice: 'Home archived!'
   end
 
   def restore
     @home.update!(disabled: false)
-    redirect_to homes_path, notice: 'Home restored!'
+    redirect_to hunt_home_path(@hunt, @home), notice: 'Home restored!'
   end
 
   private
@@ -81,6 +82,10 @@ class HomesController < ApplicationController
 
     def set_home
       @home = Home.find(params[:id])
+    end
+
+    def set_hunt
+      @hunt = Hunt.find(params[:hunt_id])
     end
 
     def home_params
@@ -97,6 +102,7 @@ class HomesController < ApplicationController
         :zoopla_url,
         :rightmove_url,
         :price,
+        :hunt_id,
         images_attributes: %i[id url _destroy]
       )
     end

@@ -1,0 +1,23 @@
+<h1>
+  Your Home Hunts
+</h1>
+
+<% @hunts.each do |hunt| %>
+  <h2>
+    <%= link_to hunt.title, hunt_path(hunt) %>
+  </h2>
+
+  <% other_users = hunt.users.to_a - [current_user] %>
+  <% if other_users.any? %>
+    <p>With: <%= other_users.map(&:display_name).to_sentence %></p>
+  <% else %>
+    <p>Personal Hunt</p>
+  <% end %>
+  <p>
+    Homes:
+    <%= hunt.homes.where(disabled: false).count %>
+    <% if hunt.homes.where(disabled: true).any? %>
+      (plus <%= hunt.homes.where(disabled: true).size %> archived home)
+    <% end %>
+  </p>
+<% end %>

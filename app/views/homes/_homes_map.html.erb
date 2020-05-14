@@ -24,7 +24,7 @@
           {
             'type': 'Feature',
             'properties': {
-              'description': '<strong><%= home.address_street %></strong><p><a href="<%= home_path(home) %>"><%= home.title %></a> </p>',
+              'description': '<strong><%= home.address_street %></strong><p><a href="<%= hunt_home_path(@hunt, home) %>"><%= home.title %></a> </p>',
               'icon': 'rocket'
             },
             'geometry': {
