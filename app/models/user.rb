@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :comments
 
+  has_many :hunts, through: :hunt_members
+
   def display_name
     email.scan(/.+@/).last[0...-1]
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_200740) do
+ActiveRecord::Schema.define(version: 2020_05_14_202925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,21 @@ ActiveRecord::Schema.define(version: 2020_05_13_200740) do
     t.string "address_region"
     t.text "description"
     t.boolean "disabled", default: false
+    t.bigint "hunt_id"
+    t.index ["hunt_id"], name: "index_homes_on_hunt_id"
+  end
+
+  create_table "hunt_members", force: :cascade do |t|
+    t.bigint "hunt_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["hunt_id"], name: "index_hunt_members_on_hunt_id"
+    t.index ["user_id"], name: "index_hunt_members_on_user_id"
+  end
+
+  create_table "hunts", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "creator_user_id", null: false
+    t.index ["creator_user_id"], name: "index_hunts_on_creator_user_id"
   end
 
   create_table "images", id: :serial, force: :cascade do |t|
@@ -68,5 +83,9 @@ ActiveRecord::Schema.define(version: 2020_05_13_200740) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "homes", "hunts"
+  add_foreign_key "hunt_members", "hunts"
+  add_foreign_key "hunt_members", "users"
+  add_foreign_key "hunts", "users", column: "creator_user_id"
   add_foreign_key "images", "homes"
 end

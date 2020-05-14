@@ -2,6 +2,8 @@ class Home < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :images, dependent: :destroy
 
+  belongs_to :hunt, required: true
+
   validates :title, presence: true
   validates :address_street, presence: true
 
