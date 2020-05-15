@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :hunt_memberships
   has_many :hunts, through: :hunt_memberships
 
+  default_scope { order(:id) }
+
   def display_name
     email.scan(/.+@/).last[0...-1]
   end

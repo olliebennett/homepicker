@@ -10,6 +10,6 @@ class HuntsController < ApplicationController
   private
 
   def set_hunt
-    @hunt = Hunt.find(params[:id])
+    @hunt = current_user.hunts.find(params[:id])
   end
 end

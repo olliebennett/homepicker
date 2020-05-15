@@ -9,6 +9,9 @@ class Home < ApplicationRecord
 
   default_scope { order(:id) }
 
+  scope :enabled, -> { where(disabled: false) }
+  scope :disabled, -> { where(disabled: true) }
+
   accepts_nested_attributes_for :images, reject_if: :mark_empty_images_for_destruction, allow_destroy: true
 
   def default_image

@@ -1,6 +1,6 @@
 class Hunt < ApplicationRecord
   has_many :homes
-  has_one :creator_user, class_name: 'User'
+  belongs_to :creator_user, class_name: 'User'
   has_many :hunt_memberships
   has_many :users, through: :hunt_memberships
 

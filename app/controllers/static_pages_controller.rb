@@ -3,6 +3,5 @@ class StaticPagesController < ApplicationController
 
   layout 'minimal'
 
-  def homepage
-  end
+  def homepage; end
 end
