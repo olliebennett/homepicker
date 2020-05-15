@@ -7,6 +7,8 @@ class Home < ApplicationRecord
 
   validates :title, presence: true
   validates :address_street, presence: true
+  validates :price, presence: true
+  validates :creator_user, presence: true
 
   default_scope { order(:id) }
 

@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_070256) do
+ActiveRecord::Schema.define(version: 2020_05_15_072943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", id: :serial, force: :cascade do |t|
-    t.string "text"
-    t.integer "home_id"
+    t.string "text", null: false
+    t.integer "home_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 2020_05_15_070256) do
     t.string "agent_url"
     t.string "zoopla_url"
     t.string "rightmove_url"
-    t.integer "price"
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
-    t.string "address_street"
+    t.string "title", null: false
+    t.string "address_street", null: false
     t.float "latitude"
     t.float "longitude"
     t.string "postcode"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_070256) do
     t.text "description"
     t.boolean "disabled", default: false
     t.bigint "hunt_id"
-    t.bigint "creator_user_id"
+    t.bigint "creator_user_id", null: false
     t.index ["creator_user_id"], name: "index_homes_on_creator_user_id"
     t.index ["hunt_id"], name: "index_homes_on_hunt_id"
   end
@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_070256) do
   end
 
   create_table "images", id: :serial, force: :cascade do |t|
-    t.string "url"
-    t.integer "home_id"
+    t.string "url", null: false
+    t.integer "home_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["home_id"], name: "index_images_on_home_id"
