@@ -3,6 +3,7 @@ class Home < ApplicationRecord
   has_many :images, dependent: :destroy
 
   belongs_to :hunt, required: true
+  belongs_to :creator_user, class_name: 'User', required: true
 
   validates :title, presence: true
   validates :address_street, presence: true

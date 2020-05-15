@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_065900) do
+ActiveRecord::Schema.define(version: 2020_05_15_070256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_065900) do
     t.text "description"
     t.boolean "disabled", default: false
     t.bigint "hunt_id"
+    t.bigint "creator_user_id"
+    t.index ["creator_user_id"], name: "index_homes_on_creator_user_id"
     t.index ["hunt_id"], name: "index_homes_on_hunt_id"
   end
 
@@ -88,6 +90,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_065900) do
   end
 
   add_foreign_key "homes", "hunts"
+  add_foreign_key "homes", "users", column: "creator_user_id"
   add_foreign_key "hunt_memberships", "hunts"
   add_foreign_key "hunt_memberships", "users"
   add_foreign_key "hunts", "users", column: "creator_user_id"
