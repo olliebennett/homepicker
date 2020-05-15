@@ -1,0 +1,11 @@
+<%= form_with model: hunt do |f| %>
+  <div class="input-group">
+    <%= f.text_field :title,
+                     class: 'form-control',
+                     placeholder: 'My first home hunt',
+                     required: true %>
+    <div class="input-group-append">
+      <%= f.submit 'Start hunting!', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

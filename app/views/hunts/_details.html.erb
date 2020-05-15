@@ -12,7 +12,9 @@
         <%= user.display_name %>
       </h5>
       <% if user == hunt.creator_user %>
-        <%= user == current_user ? 'You' : hunt.creator_user.display_name %> started this hunt
+        <%= user == current_user ? 'You' : hunt.creator_user.display_name %>
+        started this hunt on
+        <%= hunt.created_at.strftime('%d %b %Y') %>
       <% elsif user == current_user %>
         This is you!
       <% else %>
@@ -25,6 +27,12 @@
   <p>Only you, so far!</p>
 <% end %>
 
-<%= link_to "View #{pluralize(hunt.homes.enabled.size, 'home')}",
-            hunt_homes_path(hunt),
-            class: 'btn btn-success' %>
+<% if hunt.homes.enabled.size.positive? %>
+  <%= link_to "View #{pluralize(hunt.homes.enabled.size, 'home')}",
+              hunt_homes_path(hunt),
+              class: 'btn btn-success' %>
+<% else %>
+  <%= link_to 'Add the first home',
+              new_hunt_home_path(hunt),
+              class: 'btn btn-success' %>
+<% end %>

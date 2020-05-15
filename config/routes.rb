@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :comments
 
-  resources :hunts, only: %i[index show] do
+  resources :hunts, only: %i[create index show] do
     resources :homes do
       patch :restore, on: :member
     end
