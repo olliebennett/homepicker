@@ -2,25 +2,32 @@
   <%= hunt.title %>
 </h2>
 
-<% if hunt.users.each do |user| %>
+<% if hunt.hunt_memberships.includes(:user).each do |hm| %>
   <div class="media mt-2 mb-2">
-    <%= image_tag user.gravatar_url(70),
+    <%= image_tag hm.user.gravatar_url(70),
                   class: 'mr-3 rounded',
                   size: 70 %>
     <div class="media-body">
-      <h5 class="mt-0">
-        <%= user.display_name %>
+      <h5 class="mt-0 mb-0">
+        <%= hm.user.display_name %>
       </h5>
-      <% if user == hunt.creator_user %>
-        <%= user == current_user ? 'You' : hunt.creator_user.display_name %>
-        started this hunt on
-        <%= hunt.created_at.strftime('%d %b %Y') %>
-      <% elsif user == current_user %>
-        This is you!
-      <% else %>
-        <%# TODO: Fix this to use HuntMembership.created_at once it exists %>
-        Joined the hunt on <%= user.created_at.strftime('%d %b %Y') %>.
-      <% end %>
+      <p>
+        <% if hm.user == hunt.creator_user %>
+          <%= hm.user == current_user ? 'You' : hunt.creator_user.display_name %>
+          started this hunt on
+          <%= hunt.created_at.strftime('%d %b %Y') %>.
+        <% else %>
+          <%= hm.user == current_user ? 'You' : 'They' %>
+          joined the hunt on
+          <%= hm.created_at.strftime('%d %b %Y') %>.
+        <% end %>
+        <br>
+        <%= hm.user == current_user ? "You've" : "They've" %>
+        added
+        <%= pluralize(hunt.homes.enabled.where(creator_user: hm.user).size, 'home') %>
+        and
+        <%= pluralize(Comment.where(user: hm.user, home: hunt.homes).size, 'comments') %>.
+      </p>
     </div>
   </div>
 <% end.empty? %>
