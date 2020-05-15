@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_204407) do
+ActiveRecord::Schema.define(version: 2020_05_15_065900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2020_05_14_204407) do
   create_table "hunt_memberships", force: :cascade do |t|
     t.bigint "hunt_id", null: false
     t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "now()" }
+    t.datetime "updated_at", precision: 6, default: -> { "now()" }
     t.index ["hunt_id"], name: "index_hunt_memberships_on_hunt_id"
     t.index ["user_id"], name: "index_hunt_memberships_on_user_id"
   end
@@ -55,6 +57,8 @@ ActiveRecord::Schema.define(version: 2020_05_14_204407) do
   create_table "hunts", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "creator_user_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "now()" }
+    t.datetime "updated_at", precision: 6, default: -> { "now()" }
     t.index ["creator_user_id"], name: "index_hunts_on_creator_user_id"
   end
 
