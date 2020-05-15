@@ -6,7 +6,6 @@
 
 <div class="row mt-2">
   <div class="col-sm-8">
-
     <h1>
       <%= @home.address_street || '[unnamed property]' %>
     </h1>
@@ -65,6 +64,9 @@
     <% end %>
   </div>
   <div class="col-xs-12 col-lg-4">
+    <p>
+      Home added by <%= @home.creator_user.display_name %> on <%= @home.created_at.strftime('%e %b @ %H:%M').squish %>
+    </p>
     <%= render 'comments/list', comments: @home.comments %>
     <%= render 'comments/form', comment: @home.comments.new %>
   </div>

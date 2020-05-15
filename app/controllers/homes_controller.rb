@@ -21,6 +21,7 @@ class HomesController < ApplicationController
 
   def create
     @home = Home.new(home_params)
+    @home.creator_user = current_user
 
     if params[:url].present?
       retrieved_data = LinkRetrieverService.retrieve(params[:url])
