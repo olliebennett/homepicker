@@ -9,6 +9,7 @@ Rails.application.routes.draw do
              }
 
   resources :comments
+  resources :ratings, only: %i[create update]
 
   resources :hunts, only: %i[create index show] do
     resources :homes do

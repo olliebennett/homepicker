@@ -1,5 +1,6 @@
 class Home < ApplicationRecord
   has_many :comments, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :images, dependent: :destroy
 
   belongs_to :hunt, required: true

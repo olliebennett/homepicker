@@ -69,6 +69,11 @@
     </p>
     <%= render 'comments/list', comments: @home.comments %>
     <%= render 'comments/form', comment: @home.comments.new %>
+
+    <% @ratings.each do |rating| %>
+      <br>
+      <%= render 'ratings/form', rating: rating %>
+    <% end %>
   </div>
 </div>
 

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :comments
+  has_many :ratings
 
   has_many :hunt_memberships
   has_many :hunts, through: :hunt_memberships

@@ -26,7 +26,7 @@
         added
         <%= pluralize(hunt.homes.enabled.where(creator_user: hm.user).size, 'home') %>
         and
-        <%= pluralize(Comment.where(user: hm.user, home: hunt.homes).size, 'comments') %>.
+        <%= pluralize(hm.user.comments.where(home: hunt.homes).size, 'comments') %>.
       </p>
     </div>
   </div>

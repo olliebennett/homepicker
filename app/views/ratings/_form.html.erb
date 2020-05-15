@@ -1,0 +1,23 @@
+<%= form_for(rating, html: { class: 'form-inline' }) do |f| %>
+  <%= f.hidden_field :home_id %>
+  <%= f.hidden_field :aspect %>
+  <%= f.hidden_field :score, id: "score_field_#{rating.aspect}" %>
+
+  <div class="btn-group" role="group" aria-label="Rating">
+    <% 1.upto(5).each do |score| %>
+      <%= button_tag score, type: :submit, class: "set_score_btn btn #{rating.score == score ? 'btn-warning' : 'btn-outline-warning' }" %>
+    <% end %>
+  </div>
+  &nbsp;
+  <%= f.object.aspect.humanize %>
+<% end %>
+
+<script>
+  $(function() {
+    $('.set_score_btn').on('click', function(ev) {
+      var btn = $(this);
+      var score_field = $('#score_field_<%= rating.aspect %>');
+      score_field.attr('value', btn.text());
+    });
+  });
+</script>

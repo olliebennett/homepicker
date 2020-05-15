@@ -8,6 +8,9 @@ class HomesController < ApplicationController
   end
 
   def show
+    @ratings = %w[wider_area local_area garden indoors].map do |aspect|
+      current_user.ratings.find_or_initialize_by(home: @home, aspect: aspect)
+    end
   end
 
   def new

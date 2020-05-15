@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_072943) do
+ActiveRecord::Schema.define(version: 2020_05_15_200724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 2020_05_15_072943) do
     t.index ["home_id"], name: "index_images_on_home_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "score", null: false
+    t.bigint "user_id", null: false
+    t.bigint "home_id", null: false
+    t.string "aspect", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["home_id"], name: "index_ratings_on_home_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,4 +106,6 @@ ActiveRecord::Schema.define(version: 2020_05_15_072943) do
   add_foreign_key "hunt_memberships", "users"
   add_foreign_key "hunts", "users", column: "creator_user_id"
   add_foreign_key "images", "homes"
+  add_foreign_key "ratings", "homes"
+  add_foreign_key "ratings", "users"
 end
