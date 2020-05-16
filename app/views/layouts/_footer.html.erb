@@ -1,7 +1,14 @@
 <footer class="footer mt-auto py-3">
   <div class="container">
     <span class="text-muted">
-      &copy; HomePicker / Zoopla / Rightmove |
+      &copy; Ollie Bennett
+      <% if @home&.zoopla_url.present? %>
+        / Zoopla
+      <% end %>
+      <% if @home&.rightmove_url.present? %>
+        / Rightmove
+      <% end %>
+      |
       Logo: 'Home' by Dron Desain from the Noun Project
     </span>
   </div>
