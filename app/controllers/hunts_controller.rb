@@ -24,6 +24,9 @@ class HuntsController < ApplicationController
     if user_signed_in? && params[:confirm_join] == 'true'
       current_user.hunt_memberships.create!(hunt: @hunt)
       return redirect_to hunt_path(@hunt), notice: "You're in! Get hunting!"
+    else
+      # Save this page so user returns here after registration/login
+      store_location_for(:user, request.fullpath)
     end
 
     render :join
