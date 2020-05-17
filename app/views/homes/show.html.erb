@@ -72,7 +72,9 @@
 
     <% @ratings.each do |rating| %>
       <br>
-      <%= render 'ratings/form', rating: rating %>
+      <%= render 'ratings/form',
+                 rating: rating,
+                 others_ratings: @others_ratings.select { |x| x.aspect == rating.aspect} %>
     <% end %>
   </div>
 </div>

@@ -11,6 +11,8 @@ class HomesController < ApplicationController
     @ratings = Rating.aspects.keys.map do |aspect|
       current_user.ratings.find_or_initialize_by(home: @home, aspect: aspect)
     end
+
+    @others_ratings = @home.ratings.where.not(user: current_user).includes(:user).to_a
   end
 
   def new

@@ -5,7 +5,21 @@
 
   <div class="btn-group" role="group" aria-label="Rating">
     <% 1.upto(5).each do |score| %>
-      <%= button_tag score, type: :submit, class: "set_score_btn btn #{rating.score == score ? 'btn-warning' : 'btn-outline-warning' }" %>
+      <% others_score_ratings = others_ratings.select { |r| r.score == score }.map { |r| r.user.display_name } %>
+      <% btn_classes = %w[set_score_btn btn] %>
+      <% btn_classes << (rating.score == score ? 'btn-warning' : 'btn-outline-warning') %>
+      <% if others_score_ratings.any? %>
+        <% btn_classes << 'rated_by_others' %>
+        <%# TODO: Specify container: 'body' to avoid rendering problems in more complex components (like our input groups, button groups, etc). %>
+        <% btn_data = { toggle: :tooltip, container: :body } if others_score_ratings.any? %>
+        <% btn_title = "#{rating.score == score ? 'Also rated ' : 'Rated '} #{score} by #{others_score_ratings.to_sentence}" %>
+      <% end %>
+
+      <%= button_tag score,
+                     type: :submit,
+                     class: btn_classes.join(' '),
+                     data: btn_data,
+                     title: btn_title %>
     <% end %>
   </div>
   &nbsp;

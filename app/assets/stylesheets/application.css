@@ -19,3 +19,7 @@
 #homeImagesCarousel .carousel-indicators > li.active img {
   opacity: 0.7;
 }
+
+.rated_by_others {
+  color: #007bff; /* bootstrap blue */
+}
