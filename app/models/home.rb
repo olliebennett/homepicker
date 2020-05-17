@@ -31,7 +31,7 @@ class Home < ApplicationRecord
 
     scores = ratings.map(&:score)
 
-    (scores.sum * 2.0 / scores.count).round / 2.0
+    (scores.sum * 10.0 / scores.count).round / 10.0
   end
 
   def mark_empty_images_for_destruction(attributes)
