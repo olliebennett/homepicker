@@ -45,10 +45,10 @@ class HomesController < ApplicationController
       # Avoid saving a duplicate of existing home
       if @home.zoopla_url.present?
         existing_z_home = @home.hunt&.homes&.find_by(zoopla_url: @home.zoopla_url)
-        return redirect_to(existing_z_home, alert: 'Home already imported from Zoopla; see below.') if existing_z_home.present?
+        return redirect_to(hunt_home_path(@hunt, existing_z_home), alert: 'Home already imported from Zoopla; see below.') if existing_z_home.present?
       elsif @home.rightmove_url.present?
         existing_rm_home = @home.hunt&.homes&.find_by(rightmove_url: @home.rightmove_url)
-        return redirect_to(existing_rm_home, alert: 'Home already imported from Rightmove; see below.') if existing_rm_home.present?
+        return redirect_to(hunt_home_path(@hunt, existing_rm_home), alert: 'Home already imported from Rightmove; see below.') if existing_rm_home.present?
       end
     end
 
