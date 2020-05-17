@@ -26,6 +26,14 @@ class Home < ApplicationRecord
     'https://homepicker.s3.eu-west-2.amazonaws.com/homepicker.svg'
   end
 
+  def average_rating
+    return nil if ratings.none?
+
+    scores = ratings.map(&:score)
+
+    (scores.sum * 2.0 / scores.count).round / 2.0
+  end
+
   def mark_empty_images_for_destruction(attributes)
     exists = attributes['id'].present?
     empty = attributes.except(:id).values.all?(&:blank?)

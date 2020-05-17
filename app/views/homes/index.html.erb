@@ -23,6 +23,9 @@
         <% if home.rightmove_url.present? %>
           <%= link_to image_tag('external-icons/rightmove.png', size: 30, alt: 'Rightmove'), home.rightmove_url %>
         <% end %>
+        <% if home.average_rating %>
+          <%= fa_icon('star', cls: 'text-warning') %> <%= home.average_rating %>
+        <% end %>
       </p>
     </div>
   </div>
