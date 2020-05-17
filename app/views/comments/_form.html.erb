@@ -19,7 +19,8 @@
                      placeholder: ['I think...', 'Love this!', 'What about ...', 'No. Way.', 'Ermahgerd!'].sample,
                      required: true %>
     <div class="input-group-append">
-      <%= f.submit 'Comment', class: 'btn btn-primary' %>
+      <%= f.submit comment.new_record? ? 'Comment' : 'Update',
+                   class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
                sessions: 'sessions'
              }
 
-  resources :comments
+  resources :comments, only: %i[edit create update destroy]
   resources :ratings, only: %i[create update]
 
   resources :hunts, only: %i[create index show] do

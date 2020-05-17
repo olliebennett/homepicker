@@ -1,16 +1,46 @@
 <% if comments.each do |comment| %>
-  <div class="media mt-2 mb-2">
+  <div class="media mt-2 mb-2 comment">
     <%= image_tag comment.user.gravatar_url(70),
                   class: 'mr-3 rounded',
                   size: 70 %>
     <div class="media-body">
       <h5 class="mt-0">
-        <%= comment.user.display_name %>
-        <small>(<%= comment.created_at.strftime('%e %b @ %H:%M').squish %>)</small>
+        <%= comment.user.display_name %> :
+        <small>
+          <%= comment.formatted_date %>
+        </small>
       </h5>
       <%= comment.text %>
+      <% if comment.user == current_user %>
+        <span class="manage-comment-controls">
+          <%= link_to fa_icon('edit', type: :duotone),
+                      edit_comment_path(comment) %>
+          <%= link_to fa_icon('times', type: :duotone),
+                      comment_path(comment),
+                      method: :delete,
+                      data: { confirm: 'Really delete comment?' } %>
+        </span>
+      <% end %>
     </div>
   </div>
 <% end.empty? %>
   <p>No comments, yet.</p>
 <% end %>
+
+<script>
+  $(function() {
+    $('.comment').on('mouseover', function(ev) {
+      var comment_div = $(this);
+      var comment_contols = $(this).find('.manage-comment-controls');
+      comment_contols.show();
+    });
+    $('.comment').on('mouseout', function(ev) {
+      var comment_div = $(this);
+      var comment_contols = $(this).find('.manage-comment-controls');
+      comment_contols.hide();
+    });
+
+    // Initial hide of comment controls
+    $('.manage-comment-controls').hide();
+  });
+</script>
