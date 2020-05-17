@@ -9,7 +9,7 @@
       <h5 class="mt-0">
         <%= link_to home.address_street, hunt_home_path(@hunt, home) %>
         £<%= home.price / 1000 %>k
-        <% if home.comments.size > 0 %><%= fas_icon('comment') %><% end %>
+        <% if home.comments.size > 0 %><%= fa_icon('comment') %><% end %>
       </h5>
       <p class="mb-2"><%= home.title %><%= ", #{home.postcode}" if home.postcode.present? %></p>
       <p>

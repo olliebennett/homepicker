@@ -3,25 +3,23 @@
   <%= f.hidden_field :aspect %>
   <%= f.hidden_field :score, id: "score_field_#{rating.aspect}" %>
 
-  <div class="btn-group" role="group" aria-label="Rating">
-    <% 1.upto(5).each do |score| %>
-      <% others_score_ratings = others_ratings.select { |r| r.score == score }.map { |r| r.user.display_name } %>
-      <% btn_classes = %w[set_score_btn btn] %>
-      <% btn_classes << (rating.score == score ? 'btn-warning' : 'btn-outline-warning') %>
-      <% if others_score_ratings.any? %>
-        <% btn_classes << 'rated_by_others' %>
-        <%# TODO: Specify container: 'body' to avoid rendering problems in more complex components (like our input groups, button groups, etc). %>
-        <% btn_data = { toggle: :tooltip, container: :body } if others_score_ratings.any? %>
-        <% btn_title = "#{rating.score == score ? 'Also rated ' : 'Rated '} #{score} by #{others_score_ratings.to_sentence}" %>
-      <% end %>
-
-      <%= button_tag score,
-                     type: :submit,
-                     class: btn_classes.join(' '),
-                     data: btn_data,
-                     title: btn_title %>
+  <% 1.upto(5).each do |score| %>
+    <% rating_users = others_ratings.select { |r| r.score == score }.map { |r| r.user.display_name } %>
+    <% btn_data = { score: score } %>
+    <% btn_icon = rating_users.any? ? 'star-exclamation' : 'star' %>
+    <% rating_users.unshift('You') if rating.score == score %>
+    <% if rating_users.any? %>
+      <%# We specify container: 'body' to avoid rendering problems in more complex components %>
+      <% btn_data.merge!(toggle: :tooltip, container: :body) %>
+      <% btn_title = "#{rating_users.to_sentence} rated this home's #{rating.aspect.humanize.downcase} #{score}/5" %>
     <% end %>
-  </div>
+
+    <%= button_tag fa_icon(btn_icon, type: (rating.score.present? && rating.score >= score) ? :solid : :light),
+                   type: :submit,
+                   class: 'set_score_btn btn text-warning',
+                   data: btn_data,
+                   title: btn_title %>
+  <% end %>
   &nbsp;
   <%= f.object.aspect.humanize %>
 <% end %>
@@ -31,7 +29,7 @@
     $('.set_score_btn').on('click', function(ev) {
       var btn = $(this);
       var score_field = $('#score_field_<%= rating.aspect %>');
-      score_field.attr('value', btn.text());
+      score_field.attr('value', btn.data('score'));
     });
   });
 </script>
