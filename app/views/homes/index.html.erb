@@ -37,5 +37,7 @@
   </p>
 <% end %>
 
-<% longlat_homes = @homes.select { |x| x.latitude.present? && x.longitude.present? } %>
-<%= render 'homes_map', homes: longlat_homes if longlat_homes.any? %>
+<div class="mt-3">
+  <% longlat_homes = @homes.select { |x| x.latitude.present? && x.longitude.present? } %>
+  <%= render 'homes_map', homes: longlat_homes if longlat_homes.any? %>
+</div>
