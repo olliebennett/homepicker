@@ -1,1 +1,11 @@
 <%= render 'details', hunt: @hunt %>
+
+<% if @hunt.homes.enabled.size.positive? %>
+  <%= link_to "View #{pluralize(@hunt.homes.enabled.size, 'home')}",
+              hunt_homes_path(@hunt),
+              class: 'btn btn-success' %>
+<% else %>
+  <%= link_to 'Add the first home',
+              new_hunt_home_path(@hunt),
+              class: 'btn btn-success' %>
+<% end %>

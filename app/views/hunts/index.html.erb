@@ -8,6 +8,9 @@
 
 <% if @hunts.each do |hunt| %>
   <%= render 'details', hunt: hunt %>
+  <%= link_to 'View details',
+              hunt_path(hunt),
+              class: 'btn btn-success' %>
 <% end.empty? %>
   <p>
     You haven't set up or joined any hunts yet.
