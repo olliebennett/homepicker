@@ -1,0 +1,23 @@
+<p class="mt-3">
+  <%= @hunt.creator_user.display_name %>
+  has invited you to help find a home through HomePicker!
+</p>
+
+<%= render 'layouts/about_blurb' %>
+
+<%= render 'details', hunt: @hunt %>
+
+<% if user_signed_in? %>
+  <%= link_to "Join hunt: #{@hunt.title}",
+              join_accept_hunt_path(@hunt, token: params[:token], confirm_join: 'true'),
+              method: :post,
+              class: 'btn btn-success' %>
+<% else %>
+  <p>
+    You'll need to
+    <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary' %>
+    or
+    <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
+    before you can join the hunt.
+  </p>
+<% end %>

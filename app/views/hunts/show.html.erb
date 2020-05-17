@@ -9,3 +9,12 @@
               new_hunt_home_path(@hunt),
               class: 'btn btn-success' %>
 <% end %>
+
+<p class="mt-3">
+  To invite others to this home hunt,
+  share the following link:
+</p>
+
+<p>
+  <code><%= join_hunt_url(@hunt, token: @hunt.join_token) %></code>
+</p>

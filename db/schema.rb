@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_205136) do
+ActiveRecord::Schema.define(version: 2020_05_16_234911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_205136) do
     t.bigint "creator_user_id", null: false
     t.datetime "created_at", precision: 6, default: -> { "now()" }
     t.datetime "updated_at", precision: 6, default: -> { "now()" }
+    t.string "join_token", default: -> { "md5((random())::text)" }, null: false
     t.index ["creator_user_id"], name: "index_hunts_on_creator_user_id"
   end
 
