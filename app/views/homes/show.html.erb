@@ -56,7 +56,7 @@
   </div>
   <div class="col-xs-12 col-lg-4">
     <p>
-      Home added by <%= @home.creator_user.display_name %> on <%= @home.created_at.strftime('%e %b @ %H:%M').squish %>
+      Added on <%= @home.created_at.strftime("#{@home.created_at.day.ordinalize} %b").squish %> by <%= @home.creator_user.display_name %>
     </p>
     <%= render 'comments/list', comments: @home.comments %>
     <%= render 'comments/form', comment: @home.comments.new %>
