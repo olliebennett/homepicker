@@ -34,6 +34,7 @@
       <%= link_to 'Archive',
                   hunt_home_path(@hunt, @home),
                   method: :delete,
+                  data: { confirm: 'Really archive this home?' },
                   class: 'btn btn-danger' %>
     <% end %>
 
