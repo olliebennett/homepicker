@@ -13,16 +13,7 @@
       </h5>
       <p class="mb-2"><%= home.title %><%= ", #{home.postcode}" if home.postcode.present? %></p>
       <p>
-        <% if home.latitude.present? && home.longitude.present? %>
-          <%= link_to image_tag('external-icons/google-maps.svg', size: 30, alt: 'Google Maps'),
-                      "https://www.google.co.uk/maps/place/#{home.latitude},#{home.longitude}" %>
-        <% end %>
-        <% if home.zoopla_url.present? %>
-          <%= link_to image_tag('external-icons/zoopla.png', size: 30, alt: 'Zoopla'), home.zoopla_url %>
-        <% end %>
-        <% if home.rightmove_url.present? %>
-          <%= link_to image_tag('external-icons/rightmove.png', size: 30, alt: 'Rightmove'), home.rightmove_url %>
-        <% end %>
+        <%= render 'link_icons', home: home %>
         <% if home.average_rating %>
           <%= fa_icon('star', cls: 'text-warning') %> <%= home.average_rating %>
         <% end %>

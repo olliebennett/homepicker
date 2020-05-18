@@ -39,18 +39,7 @@
 
     <h3>£<%= @home.price / 1000 %>k</h3>
     <p>
-      <% if @home.latitude.present? && @home.longitude.present? %>
-        <%= link_to image_tag('external-icons/google-maps.svg', size: 30, alt: 'Google Maps'),
-                    "https://www.google.co.uk/maps/place/#{@home.latitude},#{@home.longitude}" %>
-      <% end %>
-
-      <% if @home.zoopla_url.present? %>
-        <%= link_to image_tag('external-icons/zoopla.png', size: 30, alt: 'Zoopla'), @home.zoopla_url %>
-      <% end %>
-
-      <% if @home.rightmove_url.present? %>
-        <%= link_to image_tag('external-icons/rightmove.png', size: 30, alt: 'Rightmove'), @home.rightmove_url %>
-      <% end %>
+      <%= render 'link_icons', home: @home %>
     </p>
   </div>
 </div>
