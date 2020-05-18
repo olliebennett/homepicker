@@ -23,3 +23,16 @@
 .rated_by_others {
   color: #007bff; /* bootstrap blue */
 }
+
+.header-text {
+  font-size: 2em;
+  color: rgba(0,0,0,.5);
+}
+.header-text:hover {
+  text-decoration: none;
+  color: rgba(0,0,0,.7);
+}
+
+.navbar-nav {
+  font-size: 1.2em;
+}

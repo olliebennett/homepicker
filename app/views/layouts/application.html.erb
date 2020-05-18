@@ -2,8 +2,17 @@
 <html lang="en">
   <%= render 'layouts/head' %>
   <body>
+    <div class="bg-warning text-center pt-3">
+      <a class="header-text nav-light nav-link" href="/">
+        <%= image_tag 'https://homepicker.s3.eu-west-2.amazonaws.com/homepicker.svg',
+                      size: 50,
+                      class: 'd-inline-block align-top',
+                      alt: 'Logo' %>
+        Home Picker
+      </a>
+    </div>
+    <%= render 'layouts/menu' %>
     <div class="container">
-      <%= render 'layouts/menu' %>
       <%= render 'layouts/messages' %>
       <%= yield %>
     </div>
