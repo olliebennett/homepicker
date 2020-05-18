@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  belongs_to :home
+  belongs_to :home, counter_cache: true
   belongs_to :user
 
   validates :text, presence: true

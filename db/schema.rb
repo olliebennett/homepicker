@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_234911) do
+ActiveRecord::Schema.define(version: 2020_05_18_202604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_234911) do
     t.boolean "disabled", default: false
     t.bigint "hunt_id"
     t.bigint "creator_user_id", null: false
+    t.integer "comments_count"
     t.index ["creator_user_id"], name: "index_homes_on_creator_user_id"
     t.index ["hunt_id"], name: "index_homes_on_hunt_id"
   end
