@@ -4,26 +4,26 @@
   <div class="form-row">
     <div class="form-group col-md-9">
       <%= f.label :title %>
-      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.text_field :title, class: 'form-control', autocomplete: 'off' %>
     </div>
     <div class="form-group col-md-3">
       <%= f.label :price %>
-      <%= f.number_field :price, class: 'form-control', step: 100 %>
+      <%= f.number_field :price, class: 'form-control', step: 100, autocomplete: 'off' %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-md-6">
       <%= f.label :address_street %>
-      <%= f.text_field :address_street, class: 'form-control' %>
+      <%= f.text_field :address_street, class: 'form-control', autocomplete: 'off' %>
     </div>
     <div class="form-group col-md-3">
       <%= f.label :latitude %>
-      <%= f.number_field :latitude, class: 'form-control', step: 0.000001 %>
+      <%= f.number_field :latitude, class: 'form-control', step: 0.000001, autocomplete: 'off' %>
     </div>
     <div class="form-group col-md-3">
       <%= f.label :longitude %>
-      <%= f.number_field :longitude, class: 'form-control', step: 0.000001 %>
+      <%= f.number_field :longitude, class: 'form-control', step: 0.000001, autocomplete: 'off' %>
     </div>
   </div>
 
@@ -38,13 +38,13 @@
     </div>
     <div class="form-group col-md-4">
       <%= f.label :postcode %>
-      <%= f.text_field :postcode, class: 'form-control' %>
+      <%= f.text_field :postcode, class: 'form-control', autocomplete: 'off' %>
     </div>
   </div>
 
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control', rows: 10 %>
+    <%= f.text_area :description, class: 'form-control', rows: 10, autocomplete: 'off' %>
   </div>
 
   <div class="form-row">
@@ -56,7 +56,10 @@
       <%= f.label :zoopla_url %>
       <% if f.object&.zoopla_search_link.present? %>
         <div class="input-group">
-          <%= f.text_field :zoopla_url, class: 'form-control', placeholder: 'https://zoopla.co.uk/...' %>
+          <%= f.text_field :zoopla_url,
+                           class: 'form-control',
+                           placeholder: 'https://zoopla.co.uk/...',
+                           autocomplete: 'off' %>
           <div class="input-group-append">
             <%= link_to fa_icon('search'),
                         f.object.zoopla_search_link,
@@ -68,14 +71,20 @@
           </div>
         </div>
       <% else %>
-        <%= f.text_field :zoopla_url, class: 'form-control', placeholder: 'https://zoopla.co.uk/...' %>
+        <%= f.text_field :zoopla_url,
+                         class: 'form-control',
+                         placeholder: 'https://zoopla.co.uk/...',
+                         autocomplete: 'off' %>
       <% end %>
     </div>
     <div class="form-group col-md-4">
       <%= f.label :rightmove_url %>
       <% if f.object&.rightmove_search_link.present? %>
         <div class="input-group">
-          <%= f.text_field :rightmove_url, class: 'form-control', placeholder: 'https://rightmove.co.uk/...' %>
+          <%= f.text_field :rightmove_url,
+                           class: 'form-control',
+                           placeholder: 'https://rightmove.co.uk/...',
+                           autocomplete: 'off' %>
           <div class="input-group-append">
             <%= link_to fa_icon('search'),
                         f.object.rightmove_search_link,
@@ -87,7 +96,10 @@
           </div>
         </div>
       <% else %>
-        <%= f.text_field :rightmove_url, class: 'form-control', placeholder: 'https://rightmove.co.uk/...' %>
+        <%= f.text_field :rightmove_url,
+                         class: 'form-control',
+                         placeholder: 'https://rightmove.co.uk/...',
+                         autocomplete: 'off' %>
       <% end %>
     </div>
 
