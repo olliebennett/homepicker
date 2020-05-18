@@ -4,7 +4,7 @@ class HomesController < ApplicationController
 
   def index
     filter_disabled = params[:disabled] == 'true'
-    @homes = @hunt.homes.where(disabled: filter_disabled)
+    @homes = @hunt.homes.where(disabled: filter_disabled).includes(:ratings)
   end
 
   def show
