@@ -3,10 +3,10 @@
               "https://www.google.co.uk/maps/place/#{home.latitude},#{home.longitude}" %>
 <% end %>
 <% if home.zoopla_url.present? %>
-  <%= link_to image_tag('external-icons/zoopla.png', size: 30, alt: 'Zoopla'),
+  <%= link_to image_tag('external-icons/zoopla.png', size: 30, class: 'rounded', alt: 'Zoopla'),
               home.zoopla_url %>
 <% end %>
 <% if home.rightmove_url.present? %>
-  <%= link_to image_tag('external-icons/rightmove.png', size: 30, alt: 'Rightmove'),
+  <%= link_to image_tag('external-icons/rightmove.png', size: 30, class: 'rounded', alt: 'Rightmove'),
               home.rightmove_url %>
 <% end %>
