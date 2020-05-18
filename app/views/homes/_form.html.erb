@@ -1,15 +1,6 @@
 <%= form_with model: [@hunt, home] do |f| %>
   <%= render 'layouts/errors', errors: home.errors %>
 
-  <% if home.new_record? %>
-    <div class="form-group">
-      <label for="url">Retrieve Data via URL</label>
-      <%= text_field_tag :url, '', class: 'form-control', autofocus: true %>
-    </div>
-
-    OR
-  <% end %>
-
   <div class="form-row">
     <div class="form-group col-md-9">
       <%= f.label :title %>

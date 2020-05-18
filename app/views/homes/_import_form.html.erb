@@ -1,0 +1,22 @@
+<%= form_with model: [@hunt, home] do |f| %>
+  <%= render 'layouts/errors', errors: home.errors %>
+
+  <p>To quickly add a home, paste the Rightmove or Zoopla link below to import the details</p>
+
+  <div class="form-group">
+    <label for="url">Retrieve Data via URL</label>
+    <%= text_field_tag :url,
+                       '',
+                       class: 'form-control',
+                       placeholder: 'https://www.zoopla.co.uk/for-sale/details/00000000',
+                       required: true,
+                       autofocus: true %>
+  </div>
+
+  <%= f.hidden_field :hunt_id, value: @hunt.id %>
+  <%= f.submit 'Import Home Details', class: 'btn btn-primary' %>
+  or
+  <%= link_to 'Enter all details by hand instead',
+              new_hunt_home_path(manual: true),
+              class: 'btn btn-light' %>
+<% end %>
