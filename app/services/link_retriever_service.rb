@@ -118,7 +118,7 @@ class LinkRetrieverService
     res = ''
     container_node.children.each do |child_node|
       case child_node.name
-      when 'text', 'strong', 'em'
+      when 'text', 'strong', 'em', 'b'
         res += child_node.text.squish
       when 'br'
         res += "\n"
