@@ -41,4 +41,16 @@ class Home < ApplicationRecord
 
     !exists && empty # reject empty attributes
   end
+
+  def rightmove_search_link
+    return nil if postcode.blank?
+
+    "https://www.rightmove.co.uk/property-for-sale/search.html?searchLocation=#{postcode}&includeSSTC=true"
+  end
+
+  def zoopla_search_link
+    return nil if postcode.blank?
+
+    "https://www.zoopla.co.uk/search/?q=#{postcode}&include_sold=true&section=for-sale"
+  end
 end
