@@ -5,7 +5,11 @@
 
   <%= csrf_meta_tags %>
 
-  <title>Home Picker</title>
+  <meta name='description' content='<%= content_for(:"meta_description") || 'Collaborate on the search for your home!' %>' />
+
+  <title>
+    <%= if content_for?(:title) then yield(:title) + ' | ' end %>Home Picker
+  </title>
 
   <link rel="stylesheet"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"

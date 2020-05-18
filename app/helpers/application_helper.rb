@@ -6,4 +6,12 @@ module ApplicationHelper
       end
     end
   end
+
+  def title(text)
+    content_for :title, text
+  end
+
+  def meta_tag(tag, text)
+    content_for :"meta_#{tag}", text
+  end
 end
