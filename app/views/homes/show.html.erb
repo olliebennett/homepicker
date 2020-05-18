@@ -1,4 +1,4 @@
-<% title @home.title %>
+<% title @home.address_street || @home.title %>
 
 <% if @home.disabled? %>
   <div class="mt-4 alert alert-danger" role="alert">
