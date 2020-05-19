@@ -3,7 +3,7 @@
     <% if user_signed_in? %>
       <% if @hunt %>
         <div class="navbar-nav">
-          <%= link_to hunt_homes_path(@hunt), class: 'nav-item nav-link' do %>
+          <%= link_to hunt_homes_path(@hunt), class: 'nav-item nav-link pr-3' do %>
             <%= fa_icon('list') %>
             <span class="d-none d-lg-inline-block">Homes</span>
           <% end %>
@@ -11,14 +11,14 @@
       <% end %>
       <% if @hunt %>
         <div class="navbar-nav">
-          <%= link_to new_hunt_home_path(@hunt), class: 'nav-item nav-link' do %>
+          <%= link_to new_hunt_home_path(@hunt), class: 'nav-item nav-link pl-3 pr-3' do %>
             <%= fa_icon('plus') %>
             <span class="d-none d-lg-inline-block">New Home</span>
           <% end %>
         </div>
       <% end %>
       <div class="navbar-nav">
-        <%= link_to hunts_path, class: 'nav-item nav-link' do %>
+        <%= link_to hunts_path, class: 'nav-item nav-link pl-3 pr-3' do %>
           <%= fa_icon('exchange') %>
           <span class="d-none d-lg-inline-block">Switch Hunt</span>
         <% end %>
@@ -27,7 +27,7 @@
         <%= link_to destroy_user_session_path,
                     method: :delete,
                     data: { confirm: 'Really sign out?' },
-                    class: 'nav-item nav-link' do %>
+                    class: 'nav-item nav-link pl-3' do %>
           <%= fa_icon('sign-out-alt') %>
           <span class="d-none d-lg-inline-block">Sign out</span>
         <% end %>
