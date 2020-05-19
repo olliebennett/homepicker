@@ -25,14 +25,28 @@
 }
 
 .header-text {
-  font-size: 2em;
   color: rgba(0,0,0,.5);
+  font-size: 1.2em;
 }
 .header-text:hover {
   text-decoration: none;
   color: rgba(0,0,0,.7);
 }
+.header-text img {
+  height: 25px;
+  width: 25px;
+}
 
-.navbar-nav {
-  font-size: 1.2em;
+@media (min-width: 992px) {
+  .header-text {
+    font-size: 2em;
+  }
+  .header-text img {
+    height: 50px;
+    width: 50px;
+  }
+
+  .navbar-nav {
+    font-size: 1.2em;
+  }
 }

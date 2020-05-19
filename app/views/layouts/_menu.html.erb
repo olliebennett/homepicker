@@ -1,21 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-warning pt-0 mb-3">
+<nav class="navbar navbar-light bg-warning pt-0 mb-3">
   <div class="container">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <% if user_signed_in? %>
-        <div class="navbar-nav mr-auto">
-          <% if @hunt %>
-            <%= link_to 'Homes', hunt_homes_path(@hunt), class: 'nav-item nav-link' %>
-            <%= link_to 'Add Home', new_hunt_home_path(@hunt), class: 'nav-item nav-link' %>
+    <% if user_signed_in? %>
+      <% if @hunt %>
+        <div class="navbar-nav">
+          <%= link_to hunt_homes_path(@hunt), class: 'nav-item nav-link' do %>
+            <%= fa_icon('list') %>
+            <span class="d-none d-lg-inline-block">Homes</span>
           <% end %>
         </div>
+      <% end %>
+      <% if @hunt %>
         <div class="navbar-nav">
-          <%= link_to 'Switch Hunt', hunts_path, class: 'nav-item nav-link' %>
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
+          <%= link_to new_hunt_home_path(@hunt), class: 'nav-item nav-link' do %>
+            <%= fa_icon('plus') %>
+            <span class="d-none d-lg-inline-block">New Home</span>
+          <% end %>
         </div>
       <% end %>
-    </div>
+      <div class="navbar-nav">
+        <%= link_to hunts_path, class: 'nav-item nav-link' do %>
+          <%= fa_icon('exchange') %>
+          <span class="d-none d-lg-inline-block">Switch Hunt</span>
+        <% end %>
+      </div>
+      <div class="navbar-nav">
+        <%= link_to destroy_user_session_path,
+                    method: :delete,
+                    data: { confirm: 'Really sign out?' },
+                    class: 'nav-item nav-link' do %>
+          <%= fa_icon('sign-out-alt') %>
+          <span class="d-none d-lg-inline-block">Sign out</span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </nav>
