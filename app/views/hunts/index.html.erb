@@ -9,6 +9,7 @@
   <%= link_to 'View details',
               hunt_path(hunt),
               class: 'btn btn-success' %>
+  <%= render 'action_buttons', hunt: hunt %>
 <% end.empty? %>
   <p>
     You haven't set up or joined any hunts yet.
