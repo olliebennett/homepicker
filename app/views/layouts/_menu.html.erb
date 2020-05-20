@@ -1,26 +1,28 @@
 <nav class="navbar navbar-light bg-warning pt-0 mb-3">
   <div class="container">
     <% if user_signed_in? %>
-      <% if @hunt %>
-        <div class="navbar-nav">
+      <div class="navbar-nav">
+        <% if @hunt %>
           <%= link_to hunt_homes_path(@hunt), class: 'nav-item nav-link pr-3' do %>
             <%= fa_icon('list') %>
             <span class="d-none d-lg-inline-block">Homes</span>
           <% end %>
-        </div>
-      <% end %>
-      <% if @hunt %>
-        <div class="navbar-nav">
+        <% end %>
+      </div>
+      <div class="navbar-nav">
+        <% if @hunt %>
           <%= link_to new_hunt_home_path(@hunt), class: 'nav-item nav-link pl-3 pr-3' do %>
             <%= fa_icon('plus') %>
             <span class="d-none d-lg-inline-block">New Home</span>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
       <div class="navbar-nav">
-        <%= link_to hunts_path, class: 'nav-item nav-link pl-3 pr-3' do %>
-          <%= fa_icon('exchange') %>
-          <span class="d-none d-lg-inline-block">Switch Hunt</span>
+        <% if @hunt %>
+          <%= link_to hunts_path, class: 'nav-item nav-link pl-3 pr-3' do %>
+            <%= fa_icon('exchange') %>
+            <span class="d-none d-lg-inline-block">Switch Hunt</span>
+          <% end %>
         <% end %>
       </div>
       <div class="navbar-nav">
