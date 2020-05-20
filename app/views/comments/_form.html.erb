@@ -1,4 +1,4 @@
-<%= form_for(comment, html: { class: 'form-inline' }) do |f| %>
+<%= form_for(comment) do |f| %>
   <%= render 'layouts/errors', errors: comment.errors %>
 
   <%= f.hidden_field :home_id, value: comment.home_id %>
