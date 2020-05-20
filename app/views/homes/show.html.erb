@@ -46,7 +46,7 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-12 col-lg-8">
+  <div class="col-12 col-lg-8">
     <% if @home.images.any? %>
       <%= render 'images_carousel', images: @home.images %>
     <% else %>
@@ -55,7 +55,7 @@
       </div>
     <% end %>
   </div>
-  <div class="col-xs-12 col-lg-4">
+  <div class="col-12 col-lg-4">
     <p>
       Added on <%= @home.created_at.strftime("#{@home.created_at.day.ordinalize} %b").squish %> by <%= @home.creator_user.display_name %>
     </p>
