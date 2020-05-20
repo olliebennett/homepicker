@@ -16,7 +16,7 @@
   <%= f.hidden_field :hunt_id, value: @hunt.id %>
   <%= f.submit 'Import Home Details', class: 'btn btn-primary' %>
   or
-  <%= link_to 'Enter all details by hand instead',
+  <%= link_to 'Enter manually',
               new_hunt_home_path(manual: true),
               class: 'btn btn-outline-dark' %>
 <% end %>
