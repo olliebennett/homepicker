@@ -8,4 +8,6 @@ class Hunt < ApplicationRecord
   validates :creator_user, presence: true
 
   default_scope { order(:id) }
+
+  auto_strip_attributes :title, squish: true
 end

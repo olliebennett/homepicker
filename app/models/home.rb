@@ -16,6 +16,15 @@ class Home < ApplicationRecord
   scope :enabled, -> { where(disabled: false) }
   scope :disabled, -> { where(disabled: true) }
 
+  auto_strip_attributes :address_street, squish: true
+  auto_strip_attributes :address_locality, squish: true
+  auto_strip_attributes :address_region, squish: true
+  auto_strip_attributes :agent_url, squish: true
+  auto_strip_attributes :postcode, squish: true
+  auto_strip_attributes :rightmove_url, squish: true
+  auto_strip_attributes :title, squish: true
+  auto_strip_attributes :zoopla_url, squish: true
+
   accepts_nested_attributes_for :images, reject_if: :mark_empty_images_for_destruction, allow_destroy: true
 
   def default_image

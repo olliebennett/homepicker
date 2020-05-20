@@ -8,6 +8,9 @@ source 'https://rubygems.org'
 
 ruby '2.7.0'
 
+# Remove whitespace before field validation
+gem 'auto_strip_attributes'
+
 # Debug: Improved error page display
 gem 'better_errors', group: :development
 

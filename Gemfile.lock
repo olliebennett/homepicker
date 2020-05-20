@@ -56,6 +56,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    auto_strip_attributes (2.6.0)
+      activerecord (>= 4.0)
     bcrypt (3.1.13)
     better_errors (2.7.1)
       coderay (>= 1.0.0)
@@ -200,6 +202,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  auto_strip_attributes
   better_errors
   bullet
   byebug

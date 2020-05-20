@@ -6,6 +6,8 @@ class Comment < ApplicationRecord
 
   default_scope { order(:id) }
 
+  auto_strip_attributes :text, squish: true
+
   def formatted_date
     created_at.strftime('%e %b @ %H:%M').squish
   end
