@@ -81,35 +81,36 @@ class HomesController < ApplicationController
   end
 
   private
-    def build_images
-      blank_images = (@home.images.size % 4).zero? ? 4 : 4 - (@home.images.size % 4)
-      blank_images.times { @home.images.build }
-    end
 
-    def set_home
-      @home = Home.find(params[:id])
-    end
+  def build_images
+    blank_images = (@home.images.size % 4).zero? ? 4 : 4 - (@home.images.size % 4)
+    blank_images.times { @home.images.build }
+  end
 
-    def set_hunt
-      @hunt = Hunt.find(params[:hunt_id])
-    end
+  def set_home
+    @home = Home.find(params[:id])
+  end
 
-    def home_params
-      params.require(:home).permit(
-        :title,
-        :description,
-        :address_street,
-        :address_locality,
-        :address_region,
-        :postcode,
-        :latitude,
-        :longitude,
-        :agent_url,
-        :zoopla_url,
-        :rightmove_url,
-        :price,
-        :hunt_id,
-        images_attributes: %i[id url _destroy]
-      )
-    end
+  def set_hunt
+    @hunt = Hunt.find(params[:hunt_id])
+  end
+
+  def home_params
+    params.require(:home).permit(
+      :title,
+      :description,
+      :address_street,
+      :address_locality,
+      :address_region,
+      :postcode,
+      :latitude,
+      :longitude,
+      :agent_url,
+      :zoopla_url,
+      :rightmove_url,
+      :price,
+      :hunt_id,
+      images_attributes: %i[id url _destroy]
+    )
+  end
 end
