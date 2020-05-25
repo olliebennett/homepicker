@@ -24,6 +24,7 @@ class Home < ApplicationRecord
   auto_strip_attributes :rightmove_url, squish: true
   auto_strip_attributes :title, squish: true
   auto_strip_attributes :zoopla_url, squish: true
+  auto_strip_attributes :description
 
   accepts_nested_attributes_for :images, reject_if: :mark_empty_images_for_destruction, allow_destroy: true
 
