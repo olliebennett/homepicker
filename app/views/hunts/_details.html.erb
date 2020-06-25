@@ -23,10 +23,10 @@
             <% end %>
             <br>
             added
-            <%= fa_icon('home', type: :solid) %>
+            <%= fa_icon_inline('home') %>
             <%= hunt.homes.enabled.where(creator_user: hm.user).size %>
             &nbsp;
-            <%= fa_icon('comments', type: :solid) %>
+            <%= fa_icon_inline('comments') %>
             <%= hm.user.comments.where(home: hunt.homes).size %>
           </p>
         </div>

@@ -17,11 +17,11 @@
         <%= render 'link_icons', home: home %>
         <% if home.average_rating %>
           &nbsp;
-          <%= fa_icon('star', cls: 'text-warning') %> <%= home.average_rating %>
+          <%= fa_icon_inline('star', cls: 'text-warning') %> <%= home.average_rating %>
         <% end %>
         <% if home.comments.size > 0 %>
           &nbsp;
-          <%= fa_icon(home.comments.size == 1 ? 'comment' : 'comments', cls: 'text-success') %> <%= home.comments.size %>
+          <%= fa_icon_inline(home.comments.size == 1 ? 'comment' : 'comments', cls: 'text-success') %> <%= home.comments.size %>
         <% end %>
       </p>
     </div>
