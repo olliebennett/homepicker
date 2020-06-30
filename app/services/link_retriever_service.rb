@@ -70,7 +70,7 @@ class LinkRetrieverService
     end
 
     raw_price = page.css('.ui-pricing__main-price')[0].text.squish
-    data[:price] = raw_price.match(/[\d\,\.]{5,}/)[0].tr(',','').to_i
+    data[:price] = raw_price == 'POA' ? 0 : raw_price.match(/[\d\,\.]{5,}/)[0].tr(',','').to_i
 
     data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
 
@@ -91,7 +91,9 @@ class LinkRetrieverService
     raise "RIGHTMOVE: cannot find postcode..." if data[:postcode].blank?
     data[:latitude] = property_json.dig('location', 'latitude')
     data[:longitude] = property_json.dig('location', 'longitude')
+
     data[:price] = property_json.dig('propertyInfo', 'price')
+    data[:price] = 0 if data[:price] == nil
 
     data[:title] = page.css('div.property-header-bedroom-and-price/div/h1')[0].text
     raise "RIGHTMOVE: cannot find title..." if data[:title].blank?
