@@ -52,6 +52,10 @@ class Home < ApplicationRecord
     !exists && empty # reject empty attributes
   end
 
+  def price_display
+    price.zero? ? 'UNKNOWN PRICE' : "£#{price / 1000}k"
+  end
+
   def rightmove_search_link
     return nil if postcode.blank?
 

@@ -38,7 +38,7 @@
                   class: 'btn btn-danger' %>
     <% end %>
 
-    <h3>£<%= @home.price / 1000 %>k</h3>
+    <h3><%= @home.price_display %></h3>
     <p>
       <%= render 'link_icons', home: @home %>
     </p>
