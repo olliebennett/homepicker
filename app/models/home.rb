@@ -53,7 +53,14 @@ class Home < ApplicationRecord
   end
 
   def price_display
-    price.zero? ? 'UNKNOWN PRICE' : "£#{price / 1000}k"
+    return 'UNKNOWN PRICE' if price.zero?
+
+    # Assume monthly rental amount if < 10k
+    if price > 10_000
+      "£#{price / 1000}k"
+    else
+      "£#{price} pcm"
+    end
   end
 
   def rightmove_search_link
