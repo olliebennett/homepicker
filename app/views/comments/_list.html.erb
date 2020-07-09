@@ -13,9 +13,9 @@
       <%= comment.text %>
       <% if comment.user == current_user %>
         <span class="manage-comment-controls">
-          <%= link_to fa_icon('edit', type: :duotone),
+          <%= link_to fa_icon_inline('edit', type: :duotone),
                       edit_comment_path(comment) %>
-          <%= link_to fa_icon('times', type: :duotone),
+          <%= link_to fa_icon_inline('times', type: :duotone),
                       comment_path(comment),
                       method: :delete,
                       data: { confirm: 'Really delete comment?' } %>

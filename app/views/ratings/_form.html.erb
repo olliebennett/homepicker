@@ -14,7 +14,7 @@
       <% btn_title = "#{rating_users.to_sentence} rated this home's #{rating.aspect.humanize.downcase} #{score}/5" %>
     <% end %>
 
-    <%= button_tag fa_icon(btn_icon, type: (rating.score.present? && rating.score >= score) ? :solid : :light),
+    <%= button_tag fa_icon_inline(btn_icon, type: (rating.score.present? && rating.score >= score) ? :solid : :light),
                    type: :submit,
                    class: 'set_score_btn btn text-warning',
                    data: btn_data,

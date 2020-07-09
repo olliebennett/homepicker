@@ -4,7 +4,7 @@
       <div class="navbar-nav">
         <% if @hunt %>
           <%= link_to hunt_homes_path(@hunt), class: 'nav-item nav-link pr-3' do %>
-            <%= fa_icon('list') %>
+            <%= fa_icon_inline('list') %>
             <span class="d-none d-lg-inline-block">Homes</span>
           <% end %>
         <% end %>
@@ -12,7 +12,7 @@
       <div class="navbar-nav">
         <% if @hunt %>
           <%= link_to new_hunt_home_path(@hunt), class: 'nav-item nav-link pl-3 pr-3' do %>
-            <%= fa_icon('plus') %>
+            <%= fa_icon_inline('plus') %>
             <span class="d-none d-lg-inline-block">New Home</span>
           <% end %>
         <% end %>
@@ -20,7 +20,7 @@
       <div class="navbar-nav">
         <% if @hunt %>
           <%= link_to hunts_path, class: 'nav-item nav-link pl-3 pr-3' do %>
-            <%= fa_icon('exchange') %>
+            <%= fa_icon_inline('exchange') %>
             <span class="d-none d-lg-inline-block">Switch Hunt</span>
           <% end %>
         <% end %>
@@ -30,7 +30,7 @@
                     method: :delete,
                     data: { confirm: 'Really sign out?' },
                     class: 'nav-item nav-link pl-3' do %>
-          <%= fa_icon('sign-out-alt') %>
+          <%= fa_icon_inline('sign-out-alt') %>
           <span class="d-none d-lg-inline-block">Sign out</span>
         <% end %>
       </div>
