@@ -34,9 +34,7 @@ module FontAwesomeHelper
         else
           raise "Unhandled glyph: #{glyph} of type #{type}"
         end
-    x.gsub!('svg-inline--fa', '') # remove redundant class
-    x.gsub!('<svg ', '<svg style="height: 1em;" ') # set explicit height
-    x.gsub!('class="', "class=\"#{cls} ") # add custom classes
+    x.gsub!('class="', "class=\"#{cls} ") if cls.present? # add custom classes
     x.html_safe
   end
 end

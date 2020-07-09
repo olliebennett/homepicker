@@ -50,3 +50,10 @@
     font-size: 1.2em;
   }
 }
+
+/* Font Awesome SVG styling */
+.svg-inline--fa {
+  height: 1em;
+  display: inline-block;
+  vertical-align: -.125em;
+}
