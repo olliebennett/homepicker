@@ -1,6 +1,6 @@
 # HomePicker
 
-Build a list of interesting homes and automtically pull in (and backup) data from Zoopla.
+Build a list of interesting homes and automatically pull in (and backup) data from Zoopla/Rightmove.
 
 ## Setup
 
@@ -16,8 +16,7 @@ Build a list of interesting homes and automtically pull in (and backup) data fro
 - Setup database;
 
   ```
-  createdb homepicker_development
-  createdb homepicker_test
+  bundle exec rails db:create
   bundle exec rails db:schema:load
   ```
 
