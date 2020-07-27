@@ -11,7 +11,7 @@
     <% if rating_users.any? %>
       <%# We specify container: 'body' to avoid rendering problems in more complex components %>
       <% btn_data.merge!(toggle: :tooltip, container: :body) %>
-      <% btn_title = "#{rating_users.to_sentence} rated this home's #{rating.aspect.humanize.downcase} #{score}/5" %>
+      <% btn_title = "#{rating_users.to_sentence} rated this home's #{Rating.human_attribute_name(['aspect', rating.aspect].join('.')).downcase} #{score}/5" %>
     <% end %>
 
     <%= button_tag fa_icon_inline(btn_icon, type: (rating.score.present? && rating.score >= score) ? :solid : :light),
@@ -21,7 +21,7 @@
                    title: btn_title %>
   <% end %>
   &nbsp;
-  <%= f.object.aspect.humanize %>
+  <%= Rating.human_attribute_name(['aspect', f.object.aspect].join('.')) %>
 <% end %>
 
 <script>
