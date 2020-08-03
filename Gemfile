@@ -34,6 +34,9 @@ gem 'listen'
 # HTML Parsing (for crawler)
 gem 'nokogiri', require: false
 
+# Version history tracking
+gem 'paper_trail'
+
 # PostgreSQL Database
 gem 'pg'
 
