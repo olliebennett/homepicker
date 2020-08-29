@@ -56,9 +56,6 @@
     <% end %>
   </div>
   <div class="col-12 col-lg-4">
-    <p>
-      Added on <%= @home.created_at.strftime("#{@home.created_at.day.ordinalize} %b").squish %> by <%= @home.creator_user.display_name %>
-    </p>
     <%= render 'comments/list', comments: @home.comments %>
     <%= render 'comments/form', comment: @home.comments.new %>
 
@@ -108,8 +105,7 @@
   <% @home.versions.each do |version| %>
     <%= render_home_changeset(version) %>
   <% end %>
+  <p>
+    <%= @home.created_at.strftime('%d/%m/%Y') %> : Home added to the <%= link_to @hunt.title, hunt_path(@hunt) %> hunt by <%= @home.creator_user.display_name %>.
+  </p>
 </div>
-
-<p>
-  This home is part of the <%= link_to @hunt.title, hunt_path(@hunt) %> hunt!
-</p>
