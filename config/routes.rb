@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   resources :comments, only: %i[edit create update destroy]
   resources :ratings, only: %i[create update]
 
-  resources :hunts, only: %i[create index show] do
-    get :join, on: :member
-    post :join, on: :member, as: :join_accept
+  get 'hunts/:id/join/:token', to: 'hunts#join', as: :join_hunt
+  post 'hunts/:id/join/:token', to: 'hunts#join', as: :join_accept_hunt
 
+  resources :hunts, only: %i[create index show] do
     resources :homes do
       patch :restore, on: :member
     end

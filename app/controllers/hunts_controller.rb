@@ -21,7 +21,7 @@ class HuntsController < ApplicationController
       return redirect_to root_path, alert: 'This invite link is incorrect or has expired. Please ask to be invited again.'
     end
 
-    if user_signed_in? && params[:confirm_join] == 'true'
+    if user_signed_in? && params[:confirm] == 'true'
       current_user.hunt_memberships.create!(hunt: @hunt)
       return redirect_to hunt_path(@hunt), notice: "You're in! Get hunting!"
     else

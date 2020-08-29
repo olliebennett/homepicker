@@ -12,7 +12,7 @@
 
 <% if user_signed_in? %>
   <%= link_to "Join hunt: #{@hunt.title}",
-              join_accept_hunt_path(@hunt, token: params[:token], confirm_join: 'true'),
+              join_accept_hunt_path(@hunt, token: params[:token], confirm: 'true'),
               method: :post,
               class: 'btn btn-success' %>
 <% else %>
