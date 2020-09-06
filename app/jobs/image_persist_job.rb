@@ -12,7 +12,7 @@ class ImagePersistJob < ApplicationJob
     steps = []
     steps << transloadit.step('original',
                               '/http/import',
-                              url: image.url)
+                              url: image.external_url)
     steps << transloadit.step('filter',
                               '/file/filter',
                               use: 'original',
@@ -45,10 +45,8 @@ class ImagePersistJob < ApplicationJob
       original = results.fetch('original').fetch(0).fetch('ssl_url')
       thumb = results.fetch('thumb').fetch(0).fetch('ssl_url')
 
-      # TODO: Persist 'original' and 'thumb' URLs to Image record
-      puts 'Uploaded files;'
-      puts "Original: #{original}"
-      puts "Thumb: #{thumb}"
+      # Persist 'original' and 'thumb' URLs to Image record
+      image.update!(full_url: original, thumb_url: thumb)
     end
   end
 end

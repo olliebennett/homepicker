@@ -110,17 +110,17 @@
       <% if images_form.object.persisted? %>
         <div class="form-group col-md-3">
           <%= images_form.label :_destroy do %>
-            <%= image_tag images_form.object.url, class: 'img-thumbnail' %>
+            <%= image_tag images_form.object.thumb_url_fallback, class: 'img-thumbnail' %>
           <% end %>
           <%= images_form.check_box :_destroy, class: 'form-check-input' %>
           <%#= images_form.label :_destroy, class: 'form-check-label' %>
           <br>
-          <%= images_form.text_field :url, class: 'form-control' %>
+          <%= images_form.text_field :external_url, disabled: true, class: 'form-control' %>
         </div>
       <% else %>
         <div class="form-group col-md-3">
-          <%= images_form.label :url %>
-          <%= images_form.text_field :url, class: 'form-control' %>
+          <%= images_form.label :external_url, 'URL' %>
+          <%= images_form.text_field :external_url, class: 'form-control' %>
         </div>
       <% end %>
     <% end %>
