@@ -54,7 +54,7 @@ class HomesController < ApplicationController
 
     if @home.save
       (retrieved_data&.dig(:images) || []).each do |img|
-        @home.images.create(url: img)
+        @home.images.create(external_url: img)
       end
       redirect_to hunt_home_path(@hunt, @home), notice: 'Home was successfully created.'
     else
@@ -110,7 +110,7 @@ class HomesController < ApplicationController
       :rightmove_url,
       :price,
       :hunt_id,
-      images_attributes: %i[id url _destroy]
+      images_attributes: %i[id external_url _destroy]
     )
   end
 end

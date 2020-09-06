@@ -12,7 +12,7 @@ class ImagePersistJob < ApplicationJob
     steps = []
     steps << transloadit.step('original',
                               '/http/import',
-                              url: image.url)
+                              url: image.external_url)
     steps << transloadit.step('filter',
                               '/file/filter',
                               use: 'original',

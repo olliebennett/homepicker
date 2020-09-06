@@ -5,7 +5,7 @@
 <% if @homes.each do |home| %>
   <div class="media">
     <%= link_to hunt_home_path(@hunt, home), class: 'align-self-center' do %>
-      <%= image_tag home.default_image, height: 100, class: 'mr-3', alt: home.address_street %>
+      <%= image_tag home.default_thumb, height: 100, class: 'mr-3', alt: home.address_street %>
     <% end %>
     <div class="media-body">
       <h5 class="mt-0">
