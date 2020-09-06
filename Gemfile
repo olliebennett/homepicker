@@ -49,6 +49,9 @@ gem 'rails'
 # RSpec testing framework
 gem 'rspec-rails', group: %i[development test]
 
+# Image upload and thumbnailing
+gem 'transloadit', require: false
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 
