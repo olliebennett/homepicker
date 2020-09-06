@@ -31,7 +31,7 @@ class Home < ApplicationRecord
   accepts_nested_attributes_for :images, reject_if: :mark_empty_images_for_destruction, allow_destroy: true
 
   def default_thumb
-    images.first&.thumb_url || placeholder_image
+    images.first&.thumb_url_fallback || placeholder_image
   end
 
   def placeholder_image

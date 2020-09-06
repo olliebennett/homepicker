@@ -5,13 +5,11 @@ class Image < ApplicationRecord
 
   auto_strip_attributes :external_url, squish: true
 
-  def full_url
-    # TODO: Rely on persisted URL, falling back to external
-    external_url
+  def full_url_fallback
+    full_url || external_url
   end
 
-  def thumb_url
-    # TODO: Rely on generated thumbnail URL, falling back to external
-    external_url
+  def thumb_url_fallback
+    thumb_url || external_url
   end
 end
