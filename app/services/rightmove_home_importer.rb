@@ -18,7 +18,9 @@ class RightmoveHomeImporter < HomeImporter
       data[:price] = 0 if data[:price].blank?
 
       data[:title] = property_json.dig('propertyData', 'text', 'pageTitle')
-      data[:description] = property_json.dig('propertyData', 'text', 'description')
+
+      description = property_json.dig('propertyData', 'text', 'description')
+      data[:description] = html_to_markdown(Nokogiri::HTML::DocumentFragment.parse(description)) if description
 
       address = property_json.dig('propertyData', 'address', 'displayAddress')
       if address.present?
