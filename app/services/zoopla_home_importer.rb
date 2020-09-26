@@ -26,7 +26,7 @@ class ZooplaHomeImporter < HomeImporter
 
     data[:description] = html_to_markdown(page.css('.dp-description__text')&.first)
 
-    data[:canonical_url] = page.xpath("//link[@rel='canonical']/@href")&.to_s
+    data[:zoopla_url] = page.xpath("//link[@rel='canonical']/@href")&.to_s
 
     data[:address_street] = res_data&.dig('address', 'streetAddress')
 

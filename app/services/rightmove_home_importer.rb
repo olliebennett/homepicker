@@ -4,7 +4,7 @@ class RightmoveHomeImporter < HomeImporter
 
     data = {}
 
-    data[:canonical_url] = page.xpath("//meta[@property='og:url']/@content")&.to_s
+    data[:rightmove_url] = page.xpath("//meta[@property='og:url']/@content")&.to_s
 
     property_json_string = page_html.match(/window\.PAGE_MODEL = {(.*)}/)
 
