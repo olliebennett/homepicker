@@ -11,6 +11,8 @@ class HomeImporter
         res += "\n"
       when 'ul', 'ol'
         res += html_to_markdown(child_node)
+      when 'p', 'h1', 'h2', 'h3'
+        res += "\n#{child_node.text.squish}"
       when 'li'
         res += "\n- #{child_node.text.squish}"
       else
