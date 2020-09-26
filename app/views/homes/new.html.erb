@@ -2,7 +2,8 @@
 
 <h3>Add Home</h3>
 
-<% if params[:manual] == 'true' %>
+<% # display full form if submitted with errors %>
+<% if params[:manual] == 'true' || @home.errors.any? %>
   <%= render 'form', home: @home %>
 <% else %>
   <%= render 'import_form', home: @home %>
