@@ -55,6 +55,13 @@ gem 'resque'
 # RSpec testing framework
 gem 'rspec-rails', group: %i[development test]
 
+# Ruby syntax/formatting checking (and associated Cop plugins)
+gem 'rubocop', require: false, group: %i[development test]
+gem 'rubocop-performance', group: %i[development test]
+gem 'rubocop-rails', group: %i[development test]
+gem 'rubocop-rspec', group: %i[development test]
+gem 'rubocop-thread_safety', group: %i[development test]
+
 # Image upload and thumbnailing
 gem 'transloadit', require: false
 
