@@ -19,8 +19,8 @@ class ZooplaHomeImporter < HomeImporter
     title = res_data['name']
     data[:title] = title&.gsub('for sale', '')&.squish
 
-    data[:latitude] = res_data&.dig('geo', 'latitude')
-    data[:longitude] = res_data&.dig('geo', 'longitude')
+    data[:latitude] = res_data&.dig('geo', 'latitude')&.to_f&.round(6)
+    data[:longitude] = res_data&.dig('geo', 'longitude')&.to_f&.round(6)
 
     # latlong = page_html.match(/"coordinates":{"latitude":(?<lat>\-?[0-9\.]+),"longitude":(?<long>\-?[0-9\.]+)}/)
     # data[:longitude] = latlong[:long]
