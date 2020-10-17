@@ -23,6 +23,9 @@ gem 'byebug', platform: :mri, group: %i[development test]
 # Authentication
 gem 'devise'
 
+# Load '.env' file into ENV
+gem 'dotenv-rails', groups: %i[development test]
+
 # Use factories for creating test objects
 gem 'factory_bot_rails', group: %i[development test]
 
