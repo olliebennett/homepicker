@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HuntsController < ApplicationController
   before_action :set_hunt, only: %i[show]
 

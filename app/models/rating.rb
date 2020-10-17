@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Rating < ApplicationRecord
   belongs_to :home
   belongs_to :user

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hunt < ApplicationRecord
   has_many :homes
   belongs_to :creator_user, class_name: 'User'

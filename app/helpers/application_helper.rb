@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def render_markdown_paragraphs(text_with_newlines)
     capture do

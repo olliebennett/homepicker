@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Home < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :ratings, dependent: :destroy

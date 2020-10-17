@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FontAwesomeHelper
   def fa_icon_inline(glyph, type: :solid, cls: '')
     # Download new SVGs from (eg) https://fontawesome.com/icons/plus

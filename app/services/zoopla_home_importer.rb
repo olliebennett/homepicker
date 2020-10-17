@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ZooplaHomeImporter < HomeImporter
   def self.parse(page_html)
     page = Nokogiri::HTML(page_html)

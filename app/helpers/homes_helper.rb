@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HomesHelper
   def render_home_changeset(version)
     return unless version.changeset.key?('price')
