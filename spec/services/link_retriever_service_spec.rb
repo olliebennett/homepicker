@@ -20,7 +20,7 @@ RSpec.describe LinkRetrieverService do
 
     it 'parses longitude and latitude' do
       expect(zoopla_1_data[:latitude]).to eq 51.493946
-      expect(zoopla_1_data[:longitude]).to eq -0.160260
+      expect(zoopla_1_data[:longitude]).to eq(-0.160260)
 
       expect(zoopla_2_data[:latitude]).to eq 52.19005
       expect(zoopla_2_data[:longitude]).to eq 0.161242

@@ -46,7 +46,7 @@ class ZooplaHomeImporter < HomeImporter
     end
 
     raw_price = page.css('.ui-pricing__main-price')&.first&.text&.squish
-    data[:price] = raw_price == 'POA' ? 0 : raw_price.match(/[\d\,\.]{5,}/)[0].tr(',','').to_i
+    data[:price] = raw_price == 'POA' ? 0 : raw_price.match(/[\d,.]{5,}/)[0].tr(',', '').to_i
 
     data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
 

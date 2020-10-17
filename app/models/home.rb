@@ -3,8 +3,8 @@ class Home < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :images, dependent: :destroy
 
-  belongs_to :hunt, required: true
-  belongs_to :creator_user, class_name: 'User', required: true
+  belongs_to :hunt, optional: false
+  belongs_to :creator_user, class_name: 'User', optional: false
 
   validates :title, presence: true
   validates :address_street, presence: true
@@ -49,7 +49,7 @@ class Home < ApplicationRecord
   def mark_empty_images_for_destruction(attributes)
     exists = attributes['id'].present?
     empty = attributes.except(:id).values.all?(&:blank?)
-    attributes.merge!(_destroy: 1) if exists && empty # destroy empty images
+    attributes[:_destroy] = 1 if exists && empty # destroy empty images
 
     !exists && empty # reject empty attributes
   end

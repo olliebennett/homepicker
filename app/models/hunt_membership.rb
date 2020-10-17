@@ -1,6 +1,6 @@
 class HuntMembership < ApplicationRecord
-  belongs_to :hunt, required: true
-  belongs_to :user, required: true
+  belongs_to :hunt, optional: false
+  belongs_to :user, optional: false
 
   default_scope { order(:id) }
 end

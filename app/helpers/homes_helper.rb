@@ -8,6 +8,6 @@ module HomesHelper
 
     return "#{prefix} set to #{to}." if from.nil?
 
-    content_tag(:p, "#{prefix} #{from.to_i > to.to_i ? 'decreased' : 'increased'} from #{from} to #{to}.")
+    tag.p("#{prefix} #{from.to_i > to.to_i ? 'decreased' : 'increased'} from #{from} to #{to}.")
   end
 end
