@@ -4,7 +4,7 @@ require 'open-uri'
 
 class LinkRetrieverService
   def self.retrieve(url)
-    page_html = URI.open(url) { |f| f.read }
+    page_html = URI.open(url, &:read)
 
     if url.include?('zoopla.co') # .com or .co.uk both supported!
       ZooplaHomeImporter.parse(page_html)
