@@ -1,0 +1,22 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-thread_safety
+
+AllCops:
+  NewCops: enable
+
+  Exclude:
+    - db/migrate/*
+    - db/schema.rb
+    - tmp/**/*
+
+  TargetRubyVersion: 2.7
+
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
