@@ -2,7 +2,7 @@ require 'transloadit'
 
 class ImagePersistJob < ApplicationJob
   def perform(image_id)
-    image = Image.find!(image_id)
+    image = Image.find(image_id)
 
     transloadit = Transloadit.new(
       key: ENV.fetch('TRANSLOADIT_KEY'),
