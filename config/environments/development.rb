@@ -33,6 +33,9 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  # Process jobs inline (no need for local Redis etc.)
+  config.active_job.queue_adapter = :inline
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

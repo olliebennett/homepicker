@@ -46,6 +46,9 @@ gem 'puma'
 # Ruby on Rails framework
 gem 'rails'
 
+# Background job library on top of Redis
+gem 'resque'
+
 # RSpec testing framework
 gem 'rspec-rails', group: %i[development test]
 
