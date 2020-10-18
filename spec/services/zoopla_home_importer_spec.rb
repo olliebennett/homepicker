@@ -7,19 +7,44 @@ RSpec.describe ZooplaHomeImporter do
     let(:zoopla_1_file) { IO.read('spec/fixtures/zoopla/example_1.html') }
     let(:zoopla_1_data) { described_class.parse(zoopla_1_file) }
 
-    context 'from example 1' do
-      it 'parses basic data' do
+    context 'with example 1' do
+      it 'parses canonical url' do
         expect(zoopla_1_data).to include(
-          zoopla_url: 'https://www.zoopla.co.uk/for-sale/details/56623705',
-          title: '1 bed flat',
-          price: 950_000,
-          latitude: 51.520254,
-          longitude: -0.159889,
-          postcode: 'W1H 1PW',
+          zoopla_url: 'https://www.zoopla.co.uk/for-sale/details/56623705'
+        )
+      end
+
+      it 'parses address fields' do
+        expect(zoopla_1_data).to include(
           address_street: 'York Street',
           address_locality: 'London',
-          address_region: 'London',
-          description: /Central Marylebone luxury 1 bedroom apartment/,
+          address_region: 'London'
+        )
+      end
+
+      it 'parses postcode' do
+        expect(zoopla_1_data).to include(
+          postcode: 'W1H 1PW'
+        )
+      end
+
+      it 'parses location data' do
+        expect(zoopla_1_data).to include(
+          latitude: 51.520254,
+          longitude: -0.159889
+        )
+      end
+
+      it 'parses title and description' do
+        expect(zoopla_1_data).to include(
+          title: '1 bed flat',
+          description: /Central Marylebone luxury 1 bedroom apartment/
+        )
+      end
+
+      it 'parses price' do
+        expect(zoopla_1_data).to include(
+          price: 950_000
         )
       end
     end
