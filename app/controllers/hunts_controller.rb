@@ -20,7 +20,8 @@ class HuntsController < ApplicationController
     end
 
     if params[:token].blank? || params[:token].squish != @hunt.join_token
-      return redirect_to root_path, alert: 'This invite link is incorrect or has expired. Please ask to be invited again.'
+      return redirect_to root_path,
+                         alert: 'This invite link is incorrect or has expired. Please ask to be invited again.'
     end
 
     if user_signed_in? && params[:confirm] == 'true'
