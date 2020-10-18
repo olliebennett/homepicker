@@ -7,9 +7,9 @@ class LinkRetrieverService
     page_html = URI.open(url, &:read)
 
     if url.include?('zoopla.co') # .com or .co.uk both supported!
-      ZooplaHomeImporter.parse(page_html)
+      ZooplaHomeImporter.new(page_html).parse
     elsif url.include?('rightmove.co.uk')
-      RightmoveHomeImporter.parse(page_html)
+      RightmoveHomeImporter.new(page_html).parse
     else
       raise "Unhandled URL: #{url}"
     end

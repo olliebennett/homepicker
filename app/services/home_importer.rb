@@ -3,7 +3,35 @@
 require 'nokogiri'
 
 class HomeImporter
-  def self.html_to_markdown(container_node)
+  def initialize(page_html)
+    @page_html = page_html
+    @page = Nokogiri::HTML(page_html)
+    @data = {}
+  end
+
+  private
+
+  def cleanup_address
+    # Clean up street address to remove duplication; they often end in "street, Locality OUTCODE", eg '... Bath BA1'
+    remove_trailing_outcode
+    remove_trailing_locality
+  end
+
+  def remove_trailing_locality
+    locality = @data[:address_locality]
+
+    @data[:address_street] = @data[:address_street].chomp(locality).squish.chomp(',').squish
+  end
+
+  def remove_trailing_outcode
+    return if @data[:postcode].nil?
+
+    outcode = @data[:postcode][0...-3].squish
+
+    @data[:address_street] = @data[:address_street].chomp(outcode).squish.chomp(',').squish
+  end
+
+  def html_to_markdown(container_node)
     res = ''
     container_node.children.each do |child_node|
       case child_node.name
