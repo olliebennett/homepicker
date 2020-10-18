@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Hunt < ApplicationRecord
-  has_many :homes
   belongs_to :creator_user, class_name: 'User'
-  has_many :hunt_memberships
-  has_many :users, through: :hunt_memberships
+  has_many :homes, dependent: :destroy
+  has_many :hunt_memberships, dependent: :destroy
 
   validates :title, presence: true
   validates :creator_user, presence: true

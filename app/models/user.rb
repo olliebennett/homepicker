@@ -6,11 +6,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :comments
-  has_many :ratings
-
-  has_many :hunt_memberships
+  has_many :comments, dependent: :destroy
+  has_many :hunt_memberships, dependent: :destroy
   has_many :hunts, through: :hunt_memberships
+  has_many :ratings, dependent: :destroy
 
   default_scope { order(:id) }
 
