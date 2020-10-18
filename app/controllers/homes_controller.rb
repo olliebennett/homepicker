@@ -35,17 +35,7 @@ class HomesController < ApplicationController
       @home.assign_attributes(retrieved_data.except(:images))
 
       # Avoid saving a duplicate of existing home
-      if @home.zoopla_url.present?
-        existing_z_home = @home.hunt&.homes&.find_by(zoopla_url: @home.zoopla_url)
-        if existing_z_home.present?
-          return redirect_to(hunt_home_path(@hunt, existing_z_home), alert: 'Home already imported from Zoopla; see below.')
-        end
-      elsif @home.rightmove_url.present?
-        existing_rm_home = @home.hunt&.homes&.find_by(rightmove_url: @home.rightmove_url)
-        if existing_rm_home.present?
-          return redirect_to(hunt_home_path(@hunt, existing_rm_home), alert: 'Home already imported from Rightmove; see below.')
-        end
-      end
+      return if redirect_to_duplicate?
     end
 
     if @home.save
@@ -82,6 +72,34 @@ class HomesController < ApplicationController
   def build_images
     blank_images = (@home.images.size % 4).zero? ? 4 : 4 - (@home.images.size % 4)
     blank_images.times { @home.images.build }
+  end
+
+  def redirect_to_duplicate?
+    redirect_to_duplicate_rightmove? || redirect_to_duplicate_zoopla?
+  end
+
+  def redirect_to_duplicate_rightmove?
+    return false if @home.rightmove_url.nil?
+
+    existing_rm_home = @home.hunt&.homes&.find_by(rightmove_url: @home.rightmove_url)
+    if existing_rm_home.present?
+      redirect_to(hunt_home_path(@hunt, existing_rm_home), alert: 'Home already imported from Rightmove; see below.')
+      return true
+    end
+
+    false
+  end
+
+  def redirect_to_duplicate_zoopla?
+    return false if @home.zoopla_url.nil?
+
+    existing_z_home = @home.hunt&.homes&.find_by(zoopla_url: @home.zoopla_url)
+    if existing_z_home.present?
+      redirect_to(hunt_home_path(@hunt, existing_z_home), alert: 'Home already imported from Zoopla; see below.')
+      return true
+    end
+
+    false
   end
 
   def set_home
