@@ -39,10 +39,7 @@ class HomesController < ApplicationController
     end
 
     if @home.save
-      (retrieved_data&.dig(:images) || []).each do |img_url|
-        image = @home.images.create(external_url: img_url)
-        ImagePersistJob.perform_later(image.id)
-      end
+      ImageService.persist_images(retrieved_data[:images])
       redirect_to hunt_home_path(@hunt, @home), notice: 'Home was successfully created.'
     else
       render :new
