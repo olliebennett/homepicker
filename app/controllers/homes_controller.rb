@@ -39,7 +39,7 @@ class HomesController < ApplicationController
     end
 
     if @home.save
-      ImageService.persist_images(retrieved_data[:images])
+      ImageService.persist_images(@home, retrieved_data[:images])
       redirect_to hunt_home_path(@hunt, @home), notice: 'Home was successfully created.'
     else
       render :new
