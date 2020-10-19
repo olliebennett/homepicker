@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(_resource)
     stored_location_for(:user) || hunts_path
   end
+
+  def store_location
+    # Save this page so user returns here after registration/login
+    store_location_for(:user, request.fullpath)
+  end
 end

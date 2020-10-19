@@ -11,4 +11,10 @@ class Hunt < ApplicationRecord
   default_scope { order(:id) }
 
   auto_strip_attributes :title, squish: true
+
+  def token_match?(test_token)
+    return false if test_token.blank?
+
+    test_token.squish == join_token
+  end
 end

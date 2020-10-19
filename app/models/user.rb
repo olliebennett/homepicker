@@ -24,4 +24,8 @@ class User < ApplicationRecord
   def md5_email
     Digest::MD5.hexdigest(email)
   end
+
+  def hunt_member?(hunt)
+    hunt_memberships.exist?(hunt: hunt)
+  end
 end
