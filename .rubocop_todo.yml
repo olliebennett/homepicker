@@ -17,13 +17,6 @@ Metrics/MethodLength:
   Max: 18
 
 # Offense count: 1
-# Configuration parameters: Include.
-# Include: app/controllers/**/*.rb
-Rails/LexicallyScopedActionFilter:
-  Exclude:
-    - 'app/controllers/comments_controller.rb'
-
-# Offense count: 1
 Rails/OutputSafety:
   Exclude:
     - 'app/helpers/font_awesome_helper.rb'
