@@ -58,7 +58,7 @@ class RightmoveHomeImporter < HomeImporter
     @data[:title] = property_json.dig('propertyData', 'text', 'pageTitle')
 
     description = property_json.dig('propertyData', 'text', 'description')
-    @data[:description] = html_to_markdown(Nokogiri::HTML::DocumentFragment.parse(description)) if description
+    @data[:description] = html_to_plaintext(Nokogiri::HTML::DocumentFragment.parse(description)) if description
   end
 
   def parse_images

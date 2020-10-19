@@ -53,7 +53,7 @@ class ZooplaHomeImporter < HomeImporter
     title = res_data['name']
     @data[:title] = title&.gsub('for sale', '')&.squish
 
-    @data[:description] = html_to_markdown(@page.css('.dp-description__text')&.first)
+    @data[:description] = html_to_plaintext(@page.css('.dp-description__text')&.first)
   end
 
   def res_data
