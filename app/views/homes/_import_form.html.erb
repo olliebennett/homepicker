@@ -6,7 +6,7 @@
   <div class="form-group">
     <label for="url">Retrieve Data via URL</label>
     <%= text_field_tag :url,
-                       '',
+                       params[:url],
                        class: 'form-control',
                        placeholder: 'https://zoopla.co.uk/... or https://rightmove.co.uk/...',
                        required: true,
@@ -19,4 +19,13 @@
   <%= link_to 'Enter manually',
               new_hunt_home_path(manual: true),
               class: 'btn btn-outline-dark' %>
+<% end %>
+
+<% if params[:url].nil? %>
+  <p class="mt-3">
+    You can also save this bookmark -
+    <%= link_to "Add to #{@hunt.title}",
+                "javascript:window.location='#{new_hunt_home_url}?url='+ window.location;" %>
+    - and click it from any Zoopla/Rightmove page to save to this hunt.
+  </p>
 <% end %>
