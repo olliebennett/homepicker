@@ -14,7 +14,7 @@ class ZooplaHomeImporter < HomeImporter
 
     parse_price
 
-    @data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
+    parse_images
 
     @data
   end
@@ -32,6 +32,10 @@ class ZooplaHomeImporter < HomeImporter
   def parse_coords
     @data[:latitude] = res_data&.dig('geo', 'latitude')&.to_f&.round(6)
     @data[:longitude] = res_data&.dig('geo', 'longitude')&.to_f&.round(6)
+  end
+
+  def parse_images
+    @data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
   end
 
   def parse_price
