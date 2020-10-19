@@ -36,7 +36,7 @@ class HomesController < ApplicationController
     return if redirect_to_duplicate?
 
     if @home.save
-      ImageService.persist_images(@home, retrieved_data[:images])
+      ImageService.persist_images(@home, @images) if @images.present?
       redirect_to hunt_home_path(@hunt, @home), notice: 'Home was successfully created.'
     else
       render :new
@@ -100,7 +100,8 @@ class HomesController < ApplicationController
     return if params[:url].nil?
 
     retrieved_data = LinkRetrieverService.retrieve(params[:url])
-    @home.assign_attributes(retrieved_data.except(:images))
+    @images = retrieved_data.delete(:images)
+    @home.assign_attributes(retrieved_data)
   end
 
   def set_home
