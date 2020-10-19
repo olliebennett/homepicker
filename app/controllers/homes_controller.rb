@@ -30,13 +30,10 @@ class HomesController < ApplicationController
     @home = Home.new(home_params)
     @home.creator_user = current_user
 
-    if params[:url].present?
-      retrieved_data = LinkRetrieverService.retrieve(params[:url])
-      @home.assign_attributes(retrieved_data.except(:images))
+    retrieve_attributes_from_url
 
-      # Avoid saving a duplicate of existing home
-      return if redirect_to_duplicate?
-    end
+    # Avoid saving a duplicate of existing home
+    return if redirect_to_duplicate?
 
     if @home.save
       ImageService.persist_images(@home, retrieved_data[:images])
@@ -97,6 +94,13 @@ class HomesController < ApplicationController
     end
 
     false
+  end
+
+  def retrieve_attributes_from_url
+    return if params[:url].nil?
+
+    retrieved_data = LinkRetrieverService.retrieve(params[:url])
+    @home.assign_attributes(retrieved_data.except(:images))
   end
 
   def set_home
