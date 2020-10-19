@@ -8,11 +8,9 @@ class ImagePersistJob < ApplicationJob
 
     await_response
 
-    if @response.error?
-      raise 'assembly errored!'
-    else
-      update_image
-    end
+    raise 'assembly errored!' if @response.error?
+
+    update_image
   end
 
   private
