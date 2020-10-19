@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 require:
   - rubocop-performance
   - rubocop-rails
@@ -23,6 +21,11 @@ Rails:
 
 Style/Documentation:
   Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/setup'
+    - 'bin/update'
 
 Metrics/BlockLength:
   Exclude:
