@@ -6,7 +6,7 @@ class HuntsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[join]
 
   def index
-    @hunts = current_user.hunts
+    @hunts = current_user.hunts.includes(:creator_user)
   end
 
   def show; end
