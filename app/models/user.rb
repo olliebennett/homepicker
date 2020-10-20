@@ -26,6 +26,6 @@ class User < ApplicationRecord
   end
 
   def hunt_member?(hunt)
-    hunt_memberships.exist?(hunt: hunt)
+    hunt_memberships.exists?(hunt: hunt)
   end
 end

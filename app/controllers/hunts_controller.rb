@@ -18,7 +18,9 @@ class HuntsController < ApplicationController
       return redirect_to root_path, alert: 'This invite link is incorrect or has expired.'
     end
 
-    join_hunt || store_location
+    return if join_hunt
+
+    store_location
 
     render :join
   end
@@ -51,6 +53,8 @@ class HuntsController < ApplicationController
             "You're in! Get hunting!"
           end
     redirect_to hunt_path(@hunt), notice: msg
+
+    true
   end
 
   def hunt_params
