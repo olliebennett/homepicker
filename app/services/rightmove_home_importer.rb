@@ -13,6 +13,8 @@ class RightmoveHomeImporter < HomeImporter
     @data
   end
 
+  private
+
   def property_json
     return @property_json if @property_json.present?
 
@@ -31,9 +33,9 @@ class RightmoveHomeImporter < HomeImporter
     return if address.nil?
 
     address_parts = address.split(',', 3)
-    @data[:address_street] = address_parts[0]
-    @data[:address_locality] = address_parts[1]
-    @data[:address_region] = address_parts[2] || 'UNKNOWN'
+    @data[:address_street] = address_parts[0]&.squish
+    @data[:address_locality] = address_parts[1]&.squish
+    @data[:address_region] = address_parts[2]&.squish || 'UNKNOWN'
 
     @data[:postcode] = property_json.dig('analyticsInfo', 'analyticsProperty', 'postcode')
   end
