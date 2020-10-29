@@ -33,9 +33,7 @@ class RightmoveHomeImporter < HomeImporter
     return if address.nil?
 
     address_parts = address.split(',', 3)
-    @data[:address_street] = address_parts[0]&.squish
-    @data[:address_locality] = address_parts[1]&.squish
-    @data[:address_region] = address_parts[2]&.squish || 'UNKNOWN'
+    @data[:address_street], @data[:address_locality], @data[:address_region] = address_parts.map { |x| x&.squish }
 
     @data[:postcode] = property_json.dig('analyticsInfo', 'analyticsProperty', 'postcode')
   end
