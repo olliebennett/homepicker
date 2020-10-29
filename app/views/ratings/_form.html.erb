@@ -10,7 +10,8 @@
     <% rating_users.unshift('You') if rating.score == score %>
     <% if rating_users.any? %>
       <%# We specify container: 'body' to avoid rendering problems in more complex components %>
-      <% btn_data.merge!(toggle: :tooltip, container: :body) %>
+      <% btn_data[:toggle] = :tooltip %>
+      <% btn_data[:container] = :body %>
       <% btn_title = "#{rating_users.to_sentence} rated this home's #{Rating.human_attribute_name(['aspect', rating.aspect].join('.')).downcase} #{score}/5" %>
     <% end %>
 

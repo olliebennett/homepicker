@@ -19,7 +19,7 @@
           &nbsp;
           <%= fa_icon_inline('star', cls: 'text-warning') %> <%= home.average_rating %>
         <% end %>
-        <% if home.comments.size > 0 %>
+        <% if home.comments.any? %>
           &nbsp;
           <%= fa_icon_inline(home.comments.size == 1 ? 'comment' : 'comments', cls: 'text-success') %> <%= home.comments.size %>
         <% end %>
