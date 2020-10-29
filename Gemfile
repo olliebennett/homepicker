@@ -62,6 +62,9 @@ gem 'rubocop-rails', group: %i[development test]
 gem 'rubocop-rspec', group: %i[development test]
 gem 'rubocop-thread_safety', group: %i[development test]
 
+# RuboCop for ERB view files
+gem 'ruumba'
+
 # Image upload and thumbnailing
 gem 'transloadit', require: false
 
