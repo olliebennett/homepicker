@@ -25,5 +25,9 @@ build:
       code: bin/ruumba
 
     - script:
+      name: TraceRoute (detect redundant/inaccessible routes and controller actions)
+      code: bin/traceroute
+
+    - script:
       name: Brakeman Security Check
       code: bin/brakeman
