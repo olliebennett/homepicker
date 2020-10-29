@@ -68,6 +68,9 @@ gem 'rubocop-thread_safety', group: %i[development test]
 # RuboCop for ERB view files
 gem 'ruumba'
 
+# Find misconfigured or unused routes
+gem 'traceroute'
+
 # Image upload and thumbnailing
 gem 'transloadit', require: false
 

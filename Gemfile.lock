@@ -258,6 +258,8 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    traceroute (0.8.1)
+      rails (>= 3.0.0)
     transloadit (2.0.1)
       mime-types
       multi_json
@@ -312,6 +314,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-thread_safety
   ruumba
+  traceroute
   transloadit
   uglifier
   web-console
