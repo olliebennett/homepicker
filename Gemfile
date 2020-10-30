@@ -68,11 +68,11 @@ gem 'rubocop-thread_safety', group: %i[development test]
 # RuboCop for ERB view files
 gem 'ruumba'
 
+# Find misconfigured or unused routes
+gem 'traceroute'
+
 # Image upload and thumbnailing
 gem 'transloadit', require: false
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
 
 # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
 gem 'web-console', group: :development

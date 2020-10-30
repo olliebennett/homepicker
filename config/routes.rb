@@ -21,6 +21,4 @@ Rails.application.routes.draw do
       patch :restore, on: :member
     end
   end
-
-  resources :images
 end

@@ -1,0 +1,10 @@
+ignore_unreachable_actions:
+- ^devise#_prefixes
+- ^devise/.+
+- ^confirmations#.+
+- ^registrations#.+
+- ^sessions#.+
+ignore_unused_routes:
+- ^sessions#.+
+- ^devise/passwords#.+
+- ^registrations#.+
