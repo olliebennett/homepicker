@@ -4,6 +4,8 @@ class HomesController < ApplicationController
   before_action :set_home, only: %i[show edit update destroy restore]
   before_action :set_hunt
 
+  before_action :store_location, only: %i[index show new edit]
+
   def index
     filter_disabled = params[:disabled] == 'true'
     @homes = @hunt.homes.where(disabled: filter_disabled).includes(:ratings)
