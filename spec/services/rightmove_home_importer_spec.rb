@@ -9,9 +9,7 @@ RSpec.describe RightmoveHomeImporter do
 
     context 'with example 1' do
       it 'parses canonical url' do
-        expect(rm_1).to include(
-          rightmove_url: 'https://www.rightmove.co.uk/properties/83401585'
-        )
+        expect(rm_1[:rightmove_url]).to eq 'https://www.rightmove.co.uk/properties/83401585'
       end
 
       it 'parses address fields' do
@@ -23,9 +21,7 @@ RSpec.describe RightmoveHomeImporter do
       end
 
       it 'parses postcode' do
-        expect(rm_1).to include(
-          postcode: 'SE1 9RB'
-        )
+        expect(rm_1[:postcode]).to eq 'SE1 9RB'
       end
 
       it 'parses location data' do
@@ -36,7 +32,7 @@ RSpec.describe RightmoveHomeImporter do
       end
 
       it 'parses title' do
-        expect(rm_1[:title]).to eq '2 bedroom apartment for sale in South Bank Tower, 55 Upper Ground, Bankside'
+        expect(rm_1[:title]).to eq '2 bedroom apartment for sale in South Bank Tower'
       end
 
       it 'parses description' do

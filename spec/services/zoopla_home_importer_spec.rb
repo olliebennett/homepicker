@@ -25,7 +25,7 @@ RSpec.describe ZooplaHomeImporter do
       it 'parses address fields' do
         expect(zoopla_1_data).to include(
           address_street: 'York Street',
-          address_locality: 'London',
+          address_locality: '', # wiped because it matched region
           address_region: 'London'
         )
       end

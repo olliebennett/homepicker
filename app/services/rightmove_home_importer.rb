@@ -7,7 +7,8 @@ class RightmoveHomeImporter < HomeImporter
     parse_address
     parse_price
     parse_coords
-    parse_title_description
+    parse_description
+    parse_title
     parse_images
 
     cleanup_address
@@ -54,13 +55,17 @@ class RightmoveHomeImporter < HomeImporter
     @data[:longitude] = property_json.dig('analyticsInfo', 'analyticsProperty', 'longitude')
   end
 
-  def parse_title_description
+  def parse_description
     return if property_json.nil?
-
-    @data[:title] = property_json.dig('propertyData', 'text', 'pageTitle')
 
     description = property_json.dig('propertyData', 'text', 'description')
     @data[:description] = html_to_plaintext(Nokogiri::HTML::DocumentFragment.parse(description)) if description
+  end
+
+  def parse_title
+    return if property_json.nil?
+
+    @data[:title] = property_json.dig('propertyData', 'text', 'pageTitle')
   end
 
   def parse_images
