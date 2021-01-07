@@ -1,6 +1,6 @@
 <% title 'Add Home' %>
 
-<h3>Add Home</h3>
+<h3>Add Home to <%= @hunt.title %></h3>
 
 <% # display full form if submitted with errors %>
 <% if params[:manual] == 'true' || @home.errors.any? %>

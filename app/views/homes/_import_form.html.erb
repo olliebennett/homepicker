@@ -1,7 +1,11 @@
 <%= form_with model: [@hunt, home] do |f| %>
   <%= render 'layouts/errors', errors: home.errors %>
 
-  <p>To quickly add a home, paste the Rightmove or Zoopla link below to import the details</p>
+  <p>
+    To quickly add a home to the
+    <strong><%= @hunt.title %></strong> hunt,
+    paste the Rightmove or Zoopla link below.
+  </p>
 
   <div class="form-group">
     <label for="url">Retrieve Data via URL</label>
