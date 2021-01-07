@@ -32,7 +32,7 @@ RSpec.describe RightmoveHomeImporter do
       end
 
       it 'parses title' do
-        expect(rm_1[:title]).to eq '2 bedroom apartment for sale in South Bank Tower'
+        expect(rm_1[:title]).to eq '2 bedroom apartment for sale'
       end
 
       it 'parses description' do

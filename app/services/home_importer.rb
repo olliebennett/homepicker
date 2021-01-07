@@ -17,6 +17,10 @@ class HomeImporter
     remove_duplicated_region
 
     remove_duplicated_locality
+
+    remove_duplicated_street
+
+    remove_trailing_title_in
   end
 
   def extract_outcode(postcode)
@@ -58,6 +62,22 @@ class HomeImporter
     end
   end
 
+  def remove_duplicated_street
+    return if @data[:address_street].blank?
+
+    street = @data[:address_street]
+
+    # None of these fields should include, or end with the street
+    %i[title].each do |field|
+      @data[field] = remove_occurrences(@data[field], street)
+    end
+  end
+
+  # Avoid leftover ' in' when all subsequent address info has been removed
+  def remove_trailing_title_in
+    @data[:title] = remove_occurrences(@data[:title], 'in')
+  end
+
   # Remove the `needle` from `text` if it appears alone between commas,
   # or at the end of the part, following a space.
   def remove_occurrences(text, needle)
@@ -66,7 +86,10 @@ class HomeImporter
     needle = needle.downcase
 
     parts = text.split(',').map(&:squish)
-    parts.delete_if { |x| x.downcase == needle || x.downcase.end_with?(" #{needle}") }
+    # Remove any matching sections
+    parts.delete_if { |x| x.downcase == needle }
+    # Remove trailing match (after space) from any section
+    parts = parts.map { |x| x.downcase.end_with?(" #{needle}") ? x[0...-needle.length - 1] : x }
 
     parts.join(', ')
   end
