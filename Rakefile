@@ -8,3 +8,12 @@ require_relative 'config/application'
 require 'resque/tasks'
 
 Rails.application.load_tasks
+
+# Workaround missing 'bin/yarn'
+# https://github.com/rails/rails/issues/40795#issuecomment-756095119
+Rake::Task['yarn:install'].clear
+namespace :yarn do
+  task :install do
+    # Do nothing, since there's no yarn
+  end
+end
