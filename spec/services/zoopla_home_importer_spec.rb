@@ -14,6 +14,14 @@ RSpec.describe ZooplaHomeImporter do
         )
       end
 
+      it 'parses title' do
+        expect(zoopla_1_data[:title]).to eq '1 bed flat'
+      end
+
+      it 'parses description' do
+        expect(zoopla_1_data[:description]).to include 'Central Marylebone luxury 1 bedroom apartment'
+      end
+
       it 'parses address fields' do
         expect(zoopla_1_data).to include(
           address_street: 'York Street',
@@ -23,22 +31,13 @@ RSpec.describe ZooplaHomeImporter do
       end
 
       it 'parses postcode' do
-        expect(zoopla_1_data).to include(
-          postcode: 'W1H 1PW'
-        )
+        expect(zoopla_1_data[:postcode]).to eq 'W1H 1PW'
       end
 
       it 'parses location data' do
         expect(zoopla_1_data).to include(
           latitude: 51.520254,
           longitude: -0.159889
-        )
-      end
-
-      it 'parses title and description' do
-        expect(zoopla_1_data).to include(
-          title: '1 bed flat',
-          description: /Central Marylebone luxury 1 bedroom apartment/
         )
       end
 

@@ -5,15 +5,10 @@ class ZooplaHomeImporter < HomeImporter
     @data[:zoopla_url] = @page.xpath("//link[@rel='canonical']/@href")&.to_s
 
     parse_postcode
-
     parse_coords
-
     parse_title_description
-
     parse_address
-
     parse_price
-
     parse_images
 
     @data

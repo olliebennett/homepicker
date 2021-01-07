@@ -12,23 +12,37 @@ class HomeImporter
   private
 
   def cleanup_address
-    # Clean up street address to remove duplication; they often end in "street, Locality OUTCODE", eg '... Bath BA1'
-    remove_trailing_outcode
-    remove_trailing_locality
+    remove_duplicated_postcode
   end
 
-  def remove_trailing_locality
-    locality = @data[:address_locality]
-
-    @data[:address_street] = @data[:address_street].chomp(locality).squish.chomp(',').squish
+  def extract_outcode(postcode)
+    postcode[0...-3].squish if postcode.present?
   end
 
-  def remove_trailing_outcode
-    return if @data[:postcode].nil?
+  def remove_duplicated_postcode
+    return if @data[:postcode].blank?
 
-    outcode = @data[:postcode][0...-3].squish
+    postcode = @data[:postcode]
+    outcode = postcode[0...-3].squish
 
-    @data[:address_street] = @data[:address_street].chomp(outcode).squish.chomp(',').squish
+    # None of these fields should include, or end with the postcode or outcode
+    %i[title address_locality address_region address_street].each do |field|
+      @data[field] = remove_occurrences(@data[field], postcode)
+      @data[field] = remove_occurrences(@data[field], outcode)
+    end
+  end
+
+  # Remove the `needle` from `text` if it appears alone between commas,
+  # or at the end of the part, following a space.
+  def remove_occurrences(text, needle)
+    return text if text.blank?
+
+    needle = needle.downcase
+
+    parts = text.split(',').map(&:squish)
+    parts.delete_if { |x| x.downcase == needle || x.downcase.end_with?(" #{needle}") }
+
+    parts.join(', ')
   end
 
   def html_to_plaintext(container_node)

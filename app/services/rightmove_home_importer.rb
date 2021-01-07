@@ -10,6 +10,8 @@ class RightmoveHomeImporter < HomeImporter
     parse_title_description
     parse_images
 
+    cleanup_address
+
     @data
   end
 
