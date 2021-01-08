@@ -4,19 +4,30 @@ class RightmoveHomeImporter < HomeImporter
   def parse
     @data[:rightmove_url] = @page.xpath("//meta[@property='og:url']/@content")&.to_s
 
+    parse_basic_fields
+    parse_extra_fields
+
+    cleanup_address
+    combine_fields
+
+    @data
+  end
+
+  private
+
+  def parse_basic_fields
     parse_address
     parse_price
     parse_coords
     parse_description
     parse_title
     parse_images
-
-    cleanup_address
-
-    @data
   end
 
-  private
+  def parse_extra_fields
+    parse_key_features
+    parse_floorplans
+  end
 
   def property_json
     return @property_json if @property_json.present?
@@ -62,13 +73,35 @@ class RightmoveHomeImporter < HomeImporter
     @data[:description] = html_to_plaintext(Nokogiri::HTML::DocumentFragment.parse(description)) if description
   end
 
+  def parse_key_features
+    return if property_json.nil?
+
+    @data[:key_features] = property_json.dig('propertyData', 'keyFeatures')
+  end
+
+  def parse_floorplans
+    return if property_json.nil?
+
+    floorplans_data = property_json.dig('propertyData', 'floorplans')
+    return if floorplans_data.nil?
+
+    @data[:floorplans] = floorplans_data.map { |x| x['url'] }
+  end
+
+  def parse_images
+    # Alternative data source:
+    # @data[:images] = @page.xpath("//meta[@property='og:image']/@content").map(&:to_s)
+    return if property_json.nil?
+
+    images_data = property_json.dig('propertyData', 'images')
+    return if images_data.nil?
+
+    @data[:images] = images_data.map { |x| x['url'] }
+  end
+
   def parse_title
     return if property_json.nil?
 
     @data[:title] = property_json.dig('propertyData', 'text', 'pageTitle')
-  end
-
-  def parse_images
-    @data[:images] = @page.xpath("//meta[@property='og:image']/@content").map(&:to_s)
   end
 end

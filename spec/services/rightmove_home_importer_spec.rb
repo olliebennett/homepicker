@@ -39,8 +39,21 @@ RSpec.describe RightmoveHomeImporter do
         expect(rm_1[:description]).to include 'a 20m indoor swimming pool'
       end
 
+      it 'parses key features (and prepends to desc in list format)' do
+        expect(rm_1[:description]).to include '- example key feature two'
+      end
+
       it 'parses price' do
         expect(rm_1[:price]).to eq 1_875_000
+      end
+
+      it 'parses image data' do
+        expect(rm_1[:images]).to include 'https://media.rightmove.co.uk/121k/120835/83401585/120835_SNE190293_IMG_21_0000.jpg'
+      end
+
+      it 'parses floorplan image url' do
+        # Note: floorplans are simply stored (last) in the images array
+        expect(rm_1[:images].last).to eq 'https://media.rightmove.co.uk/121k/120835/83401585/120835_SNE190293_FLP_01_0000.jpg'
       end
     end
   end

@@ -23,6 +23,24 @@ class HomeImporter
     remove_trailing_title_in
   end
 
+  def combine_fields
+    combine_floorplan
+    combine_key_features
+  end
+
+  def combine_floorplan
+    return if @data[:floorplans].blank?
+
+    @data[:images] = @data[:images].concat(@data[:floorplans])
+  end
+
+  def combine_key_features
+    return if @data[:key_features].blank?
+
+    desc_prefix = "Key Features:\n\n- #{@data[:key_features].join("\n- ")}\n\n"
+    @data[:description] = "#{desc_prefix}#{@data[:description]}"
+  end
+
   def extract_outcode(postcode)
     postcode[0...-3].squish if postcode.present?
   end
