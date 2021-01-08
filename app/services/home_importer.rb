@@ -31,7 +31,7 @@ class HomeImporter
   def combine_floorplan
     return if @data[:floorplans].blank?
 
-    @data[:images] = @data[:images].concat(@data[:floorplans])
+    @data[:images] = @data[:images].concat(@data[:floorplans]).uniq
   end
 
   def combine_key_features
