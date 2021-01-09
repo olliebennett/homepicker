@@ -103,8 +103,7 @@ class HomesController < ApplicationController
 
     retrieved_data = LinkRetrieverService.retrieve(params[:url])
     @images = retrieved_data.delete(:images)
-    @images.concat(retrieved_data.delete(:floorplans))
-    @home.assign_attributes(retrieved_data.except(:key_features))
+    @home.assign_attributes(retrieved_data.except(:floorplans, :key_features))
   end
 
   def set_home
