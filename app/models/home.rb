@@ -15,9 +15,6 @@ class Home < ApplicationRecord
 
   default_scope { order(:id) }
 
-  scope :enabled, -> { where(disabled: false) }
-  scope :disabled, -> { where(disabled: true) }
-
   has_paper_trail only: [:price]
 
   auto_strip_attributes :address_street, squish: true
