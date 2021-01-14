@@ -17,6 +17,9 @@ gem 'better_errors', group: :development
 # Security audit checks (eg. SQL injection)
 gem 'brakeman', require: false, group: %i[development test]
 
+# Improve applicaion boot speed
+gem 'bootsnap', require: false
+
 # Detect N+1 query issues
 gem 'bullet', group: :development
 
