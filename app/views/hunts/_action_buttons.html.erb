@@ -1,5 +1,5 @@
 <% if hunt.homes.where(disabled: false).size.positive? %>
-  <%= link_to "View #{pluralize(hunt.homes.enabled.size, 'home')}",
+  <%= link_to "View #{pluralize(hunt.homes.where(disabled: false).size, 'home')}",
               hunt_homes_path(hunt),
               class: 'btn btn-success' %>
 <% else %>
