@@ -1,4 +1,7 @@
 <% if hunt.homes.where(disabled: false).size.positive? %>
+  <%= link_to 'Add home',
+              new_hunt_home_path(hunt),
+              class: 'btn btn-success' %>
   <%= link_to "View #{pluralize(hunt.homes.where(disabled: false).size, 'home')}",
               hunt_homes_path(hunt),
               class: 'btn btn-success' %>
