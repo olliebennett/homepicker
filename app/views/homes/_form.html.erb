@@ -128,6 +128,14 @@
     <% end %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :bulk_images do %>
+      Bulk Images
+      <small>(enter each new image URL on its own line)</small>
+    <% end %>
+    <%= f.text_area :bulk_images, class: 'form-control', rows: 4, autocomplete: 'off' %>
+  </div>
+
   <%= f.hidden_field :hunt_id, value: @hunt.id %>
   <%= f.submit class: 'btn btn-primary' %>
 
