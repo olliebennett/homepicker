@@ -11,6 +11,9 @@ class ZooplaHomeImporter < HomeImporter
     parse_price
     parse_images
 
+    cleanup_address
+    combine_fields
+
     @data
   end
 
@@ -20,8 +23,6 @@ class ZooplaHomeImporter < HomeImporter
     @data[:address_locality] = res_data&.dig('address', 'addressLocality')
 
     @data[:address_region] = res_data&.dig('address', 'addressRegion')
-
-    cleanup_address
   end
 
   def parse_coords
