@@ -121,7 +121,7 @@
         </div>
       <% else %>
         <div class="form-group col-md-3">
-          <%= images_form.label :external_url, 'URL' %>
+          <%= image_tag images_form.object.thumb_url_fallback, class: 'img-thumbnail' %>
           <%= images_form.text_field :external_url, class: 'form-control' %>
         </div>
       <% end %>

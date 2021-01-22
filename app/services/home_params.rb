@@ -45,7 +45,7 @@ class HomeParams
   end
 
   def deduplicate_images(images)
-    @params[:home][:images_attributes] ||= []
+    @params[:home][:images_attributes] ||= {}
 
     images.reject do |image_url|
       @params[:home][:images_attributes].values.any? { |v| v[:external_url] == image_url }
