@@ -21,12 +21,9 @@ class HomesController < ApplicationController
 
   def new
     @home = @hunt.homes.new
-    build_images
   end
 
-  def edit
-    build_images
-  end
+  def edit; end
 
   def create
     @home = Home.new(home_params)
@@ -64,11 +61,6 @@ class HomesController < ApplicationController
   end
 
   private
-
-  def build_images
-    blank_images = (@home.images.size % 4).zero? ? 4 : 4 - (@home.images.size % 4)
-    blank_images.times { @home.images.build }
-  end
 
   def redirect_to_duplicate?
     redirect_to_duplicate_rightmove? || redirect_to_duplicate_zoopla?
