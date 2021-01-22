@@ -19,3 +19,10 @@ namespace :yarn do
   end
 end
 # rubocop:enable Rails/RakeEnvironment
+
+desc 'Persist any unpersisted images'
+task persist_images: :environment do
+  Image.where.not(external_url: nil).where(full_url: nil).find_each do |img|
+    ImagePersistJob.perform_now(img.id)
+  end
+end
