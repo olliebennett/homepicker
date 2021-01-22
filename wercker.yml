@@ -1,5 +1,5 @@
 # Ruby box from docker
-box: ruby:3.0.0-rc1
+box: ruby:3.0.0
 
 services:
   - postgres
