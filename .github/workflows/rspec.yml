@@ -6,25 +6,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      RAILS_ENV: test
+      REDIS_URL: redis://localhost:6379
+
     services:
       postgres:
         image: postgres:latest
         ports:
-        - 5432:5432
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 3.0.0
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.0
-    - name: Cache gems
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-rspec-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-rspec-
+    - uses: ruby/setup-ruby@v1
+      with: # uses version defined in `.ruby-version` file
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Install PostgreSQL client
       run: sudo apt-get install libpq-dev
     - name: Install gems
@@ -33,6 +30,6 @@ jobs:
         bundle install --jobs 4 --retry 3
     - name: Create database
       run: |
-        bundler exec rails db:setup RAILS_ENV=test
+        bundler exec rails db:setup
     - name: Run Rspec
       run: bin/rspec
