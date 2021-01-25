@@ -1,6 +1,7 @@
 # Based on;
 # https://github.com/actions/example-services/blob/master/.github/workflows/postgres-service.yml
 # https://docs.publishing.service.gov.uk/manual/test-and-build-a-project-with-github-actions.html
+# https://andycroll.com/ruby/github-actions-ci-for-rails-with-postgresql/
 
 name: Test
 
@@ -13,7 +14,6 @@ jobs:
     env:
       RAILS_ENV: test
       REDIS_URL: redis://localhost:6379
-
 
     services:
       postgres:
@@ -31,14 +31,13 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with: # uses version defined in `.ruby-version` file
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
     - name: Install PostgreSQL client
       run: sudo apt-get install libpq-dev
-    - name: Install gems
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+
     - name: Create database
       run: |
         bundler exec rails db:setup
+
     - name: Run Rspec
       run: bin/rspec
