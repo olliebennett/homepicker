@@ -24,3 +24,5 @@ jobs:
       run: bin/ruumba
     - name: Run Brakeman
       run: bin/brakeman
+    - name: Run Traceroute (detect unused actions/routes)
+      run: bin/traceroute
