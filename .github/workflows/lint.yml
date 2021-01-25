@@ -1,5 +1,8 @@
-# GitHub Action to run RuboCop, based on Rails' version:
-# https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
+# GitHub Action to run linters, based on:
+# - Rails repo configuration:
+#   https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
+# - GitHub Actions Docs
+#   https://github.com/ruby/setup-ruby#usage
 
 name: Lint
 
@@ -11,21 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 3.0.0
-      uses: ruby/setup-ruby@v1
+    - name: Set up Ruby # https://github.com/ruby/setup-ruby#usage
+      uses: ruby/setup-ruby@v1 # reads version from .ruby-version file
       with:
-        ruby-version: 3.0.0
-    - name: Cache gems
-      uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-rubocop-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-rubocop-
-    - name: Install gems
-      run: |
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run RuboCop
       run: bin/rubocop
     - name: Run Ruumba (RuboCop on views)
