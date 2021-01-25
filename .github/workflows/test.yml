@@ -50,4 +50,6 @@ jobs:
         bundler exec rails db:setup
 
     - name: Run Rspec
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432
       run: bin/rspec
