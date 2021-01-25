@@ -45,6 +45,7 @@ jobs:
         POSTGRES_HOST: localhost
         POSTGRES_PORT: 5432
         POSTGRES_PASSWORD: postgres
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432
       run: |
         bundler exec rails db:setup
 
