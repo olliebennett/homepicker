@@ -1,7 +1,7 @@
 # GitHub Action to run RuboCop, based on Rails' version:
 # https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
 
-name: RuboCop & Ruumba
+name: Lint
 
 on: [push, pull_request]
 
