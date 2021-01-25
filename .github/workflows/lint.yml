@@ -11,10 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 3.0.0
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.0
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1 # reads version from .ruby-version file
     - name: Cache gems
       uses: actions/cache@v1
       with:
