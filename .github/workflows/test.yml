@@ -2,7 +2,7 @@
 # https://github.com/actions/example-services/blob/master/.github/workflows/postgres-service.yml
 # https://docs.publishing.service.gov.uk/manual/test-and-build-a-project-with-github-actions.html
 
-name: RSpec
+name: Test
 
 on: [push, pull_request]
 
