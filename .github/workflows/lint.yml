@@ -1,5 +1,8 @@
-# GitHub Action to run RuboCop, based on Rails' version:
-# https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
+# GitHub Action to run linters, based on:
+# - Rails repo configuration:
+#   https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
+# - GitHub Actions Docs
+#   https://github.com/ruby/setup-ruby#usage
 
 name: Lint
 
