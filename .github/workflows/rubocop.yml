@@ -1,7 +1,7 @@
 # GitHub Action to run RuboCop, based on Rails' version:
 # https://github.com/rails/rails/blob/master/.github/workflows/rubocop.yml
 
-name: RuboCop
+name: RuboCop & Ruumba
 
 on: [push, pull_request]
 
@@ -28,3 +28,5 @@ jobs:
         bundle install --jobs 4 --retry 3
     - name: Run RuboCop
       run: bin/rubocop
+    - name: Run Ruumba (RuboCop on views)
+      run: bin/ruumba
