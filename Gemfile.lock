@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/bradherman/sparkpost_rails.git
+  revision: 7e5b2dae285083c5f5b740605c26bb885b2a82d7
+  branch: rails-6.1-support
+  specs:
+    sparkpost_rails (1.5.4)
+      rails (>= 4.0, < 6.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -323,6 +331,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-thread_safety
   ruumba
+  sparkpost_rails!
   traceroute
   transloadit
   web-console
