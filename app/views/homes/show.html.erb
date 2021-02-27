@@ -12,15 +12,10 @@
       <%= @home.address_street || '[unnamed property]' %>
     </h1>
     <h3>
-      <%= @home.title %><%= ", #{@home.postcode}" if @home.postcode %>
+      <%= [@home.title, @home.postcode].compact.join(', ') %>
     </h3>
     <p>
-      <% if @home.address_locality.present? %>
-        <%= @home.address_locality %>,
-      <% end %>
-      <% if @home.address_region.present? %>
-        <%= @home.address_region %>
-      <% end %>
+      <%= [@home.address_locality, @home.address_region].compact.join(', ') %>
     </p>
   </div>
   <div class="col-sm-4 text-right">
