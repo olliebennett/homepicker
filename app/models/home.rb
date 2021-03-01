@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Home < ApplicationRecord
+  include Hashid::Rails
+
   has_many :comments, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :images, dependent: :destroy

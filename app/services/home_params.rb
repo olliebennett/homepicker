@@ -25,7 +25,13 @@ class HomeParams
     bulk_images = @params[:home]&.delete(:bulk_images)
     handle_bulk_images(bulk_images) if bulk_images.present?
 
-    @params.require(:home).permit(
+    params_copy = @params.dup
+
+    if params_copy.dig(:home, :hunt_id).present?
+      params_copy[:home][:hunt_id] = Hunt.decode_id(params_copy[:home][:hunt_id])
+    end
+
+    params_copy.require(:home).permit(
       PERMITTED_PARAMS,
       images_attributes: %i[id external_url _destroy]
     )

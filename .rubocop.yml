@@ -20,6 +20,10 @@ AllCops:
 Rails:
   Enabled: true
 
+# We encourage `find_by_id!` (an alias for `find`), as it's more explicit that it's using raw IDs (not HashIDs).
+Rails/DynamicFindBy:
+  Whitelist: find_by_id! find_by_hashid find_by_hashid!
+
 Style/Documentation:
   Enabled: false
 

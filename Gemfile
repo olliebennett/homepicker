@@ -35,6 +35,9 @@ gem 'dotenv-rails', groups: %i[development test]
 # Use factories for creating test objects
 gem 'factory_bot_rails', group: %i[development test]
 
+# Replace raw numeric IDs with short unique ids
+gem 'hashid-rails'
+
 # Support dialogues, link HTTP verb changes and form-submit improvements
 gem 'jquery-rails'
 

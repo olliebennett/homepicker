@@ -40,7 +40,7 @@ class HuntsController < ApplicationController
   private
 
   def set_hunt
-    @hunt = current_user.hunts.find(params[:id])
+    @hunt = current_user.hunts.find_by_hashid!(params[:id])
   end
 
   def join_hunt

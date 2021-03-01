@@ -136,7 +136,7 @@
     <%= f.text_area :bulk_images, class: 'form-control', rows: 4, autocomplete: 'off' %>
   </div>
 
-  <%= f.hidden_field :hunt_id, value: @hunt.id %>
+  <%= f.hidden_field :hunt_id, value: @hunt.hashid %>
   <%= f.submit class: 'btn btn-primary' %>
 
   <%= link_to 'Cancel',

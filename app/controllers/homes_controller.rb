@@ -99,11 +99,11 @@ class HomesController < ApplicationController
   end
 
   def set_home
-    @home = Home.find(params[:id])
+    @home = Home.find_by_hashid!(params[:id])
   end
 
   def set_hunt
-    @hunt = Hunt.find(params[:hunt_id])
+    @hunt = Hunt.find_by_hashid!(params[:hunt_id])
   end
 
   def home_params
