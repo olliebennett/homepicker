@@ -25,6 +25,4 @@ jobs:
     - name: Run Brakeman
       run: bin/brakeman
     - name: Run Traceroute (detect unused actions/routes)
-      env:
-        REDIS_URL: 'redis://localhost:6379'
       run: bin/traceroute
