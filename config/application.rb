@@ -26,6 +26,14 @@ module Homepicker
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    config.action_controller.default_url_options[:protocol] = ENV.fetch('SITE_PROTOCOL')
+
+    config.action_mailer.default_url_options = {
+      host: ENV.fetch('SITE_HOST'),
+      port: ENV.fetch('SITE_PORT').to_i,
+      protocol: ENV.fetch('SITE_PROTOCOL')
+    }
+
     config.time_zone = 'Europe/London'
   end
 end
