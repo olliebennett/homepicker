@@ -26,12 +26,14 @@ module Homepicker
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.action_controller.default_url_options[:protocol] = ENV.fetch('SITE_PROTOCOL')
+    # Force pages to be served via HTTPS if configured
+    config.force_ssl = ENV.fetch('SITE_PROTOCOL', 'http') == 'https'
 
+    # Define URL defaults for use in email links
     config.action_mailer.default_url_options = {
-      host: ENV.fetch('SITE_HOST'),
-      port: ENV.fetch('SITE_PORT').to_i,
-      protocol: ENV.fetch('SITE_PROTOCOL')
+      host: ENV.fetch('SITE_HOST', 'localhost'),
+      port: ENV.fetch('SITE_PORT', 80).to_i,
+      protocol: ENV.fetch('SITE_PROTOCOL', 'http')
     }
 
     config.time_zone = 'Europe/London'
