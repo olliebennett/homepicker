@@ -17,7 +17,7 @@
                        autofocus: true %>
   </div>
 
-  <%= f.hidden_field :hunt_id, value: @hunt.id %>
+  <%= f.hidden_field :hunt_id, value: @hunt.hashid %>
   <%= f.submit 'Import Home Details', class: 'btn btn-primary' %>
   or
   <%= link_to 'Enter manually',
