@@ -23,7 +23,7 @@ class HtmlStripper
   def to_plaintext
     @container_node.children.map do |child_node|
       # Recursively parse parent elements to extract children as plaintext
-      return nokogiri_node_to_markdown(child_node) if PARENT_NODE_LIST.include?(child_node.name)
+      return HtmlStripper.new(child_node).to_plaintext if PARENT_NODE_LIST.include?(child_node.name)
 
       childless_node_to_text(child_node)
     end.join('')
