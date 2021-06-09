@@ -75,8 +75,7 @@ gem 'rubocop-thread_safety', group: %i[development test]
 gem 'ruumba'
 
 # Send emails via SparkPost
-# Use GitHub until https://github.com/the-refinery/sparkpost_rails/pull/79 is merged
-gem 'sparkpost_rails', github: 'bradherman/sparkpost_rails', branch: 'rails-6.1-support'
+gem 'sparkpost_rails'
 
 # Find misconfigured or unused routes
 gem 'traceroute'
