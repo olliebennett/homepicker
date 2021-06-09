@@ -40,8 +40,8 @@ class ZooplaHomeImporter < HomeImporter
   end
 
   def parse_postcode
-    incode = @page_html.match(/incode: "([A-Z0-9]{3,4})"/)[1]
-    outcode = @page_html.match(/outcode: "([A-Z0-9]{3,4})"/)[1]
+    incode = (@page_html.match(/incode: +"([A-Z0-9]{3})"/) || @page_html.match(/"incode":"([A-Z0-9]{3})"/))[1]
+    outcode = (@page_html.match(/outcode: +"([A-Z0-9]{3,4})"/) || @page_html.match(/"outcode":"([A-Z0-9]{3,4})"/))[1]
     @data[:postcode] = "#{outcode} #{incode}"
   end
 
