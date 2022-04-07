@@ -16,7 +16,7 @@ class ImagePersistJob < ApplicationJob
   private
 
   def assembly
-    transloadit.assembly(steps: steps)
+    transloadit.assembly(steps:)
   end
 
   def await_response

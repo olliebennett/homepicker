@@ -52,7 +52,7 @@ RSpec.describe RightmoveHomeImporter do
       end
 
       it 'parses floorplan image url' do
-        # Note: floorplans are simply stored (last) in the images array
+        # NOTE: floorplans are simply stored (last) in the images array
         expect(rm_1[:images].last).to eq 'https://media.rightmove.co.uk/121k/120835/83401585/120835_SNE190293_FLP_01_0000.jpg'
       end
 
