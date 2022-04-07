@@ -24,5 +24,13 @@
 
   <%= javascript_include_tag 'application' %>
 
-  <script defer data-domain="homepicker.app" src="https://plausible.io/js/plausible.js"></script>
+  <script>
+    (function(s,q,e,a,u,k,y){
+      s._sqSettings={site_id:'e54a2bab-2cb5-46e9-bf25-1325729622ce'};
+      u=q.getElementsByTagName('head')[0];
+      k=q.createElement('script');
+      k.src=e+s._sqSettings.site_id;
+      u.appendChild(k);
+    })(window,document,'https://cdn.squeaky.ai/g/0.4.0/script.js?');
+  </script>
 </head>
