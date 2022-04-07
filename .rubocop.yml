@@ -24,6 +24,9 @@ Rails:
 Rails/DynamicFindBy:
   Whitelist: find_by_id! find_by_hashid find_by_hashid!
 
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 

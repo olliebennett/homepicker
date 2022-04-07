@@ -39,7 +39,7 @@ class HomeParams
 
   def handle_bulk_images(bulk_images)
     # Split 'bulk images' textarea to separate fields
-    images = bulk_images.split("\n").map(&:squish).reject(&:blank?).uniq
+    images = bulk_images.split("\n").map(&:squish).compact_blank.uniq
 
     images = deduplicate_images(images)
 

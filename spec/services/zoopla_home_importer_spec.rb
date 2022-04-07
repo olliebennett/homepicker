@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe ZooplaHomeImporter do
   describe '#parse' do
-    let(:zoopla_1_file) { IO.read('spec/fixtures/zoopla/example_1.html') }
+    let(:zoopla_1_file) { File.read('spec/fixtures/zoopla/example_1.html') }
     let(:zoopla_1_data) { described_class.new(zoopla_1_file).parse }
 
     context 'with example 1' do

@@ -8,7 +8,6 @@ class Hunt < ApplicationRecord
   has_many :hunt_memberships, dependent: :destroy
 
   validates :title, presence: true
-  validates :creator_user, presence: true
 
   default_scope { order(:id) }
 

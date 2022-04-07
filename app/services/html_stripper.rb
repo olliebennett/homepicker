@@ -26,7 +26,7 @@ class HtmlStripper
       return HtmlStripper.new(child_node).to_plaintext if PARENT_NODE_LIST.include?(child_node.name)
 
       childless_node_to_text(child_node)
-    end.join('')
+    end.join
   end
 
   private
