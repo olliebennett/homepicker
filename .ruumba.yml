@@ -186,31 +186,19 @@ Style/RedundantCondition:
 # - De-duplicate and sort the matching cop names
 # - Paste below and manipulate to be `Enabled: false` in each case.
 
+Lint/EmptyBlock:
+  Enabled: false
+
 Lint/EmptyConditionalBody:
   Enabled: false
 
 Metrics/BlockLength:
   Enabled: false
 
-Metrics/BlockNesting:
-  Enabled: false
-
-Rails/OutputSafety:
-  Enabled: false
-
-Rails/UnknownEnv:
-  Enabled: false
-
-Style/CaseLikeIf:
-  Enabled: false
-
 Style/CombinableLoops:
   Enabled: false
 
-Style/HashAsLastArrayItem:
-  Enabled: false
-
-Style/SoleNestedConditional:
+Style/HashSyntax:
   Enabled: false
 
 Style/StringConcatenation:
