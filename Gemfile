@@ -32,9 +32,6 @@ gem 'devise'
 # Load '.env' file into ENV
 gem 'dotenv-rails', groups: %i[development test]
 
-# Use factories for creating test objects
-gem 'factory_bot_rails', group: %i[development test]
-
 # Replace raw numeric IDs with short unique ids
 gem 'hashid-rails'
 
@@ -77,6 +74,9 @@ gem 'ruumba'
 # Send emails via SparkPost
 # https://github.com/the-refinery/sparkpost_rails/pull/89
 gem 'sparkpost_rails', github: 'sunny/sparkpost_rails', branch: 'allow-rails-seven'
+
+# Asset serving (not included in Rails 7+)
+gem 'sprockets-rails'
 
 # Find misconfigured or unused routes
 gem 'traceroute'
