@@ -75,7 +75,8 @@ gem 'rubocop-thread_safety', group: %i[development test]
 gem 'ruumba'
 
 # Send emails via SparkPost
-gem 'sparkpost_rails'
+# https://github.com/the-refinery/sparkpost_rails/pull/89
+gem 'sparkpost_rails', github: 'sunny/sparkpost_rails', branch: 'allow-rails-seven'
 
 # Find misconfigured or unused routes
 gem 'traceroute'
