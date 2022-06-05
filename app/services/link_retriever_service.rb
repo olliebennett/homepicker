@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'open-uri'
-
 class LinkRetrieverService
   def self.retrieve(url)
-    page_html = URI.parse(url).open
+    res = Net::HTTP.get_response(URI(url))
+
+    raise "Unsuccessful response: #{res.code}" unless res.code == '200'
 
     if url.include?('zoopla.co') # .com or .co.uk both supported!
-      ZooplaHomeImporter.new(page_html).parse
+      ZooplaHomeImporter.new(res.body).parse
     elsif url.include?('rightmove.co.uk')
-      RightmoveHomeImporter.new(page_html).parse
+      RightmoveHomeImporter.new(res.body).parse
     else
       raise "Unhandled URL: #{url}"
     end
