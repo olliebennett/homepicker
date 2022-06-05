@@ -32,11 +32,11 @@ class RightmoveHomeImporter < HomeImporter
   def property_json
     return @property_json if @property_json.present?
 
-    property_json_string = @page_html.match(/window\.PAGE_MODEL = {(.*)}/)
+    property_json_string = @page_html.match(/\<script\>\s*window\.PAGE_MODEL = (.*?)\s*\<\/script\>/)
 
     return if property_json_string.nil?
 
-    @property_json = JSON.parse("{#{property_json_string[1]}}")
+    @property_json = JSON.parse(property_json_string[1])
   end
 
   def parse_address
