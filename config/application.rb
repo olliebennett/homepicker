@@ -36,6 +36,11 @@ module Homepicker
       protocol: ENV.fetch('SITE_PROTOCOL', 'http')
     }
 
+    config.after_initialize do
+      # Ensure availability of xyz_url helpers in background jobs
+      Rails.application.routes.default_url_options = config.action_mailer.default_url_options
+    end
+
     config.time_zone = 'Europe/London'
   end
 end
