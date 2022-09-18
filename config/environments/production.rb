@@ -82,6 +82,9 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Send emails via SparkPost EU (https://app.eu.sparkpost.com/)
+  config.action_mailer.delivery_method = :sparkpost
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
