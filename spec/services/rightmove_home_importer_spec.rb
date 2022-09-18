@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.fdescribe RightmoveHomeImporter do
+RSpec.describe RightmoveHomeImporter do
   describe '#parse' do
     context 'with example 2' do
       let(:rm2_file) { File.read('spec/fixtures/rightmove/example_2.html') }
