@@ -2,7 +2,7 @@
 
 module FontAwesomeHelper
   # Add any new icons in fontawesome_icons.yml
-  FA_ICON_SVGS = YAML.safe_load(File.read(Rails.root.join('lib/assets/fontawesome_icons.yml'))).freeze
+  FA_ICON_SVGS = YAML.safe_load(Rails.root.join('lib/assets/fontawesome_icons.yml').read).freeze
 
   def fa_icon_inline(glyph, type: :solid, cls: '')
     x = fa_icon_svg(glyph, type).dup
