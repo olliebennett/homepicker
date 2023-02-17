@@ -1,8 +1,10 @@
-<%= form_for(rating, html: { class: 'form-inline' }) do |f| %>
+<%= form_for(rating) do |f| %>
   <%= f.hidden_field :home_id %>
   <%= f.hidden_field :aspect %>
   <%= f.hidden_field :score, id: "score_field_#{rating.aspect}" %>
 
+  <%= Rating.human_attribute_name(['aspect', f.object.aspect].join('.')) %>
+  <br>
   <% 1.upto(5).each do |score| %>
     <% rating_users = others_ratings.select { |r| r.score == score }.map { |r| r.user.display_name } %>
     <% btn_data = { score: score } %>
@@ -21,8 +23,6 @@
                    data: btn_data,
                    title: btn_title %>
   <% end %>
-  &nbsp;
-  <%= Rating.human_attribute_name(['aspect', f.object.aspect].join('.')) %>
 <% end %>
 
 <script>
