@@ -21,6 +21,7 @@ class RightmoveHomeImporter < HomeImporter
     parse_coords
     parse_description
     parse_title
+    parse_status
     parse_images
   end
 
@@ -103,5 +104,13 @@ class RightmoveHomeImporter < HomeImporter
     return if property_json.nil?
 
     @data[:title] = property_json.dig('propertyData', 'text', 'pageTitle')
+  end
+
+  def parse_status
+    if @response_status == '410'
+      @data[:listing_status] = :removed
+    else
+      @data[:listing_status] = :okay
+    end
   end
 end

@@ -26,6 +26,12 @@
                   method: :patch,
                   class: 'btn btn-info' %>
     <% else %>
+      <% if @home.rightmove_url.present? %>
+        <%= link_to 'Refresh Listing Status',
+                    refresh_listing_hunt_home_path(@hunt, @home),
+                    method: :patch,
+                    class: 'btn btn-info' %>
+        <% end %>
       <%= link_to 'Archive',
                   hunt_home_path(@hunt, @home),
                   method: :delete,

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomesController < ApplicationController
-  before_action :set_home, only: %i[show edit update destroy restore]
+  before_action :set_home, only: %i[show edit update destroy restore refresh_listing]
   before_action :set_hunt
 
   before_action :store_location, only: %i[index show new edit]
@@ -58,6 +58,25 @@ class HomesController < ApplicationController
   def restore
     @home.update!(disabled: false)
     redirect_to hunt_home_path(@hunt, @home), notice: 'Home restored!'
+  end
+
+  def refresh_listing
+    fls = if @home.rightmove_url.present?
+            rm_data = LinkRetrieverService.retrieve(@home.rightmove_url)
+            new_status = rm_data.fetch(:listing_status)
+            if @home.update(listing_status: new_status)
+              if @home.saved_change_to_attribute?(:listing_status)
+                { notice: "Updated with listing status '#{@home.listing_status.humanize.downcase}'" }
+              else
+                { notice: "Status not changed - still '#{@home.listing_status.humanize.downcase}'" }
+              end
+            else
+              { alert: "Failed to update: #{@home.errors.full_messages.join(',')}" }
+            end
+          else
+            { alert: 'Cannot refresh listing for non-rightmove homes!' }
+          end
+    redirect_to hunt_home_path(@hunt, @home), flash: fls
   end
 
   private

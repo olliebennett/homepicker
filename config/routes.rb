@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :hunts, only: %i[create index show] do
     resources :homes do
       patch :restore, on: :member
+      patch :refresh_listing, on: :member
     end
   end
 end
