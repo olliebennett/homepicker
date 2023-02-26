@@ -40,6 +40,12 @@
   </div>
 </div>
 
+<% if @home.listing_removed? %>
+  <div class="alert alert-danger" role="alert">
+    This listing has been removed by the agent
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-12 col-lg-8">
     <% if @home.images.any? %>
@@ -97,10 +103,11 @@
 <div class="mt-3">
   <h3>History</h3>
 
-  <% @home.versions.each do |version| %>
-    <%= render_home_changeset(version) %>
-  <% end %>
   <p>
     <%= @home.created_at.strftime('%d/%m/%Y') %> : Home added to the <%= link_to @hunt.title, hunt_path(@hunt) %> hunt by <%= @home.creator_user.display_name %>.
   </p>
+  <% @home.versions.each do |version| %>
+    <%= render_home_changeset_price(version) %>
+    <%= render_home_changeset_listing_status(version) %>
+  <% end %>
 </div>

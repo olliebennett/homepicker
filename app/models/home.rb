@@ -16,7 +16,7 @@ class Home < ApplicationRecord
 
   default_scope { order(:id) }
 
-  has_paper_trail only: [:price]
+  has_paper_trail only: %i[price listing_status]
 
   auto_strip_attributes :address_street, squish: true
   auto_strip_attributes :address_locality, squish: true
@@ -29,6 +29,8 @@ class Home < ApplicationRecord
   auto_strip_attributes :description
 
   accepts_nested_attributes_for :images, reject_if: :mark_empty_images_for_destruction, allow_destroy: true
+
+  enum listing_status: { okay: 0, removed: 1 }, _prefix: :listing
 
   def default_thumb
     images.first&.thumb_url_fallback || placeholder_image
