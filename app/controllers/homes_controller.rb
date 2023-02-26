@@ -62,17 +62,7 @@ class HomesController < ApplicationController
 
   def refresh_listing
     fls = if @home.rightmove_url.present?
-            rm_data = LinkRetrieverService.retrieve(@home.rightmove_url)
-            new_status = rm_data.fetch(:listing_status)
-            if @home.update(listing_status: new_status)
-              if @home.saved_change_to_attribute?(:listing_status)
-                { notice: "Updated with listing status '#{@home.listing_status.humanize.downcase}'" }
-              else
-                { notice: "Status not changed - still '#{@home.listing_status.humanize.downcase}'" }
-              end
-            else
-              { alert: "Failed to update: #{@home.errors.full_messages.join(',')}" }
-            end
+            refresh_listing_from_rightmove
           else
             { alert: 'Cannot refresh listing for non-rightmove homes!' }
           end
@@ -115,6 +105,17 @@ class HomesController < ApplicationController
     retrieved_data = LinkRetrieverService.retrieve(params[:url])
     @images = retrieved_data.delete(:images)
     @home.assign_attributes(retrieved_data.except(:floorplans, :key_features))
+  end
+
+  def refresh_listing_from_rightmove
+    rm_data = LinkRetrieverService.retrieve(@home.rightmove_url)
+    new_status = rm_data.fetch(:listing_status)
+    if @home.update(listing_status: new_status)
+      has_changed = @home.saved_change_to_attribute?(:listing_status)
+      { notice: "#{has_changed ? 'Updated status to ' : 'Status is still '} '#{@home.listing_status}'" }
+    else
+      { alert: "Failed to update: #{@home.errors.full_messages.join(',')}" }
+    end
   end
 
   def set_home

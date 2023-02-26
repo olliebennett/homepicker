@@ -107,10 +107,10 @@ class RightmoveHomeImporter < HomeImporter
   end
 
   def parse_status
-    if @response_status == '410'
-      @data[:listing_status] = :removed
-    else
-      @data[:listing_status] = :okay
-    end
+    @data[:listing_status] = if @response_status == '410'
+                               :removed
+                             else
+                               :okay
+                             end
   end
 end
