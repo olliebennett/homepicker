@@ -6,7 +6,7 @@ RSpec.describe RightmoveHomeImporter do
   describe '#parse' do
     context 'with example 2' do
       let(:rm2_file) { File.read('spec/fixtures/rightmove/example_2.html') }
-      let(:rm2) { described_class.new(rm2_file).parse }
+      let(:rm2) { described_class.new(rm2_file, '200').parse }
 
       it 'parses canonical url' do
         expect(rm2[:rightmove_url]).to eq 'https://www.rightmove.co.uk/properties/77665544'
@@ -54,7 +54,7 @@ RSpec.describe RightmoveHomeImporter do
 
     context 'with example 3' do
       let(:rm3_file) { File.read('spec/fixtures/rightmove/example_3.html') }
-      let(:rm3) { described_class.new(rm3_file).parse }
+      let(:rm3) { described_class.new(rm3_file, '200').parse }
 
       it 'parses canonical url' do
         expect(rm3[:rightmove_url]).to eq 'https://www.rightmove.co.uk/properties/85417833'
@@ -97,6 +97,15 @@ RSpec.describe RightmoveHomeImporter do
 
       it 'parses image data' do
         expect(rm3[:images]).to include 'https://media.rightmove.co.uk/30k/29340/85417833/29340_100656005504_IMG_00_0000.jpeg'
+      end
+    end
+
+    context 'with removed listing' do
+      let(:rm3_file) { File.read('spec/fixtures/rightmove/example_3.html') }
+      let(:rm3) { described_class.new(rm3_file, '410').parse }
+
+      it 'parses listing status' do
+        expect(rm3[:listing_status]).to eq :removed
       end
     end
   end
