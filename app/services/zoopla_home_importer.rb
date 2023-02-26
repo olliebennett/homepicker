@@ -31,7 +31,7 @@ class ZooplaHomeImporter < HomeImporter
   end
 
   def parse_images
-    @data[:images] = res_data['photo'].map { |x| x['contentUrl'] }
+    @data[:images] = res_data['photo'].pluck('contentUrl')
   end
 
   def parse_price
