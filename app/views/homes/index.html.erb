@@ -15,6 +15,10 @@
       <p class="mb-2"><%= home.title %><%= ", #{home.postcode}" if home.postcode.present? %></p>
       <p>
         <%= render 'link_icons', home: home %>
+        <% if home.listing_removed? %>
+          &nbsp;
+          <%= fa_icon_inline('exclamation-circle', type: :solid, cls: 'text-danger') %>
+        <% end %>
         <% if home.average_rating %>
           &nbsp;
           <%= fa_icon_inline('star', cls: 'text-warning') %> <%= home.average_rating %>
