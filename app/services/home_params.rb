@@ -13,6 +13,7 @@ class HomeParams
     agent_url
     zoopla_url
     rightmove_url
+    listing_status
     price
     hunt_id
   ].freeze

@@ -3,8 +3,9 @@
 require 'nokogiri'
 
 class HomeImporter
-  def initialize(page_html)
+  def initialize(page_html, response_status)
     @page_html = page_html.squish
+    @response_status = response_status
     @page = Nokogiri::HTML(page_html)
     @data = {}
   end

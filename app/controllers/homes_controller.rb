@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomesController < ApplicationController
-  before_action :set_home, only: %i[show edit update destroy restore]
+  before_action :set_home, only: %i[show edit update destroy restore refresh_listing]
   before_action :set_hunt
 
   before_action :store_location, only: %i[index show new edit]
@@ -60,6 +60,15 @@ class HomesController < ApplicationController
     redirect_to hunt_home_path(@hunt, @home), notice: 'Home restored!'
   end
 
+  def refresh_listing
+    fls = if @home.rightmove_url.present?
+            refresh_listing_from_rightmove
+          else
+            { alert: 'Cannot refresh listing for non-rightmove homes!' }
+          end
+    redirect_to hunt_home_path(@hunt, @home), flash: fls
+  end
+
   private
 
   def redirect_to_duplicate?
@@ -96,6 +105,17 @@ class HomesController < ApplicationController
     retrieved_data = LinkRetrieverService.retrieve(params[:url])
     @images = retrieved_data.delete(:images)
     @home.assign_attributes(retrieved_data.except(:floorplans, :key_features))
+  end
+
+  def refresh_listing_from_rightmove
+    rm_data = LinkRetrieverService.retrieve(@home.rightmove_url)
+    new_status = rm_data.fetch(:listing_status)
+    if @home.update(listing_status: new_status)
+      has_changed = @home.saved_change_to_attribute?(:listing_status)
+      { notice: "#{has_changed ? 'Updated status to ' : 'Status is still '} '#{@home.listing_status}'" }
+    else
+      { alert: "Failed to update: #{@home.errors.full_messages.join(',')}" }
+    end
   end
 
   def set_home

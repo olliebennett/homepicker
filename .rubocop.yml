@@ -39,3 +39,6 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
     - 'config/environments/*.rb'
+
+Metrics/ClassLength:
+  Max: 300
