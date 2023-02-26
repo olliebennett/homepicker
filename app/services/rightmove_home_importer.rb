@@ -86,7 +86,7 @@ class RightmoveHomeImporter < HomeImporter
     floorplans_data = property_json.dig('propertyData', 'floorplans')
     return if floorplans_data.nil?
 
-    @data[:floorplans] = floorplans_data.select { |x| x['type'] == 'IMAGE' }.map { |x| x['url'] }
+    @data[:floorplans] = floorplans_data.select { |x| x['type'] == 'IMAGE' }.pluck('url')
   end
 
   def parse_images
@@ -97,7 +97,7 @@ class RightmoveHomeImporter < HomeImporter
     images_data = property_json.dig('propertyData', 'images')
     return if images_data.nil?
 
-    @data[:images] = images_data.map { |x| x['url'] }
+    @data[:images] = images_data.pluck('url')
   end
 
   def parse_title
