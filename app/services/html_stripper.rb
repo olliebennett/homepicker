@@ -7,6 +7,7 @@ class HtmlStripper
     b: '%<txt>s',
     br: "\n",
     em: '%<txt>s',
+    i: '%<txt>s',
     h1: "\n%<txt>s",
     h2: "\n%<txt>s",
     h3: "\n%<txt>s",
