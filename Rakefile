@@ -9,17 +9,6 @@ require 'resque/tasks'
 
 Rails.application.load_tasks
 
-# Workaround missing 'bin/yarn'
-# https://github.com/rails/rails/issues/40795#issuecomment-756095119
-# rubocop:disable Rails/RakeEnvironment
-Rake::Task['yarn:install'].clear
-namespace :yarn do
-  task :install do
-    # Do nothing, since there's no yarn
-  end
-end
-# rubocop:enable Rails/RakeEnvironment
-
 desc 'Persist any unpersisted images'
 task persist_images: :environment do
   Image.where.not(external_url: nil).where(full_url: nil).find_each do |img|
