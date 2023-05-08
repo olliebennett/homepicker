@@ -71,6 +71,10 @@ gem 'rubocop-thread_safety', group: %i[development test]
 # RuboCop for ERB view files
 gem 'ruumba'
 
+# Sentry.io error tracking
+gem 'sentry-ruby'
+gem 'sentry-rails'
+
 # Send emails via SparkPost
 # https://github.com/the-refinery/sparkpost_rails/pull/89
 gem 'sparkpost_rails', github: 'sunny/sparkpost_rails', branch: 'allow-rails-seven'
