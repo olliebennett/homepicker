@@ -72,8 +72,8 @@ gem 'rubocop-thread_safety', group: %i[development test]
 gem 'ruumba'
 
 # Sentry.io error tracking
-gem 'sentry-ruby'
 gem 'sentry-rails'
+gem 'sentry-ruby'
 
 # Send emails via SparkPost
 # https://github.com/the-refinery/sparkpost_rails/pull/89
