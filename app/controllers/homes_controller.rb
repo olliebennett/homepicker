@@ -32,7 +32,7 @@ class HomesController < ApplicationController
     retrieve_attributes_from_url
 
     # Avoid saving a duplicate of existing home
-    return if redirect_to_duplicate?(@images)
+    return if redirect_to_duplicate?
 
     if @home.save
       ImageService.persist_images(@home, @images)
@@ -71,11 +71,11 @@ class HomesController < ApplicationController
 
   private
 
-  def redirect_to_duplicate?(images)
-    redirect_to_duplicate_rightmove?(images) || redirect_to_duplicate_zoopla?(images)
+  def redirect_to_duplicate?
+    redirect_to_duplicate_rightmove? || redirect_to_duplicate_zoopla?
   end
 
-  def redirect_to_duplicate_rightmove?(images)
+  def redirect_to_duplicate_rightmove?
     return false if @home.rightmove_url.nil?
 
     existing_rm_home = @home.hunt&.homes&.find_by(rightmove_url: @home.rightmove_url)
@@ -89,11 +89,12 @@ class HomesController < ApplicationController
     false
   end
 
-  def redirect_to_duplicate_zoopla?(images)
+  def redirect_to_duplicate_zoopla?
     return false if @home.zoopla_url.nil?
 
     existing_z_home = @home.hunt&.homes&.find_by(zoopla_url: @home.zoopla_url)
     if existing_z_home.present?
+      ImageService.persist_images(@home, @images)
       redirect_to(hunt_home_path(@hunt, existing_z_home), alert: 'Home already imported from Zoopla; see below.')
       return true
     end
