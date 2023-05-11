@@ -81,7 +81,7 @@ class HomesController < ApplicationController
     existing_rm_home = @home.hunt&.homes&.find_by(rightmove_url: @home.rightmove_url)
     if existing_rm_home.present?
       # Fallback persistance of images in case of previous omissions
-      ImageService.persist_images(@home, @images)
+      ImageService.persist_images(existing_rm_home, @images)
       redirect_to(hunt_home_path(@hunt, existing_rm_home), alert: 'Home already imported from Rightmove; see below.')
       return true
     end
@@ -94,7 +94,7 @@ class HomesController < ApplicationController
 
     existing_z_home = @home.hunt&.homes&.find_by(zoopla_url: @home.zoopla_url)
     if existing_z_home.present?
-      ImageService.persist_images(@home, @images)
+      ImageService.persist_images(existing_z_home, @images)
       redirect_to(hunt_home_path(@hunt, existing_z_home), alert: 'Home already imported from Zoopla; see below.')
       return true
     end
