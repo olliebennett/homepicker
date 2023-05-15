@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HtmlStripper
-  PARENT_NODE_LIST = %w[ul ol].freeze
+  PARENT_NODE_LIST = %w[ul ol div].freeze
 
   CHILDLESS_NODE_CONFIG = {
     b: '%<txt>s',
