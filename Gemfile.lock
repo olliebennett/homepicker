@@ -293,10 +293,10 @@ GEM
     ruby2_keywords (0.0.5)
     ruumba (0.1.17)
       rubocop
-    sentry-rails (5.9.0)
+    sentry-rails (5.10.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.9.0)
-    sentry-ruby (5.9.0)
+      sentry-ruby (~> 5.10.0)
+    sentry-ruby (5.10.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
     sinatra (3.0.5)
       mustermann (~> 3.0)
