@@ -2,7 +2,7 @@
 
 class LinkRetrieverService
   def self.retrieve(url)
-    res = Net::HTTP.get_response(URI(url))
+    res = Net::HTTP.get_response(URI(strip_url_preamble(url)))
 
     # NOTE: Rightmove returns a 410 (Gone) when property has been 'removed by agent'
     raise "Unsuccessful response: #{res.code} for #{url}" unless %w[200 410].include?(res.code)
@@ -18,5 +18,10 @@ class LinkRetrieverService
     else
       raise "Unhandled URL: #{url}"
     end
+  end
+
+  def self.strip_url_preamble(url)
+    # Remove any words up to the first 'http' part of the URL
+    url.sub(/[A-Za-z\: ]*http/, 'http')
   end
 end
