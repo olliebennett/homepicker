@@ -56,7 +56,7 @@ class ImagePersistJob < ApplicationJob
                      use: 'filter',
                      width: 150,
                      height: 150,
-                     imagemagick_stack: 'v2.0.7',
+                     imagemagick_stack: 'v2.0.9',
                      resize_strategy: 'fillcrop')
   end
 
