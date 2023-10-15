@@ -3,7 +3,7 @@
 </h4>
 
 <div class="row">
-  <% if hunt.hunt_memberships.includes(:user).find_each do |hm| %>
+  <% hunt.hunt_memberships.includes(:user).find_each do |hm| %>
     <div class="col-12 col-md-6 col-lg-4">
       <div class="media mt-2 mb-2">
         <%= image_tag hm.user.gravatar_url(70),
