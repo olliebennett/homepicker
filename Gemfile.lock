@@ -86,7 +86,7 @@ GEM
     ast (2.4.2)
     auto_strip_attributes (2.6.0)
       activerecord (>= 4.0)
-    base64 (0.1.1)
+    base64 (0.2.0)
     bcrypt (3.1.19)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
@@ -98,7 +98,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.0.1)
     builder (3.2.4)
-    bullet (7.1.2)
+    bullet (7.1.4)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.1.3)
@@ -119,7 +119,7 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    drb (2.1.1)
+    drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
     ffi (1.15.5)
@@ -167,7 +167,7 @@ GEM
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
-    mutex_m (0.1.2)
+    mutex_m (0.2.0)
     net-imap (0.4.1)
       date
       net-protocol
