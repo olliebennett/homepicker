@@ -4,7 +4,7 @@
   <%# Carousel full-size images %>
   <div class="carousel-inner shadow">
     <% images.each_with_index do |image, idx| %>
-      <div class="<%= 'active' if idx.zero? %> carousel-item" data-slide-number="<%= idx %>">
+      <div class="<%= 'active' if idx.zero? %> carousel-item" data-slide-number="<%= idx %>" data-interval="false">
         <%= image_tag image.full_url_fallback, class: 'd-block w-100', alt: "Image #{idx + 1} of #{images.size}" %>
       </div>
     <% end %>
