@@ -6,7 +6,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.2.2'
+ruby '3.2.3'
 
 # Remove whitespace before field validation
 gem 'auto_strip_attributes'
