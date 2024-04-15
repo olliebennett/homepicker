@@ -117,9 +117,6 @@ GEM
     diff-lcs (1.5.0)
     domain_name (0.6.20240107)
     dotenv (3.1.0)
-    dotenv-rails (3.1.0)
-      dotenv (= 3.1.0)
-      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.12.0)
     ffi (1.16.3)
@@ -378,7 +375,7 @@ DEPENDENCIES
   bullet
   byebug
   devise
-  dotenv-rails
+  dotenv
   hashid-rails
   jquery-rails
   listen

@@ -30,7 +30,7 @@ gem 'byebug', platform: :mri, group: %i[development test]
 gem 'devise'
 
 # Load '.env' file into ENV
-gem 'dotenv-rails', groups: %i[development test]
+gem 'dotenv', groups: %i[development test]
 
 # Replace raw numeric IDs with short unique ids
 gem 'hashid-rails'
