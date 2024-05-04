@@ -8,7 +8,7 @@
   <% 1.upto(5).each do |score| %>
     <% rating_users = others_ratings.select { |r| r.score == score }.map { |r| r.user.display_name } %>
     <% btn_data = { score: score } %>
-    <% btn_icon = rating_users.any? ? 'star-exclamation' : 'star' %>
+    <% btn_icon = rating_users.any? ? 'heart' : 'star' %>
     <% rating_users.unshift('You') if rating.score == score %>
     <% if rating_users.any? %>
       <%# We specify container: 'body' to avoid rendering problems in more complex components %>
