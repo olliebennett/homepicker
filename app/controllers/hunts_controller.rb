@@ -12,7 +12,7 @@ class HuntsController < ApplicationController
   def show; end
 
   def join
-    @hunt = Hunt.find(params[:id])
+    @hunt = Hunt.find_by_hashid(params[:id])
 
     unless @hunt.token_match?(params[:token])
       return redirect_to root_path, alert: 'This invite link is incorrect or has expired.'
