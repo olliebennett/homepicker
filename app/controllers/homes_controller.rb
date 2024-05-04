@@ -6,6 +6,8 @@ class HomesController < ApplicationController
 
   before_action :store_location, only: %i[index show new edit]
 
+  skip_before_action :authenticate_user!, only: %i[show refresh_listing]
+
   def index
     filter_disabled = params[:disabled] == 'true'
     @homes = @hunt.homes.where(disabled: filter_disabled).includes(:ratings)
@@ -13,7 +15,7 @@ class HomesController < ApplicationController
 
   def show
     @ratings = Rating.aspects.keys.map do |aspect|
-      current_user.ratings.find_or_initialize_by(home: @home, aspect:)
+      Rating.find_or_initialize_by(user: current_user, home: @home, aspect:)
     end
 
     @others_ratings = @home.ratings.where.not(user: current_user).includes(:user).to_a

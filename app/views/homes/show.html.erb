@@ -19,7 +19,11 @@
     </p>
   </div>
   <div class="col-sm-4 text-right">
-    <%= link_to 'Edit', edit_hunt_home_path(@hunt, @home), class: 'btn btn-warning' %>
+    <% if user_signed_in? %>
+      <%= link_to 'Edit', edit_hunt_home_path(@hunt, @home), class: 'btn btn-warning' %>
+    <% else %>
+      <%= link_to 'Log in', new_session_path('user'), class: 'btn btn-warning' %>
+    <% end %>
     <% if @home.disabled? %>
       <%= link_to 'Restore',
                   restore_hunt_home_path(@hunt, @home),
@@ -32,11 +36,13 @@
                     method: :patch,
                     class: 'btn btn-info' %>
         <% end %>
-      <%= link_to 'Archive',
-                  hunt_home_path(@hunt, @home),
-                  method: :delete,
-                  data: { confirm: 'Really archive this home?' },
-                  class: 'btn btn-danger' %>
+      <% if user_signed_in? %>
+        <%= link_to 'Archive',
+                    hunt_home_path(@hunt, @home),
+                    method: :delete,
+                    data: { confirm: 'Really archive this home?' },
+                    class: 'btn btn-danger' %>
+      <% end %>
     <% end %>
 
     <h3><%= @home.price_display %></h3>
@@ -64,7 +70,14 @@
   </div>
   <div class="col-12 col-lg-4">
     <%= render 'comments/list', comments: @home.comments %>
-    <%= render 'comments/form', comment: @home.comments.new %>
+    <% if user_signed_in? %>
+      <%= render 'comments/form', comment: @home.comments.new %>
+    <% else %>
+      <p>
+        <%= link_to 'Log in', new_session_path('user') %>
+        to leave a comment or rating.
+      </p>
+    <% end %>
 
     <% @ratings.each do |rating| %>
       <br>
