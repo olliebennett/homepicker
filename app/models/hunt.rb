@@ -9,8 +9,6 @@ class Hunt < ApplicationRecord
 
   validates :title, presence: true
 
-  default_scope { order(:id) }
-
   auto_strip_attributes :title, squish: true
 
   def token_match?(test_token)

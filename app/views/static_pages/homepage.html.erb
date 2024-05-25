@@ -2,19 +2,19 @@
 
 <%= render 'layouts/about_blurb' %>
 
-<% hunts_shown = 2 %>
+<% hunts_shown = 5 %>
 
 <% if user_signed_in? %>
-  <% current_user.hunts.order(updated_at: :desc).limit(hunts_shown).each do |hunt| %>
-    <p>
-      <%= link_to "View '#{hunt.title}' Homes",
+  <p>
+    <% current_user.hunts.order(created_at: :desc).limit(hunts_shown).each do |hunt| %>
+      <%= link_to hunt.title,
                   hunt_homes_path(hunt),
-                  class: 'btn btn-warning' %>
-    </p>
-  <% end %>
+                  class: 'btn btn-warning m-1' %>
+    <% end %>
+  </p>
   <% if current_user.hunts.size > hunts_shown %>
     <p>
-      <%= link_to 'Switch to a different home hunt',
+      <%= link_to 'View all hunts',
                   hunts_path,
                   class: 'btn btn-outline-info' %>
     </p>
