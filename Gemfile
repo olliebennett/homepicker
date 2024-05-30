@@ -55,6 +55,9 @@ gem 'puma'
 # Ruby on Rails framework
 gem 'rails'
 
+# Markdown renderer
+gem 'redcarpet'
+
 # Background job library on top of Redis
 gem 'resque'
 

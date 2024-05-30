@@ -4,10 +4,11 @@
   <%= f.hidden_field :home_id, value: comment.home_id %>
 
   <div class="input-group">
-    <%= f.text_field :text,
+    <%= f.text_area :text,
                      class: 'form-control',
                      placeholder: ['I think...', 'Love this!', 'What about ...', 'No. Way.', 'Ermahgerd!'].sample,
                      required: true,
+                     rows: comment.new_record? ? 3 : 10,
                      autocomplete: 'off' %>
     <div class="input-group-append">
       <%= f.submit comment.new_record? ? 'Comment' : 'Update',

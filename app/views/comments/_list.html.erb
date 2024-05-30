@@ -1,3 +1,4 @@
+<% markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true) %>
 <% if comments.each do |comment| %>
   <div class="media mt-2 mb-2 comment">
     <%= image_tag comment.user.gravatar_url(70),
@@ -8,19 +9,19 @@
         <%= comment.user.display_name %> :
         <small>
           <%= comment.formatted_date %>
+          <% if comment.user == current_user %>
+            <span class="manage-comment-controls">
+              <%= link_to fa_icon_inline('edit', type: :duotone),
+                          edit_comment_path(comment) %>
+              <%= link_to fa_icon_inline('times', type: :duotone),
+                          comment_path(comment),
+                          method: :delete,
+                          data: { confirm: 'Really delete comment?' } %>
+            </span>
+          <% end %>
         </small>
       </h5>
-      <%= comment.text %>
-      <% if comment.user == current_user %>
-        <span class="manage-comment-controls">
-          <%= link_to fa_icon_inline('edit', type: :duotone),
-                      edit_comment_path(comment) %>
-          <%= link_to fa_icon_inline('times', type: :duotone),
-                      comment_path(comment),
-                      method: :delete,
-                      data: { confirm: 'Really delete comment?' } %>
-        </span>
-      <% end %>
+      <%= markdown.render(comment.text).html_safe %>
     </div>
   </div>
 <% end.empty? %>
