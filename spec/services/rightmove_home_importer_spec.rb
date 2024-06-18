@@ -100,6 +100,54 @@ RSpec.describe RightmoveHomeImporter do
       end
     end
 
+    context 'with example 4' do
+      let(:rm4_file) { File.read('spec/fixtures/rightmove/example_4.html') }
+      let(:rm4) { described_class.new(rm4_file, '200').parse }
+
+      it 'parses canonical url' do
+        expect(rm4[:rightmove_url]).to eq 'https://www.rightmove.co.uk/properties/130477295'
+      end
+
+      it 'parses address fields' do
+        expect(rm4).to include(
+          address_street: 'Headfort Place',
+          address_locality: 'Belgravia',
+          address_region: 'London'
+        )
+      end
+
+      it 'parses postcode' do
+        expect(rm4[:postcode]).to eq 'SW1X 7DH'
+      end
+
+      it 'parses location data' do
+        expect(rm4).to include(
+          latitude: 51.50064,
+          longitude: -0.150708
+        )
+      end
+
+      it 'parses title' do
+        expect(rm4[:title]).to eq '4 bedroom mews property for sale'
+      end
+
+      it 'parses description' do
+        expect(rm4[:description]).to include 'generous proportions throughout'
+      end
+
+      it 'parses key features (and prepends to desc in list format)' do
+        expect(rm4[:description]).to include '- Two En Suite Bathrooms'
+      end
+
+      it 'parses price' do
+        expect(rm4[:price]).to eq 6_950_000
+      end
+
+      it 'parses image data' do
+        expect(rm4[:images]).to include 'https://media.rightmove.co.uk/85k/84980/130477295/84980_KEN220198_IMG_07_0000.jpeg'
+      end
+    end
+
     context 'with removed listing' do
       let(:rm3_file) { File.read('spec/fixtures/rightmove/example_3.html') }
       let(:rm3) { described_class.new(rm3_file, '410').parse }
