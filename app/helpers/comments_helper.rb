@@ -2,12 +2,19 @@
 
 module CommentsHelper
   def markdown(text)
-    redcarpet.render(text).html_safe
+    # We strip HTML tags from user input so it's safe
+    # rubocop:disable Rails/OutputSafety
+    redcarpet_markdown.render(text).html_safe
+    # rubocop:enable Rails/OutputSafety
   end
 
   private
 
-  def redcarpet
-    @redcarpet ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+  def redcarpet_renderer
+    Redcarpet::Render::HTML.new(escape_html: true)
+  end
+
+  def redcarpet_markdown
+    @redcarpet_markdown ||= Redcarpet::Markdown.new(redcarpet_renderer, autolink: true, tables: true)
   end
 end
