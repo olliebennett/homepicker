@@ -60,7 +60,7 @@ class Home < ApplicationRecord
     return 'UNKNOWN PRICE' if price.zero?
 
     # Assume monthly rental amount if < 10k
-    if price > 1_000_000
+    if price >= 1_000_000
       "£#{price / 1_000_000.0}m"
     elsif price > 10_000
       "£#{price / 1000}k"
