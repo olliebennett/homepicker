@@ -11,6 +11,6 @@ class Comment < ApplicationRecord
   auto_strip_attributes :text
 
   def formatted_date
-    created_at.strftime('%e %b @ %H:%M').squish
+    created_at.strftime('%e %b').squish
   end
 end
